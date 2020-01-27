@@ -56,7 +56,7 @@ Once you have configured LingoTurk, you can start running it. Running LingoTurk 
 This should open the LingoTurk interface. Go to the next section for the initial LingoTurk setup.
 
 Initial LingoTurk setup
-1. Log in to Lingoturk. The default username is "admin" and the default password is admin too. You should change this password immediately.
+1. Log in to Lingoturk. 
 2. Click on the Settings button.
 3. Enter your Access key and your Secret Key if you plan to run experiments on MTurk (not necessary for Prolific).
 4. Change the URL to the URL that can be used to access the LingoTurk server.
