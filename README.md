@@ -1,5 +1,11 @@
 # Web-based-Interface-for-LingoTurk
 
+This repo contains code that provides a Graphical User Interface for the [Ligoturk system] https://github.com/FlorianPusse/Lingoturk .
+The lingoturk system was designed to develop crowdsourcing interviews but did not have a GUI. In the Software Engineering course of WS19/20 at Saarland University, we developed the GUI for this system. Our GUI provides an interface similar to a presentation software and allows the experiment designers to easily design their experiments as per their requirements.
+
+This repo contains only the code that we developed and does not contain the original files from the Lingoturk System. But in order to make our code functional, you can refer to the original Lingoturk System and add our files.
+
+
 Requirements
 > Java Development Kit 8: [Download JDK] http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
