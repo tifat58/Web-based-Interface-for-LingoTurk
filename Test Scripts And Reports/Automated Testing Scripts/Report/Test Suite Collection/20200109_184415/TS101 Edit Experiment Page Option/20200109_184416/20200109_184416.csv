@@ -1,0 +1,14 @@
+Suite/Test/Step Name,Browser,Description,Tag,Start time,End time,Duration,Status
+TS101 Edit Experiment Page Option,Firefox 72.0,,,2020-01-09 18:45:04,2020-01-09 18:45:21,17.165s,PASSED
+,,,,,,,
+Test Cases/Edit Experiment Page Option,Firefox 72.0,,,2020-01-09 18:45:04,2020-01-09 18:45:21,16.729s,PASSED
+"openBrowser(""http://localhost:9000/"")",Firefox 72.0,,,2020-01-09 18:45:05,2020-01-09 18:45:13,8.609s,PASSED
+"setText(findTestObject(""Object Repository/Edit Experiment Page Option/Page_Login/input_Username_username""), ""admin"")",Firefox 72.0,,,2020-01-09 18:45:13,2020-01-09 18:45:14,0.559s,PASSED
+"setEncryptedText(findTestObject(""Object Repository/Edit Experiment Page Option/Page_Login/input_Password_password""), ""BR2H/KIz0NBfgccJ+PbLCA=="")",Firefox 72.0,,,2020-01-09 18:45:14,2020-01-09 18:45:14,0.502s,PASSED
+"click(findTestObject(""Object Repository/Edit Experiment Page Option/Page_Login/strong_Let me in""))",Firefox 72.0,,,2020-01-09 18:45:14,2020-01-09 18:45:15,0.962s,PASSED
+"navigateToUrl(""http://localhost:9000/"")",Firefox 72.0,,,2020-01-09 18:45:15,2020-01-09 18:45:16,0.350s,PASSED
+"click(findTestObject(""Object Repository/Edit Experiment Page Option/Page_LINGOturk/div_Edit Experiment""))",Firefox 72.0,,,2020-01-09 18:45:16,2020-01-09 18:45:17,1.119s,PASSED
+"click(findTestObject(""Object Repository/Edit Experiment Page Option/Page_Edit Experiment/div_TestSample""))",Firefox 72.0,,,2020-01-09 18:45:17,2020-01-09 18:45:18,0.775s,PASSED
+"click(findTestObject(""Object Repository/Edit Experiment Page Option/Page_LINGOturk/a_About""))",Firefox 72.0,,,2020-01-09 18:45:18,2020-01-09 18:45:18,0.660s,PASSED
+"click(findTestObject(""Object Repository/Edit Experiment Page Option/Page_Contact/a_Home""))",Firefox 72.0,,,2020-01-09 18:45:18,2020-01-09 18:45:19,0.704s,PASSED
+closeBrowser(),Firefox 72.0,,,2020-01-09 18:45:19,2020-01-09 18:45:21,2.007s,PASSED

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="TS102_C1_C2" time="134.066" tests="2" failures="0" errors="0">
+   <testsuite name="TS102_C1_C2" tests="2" failures="0" errors="0" time="134.066" timestamp="2020-01-09 18:45:34" hostname="Koushik - 10.20.148.196" id="Test Suites/TS102_C1_C2">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="C:\\Users\\Koushik\\Katalon Studio\\LingoTurk AutomatedTesting\\Reports\\20200109_184415\\TS102_C1_C2\\20200109_184417"/>
+         <property name="logFiles" value="C:\\Users\\Koushik\\Katalon Studio\\LingoTurk AutomatedTesting\\Reports\\20200109_184415\\TS102_C1_C2\\20200109_184417\\execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="Koushik - 10.20.148.196"/>
+         <property name="os" value="Windows 10 64bit"/>
+         <property name="katalonVersion" value="7.1.2.1"/>
+         <property name="browser" value="Firefox 72.0"/>
+         <property name="hostAddress" value="10.20.148.196"/>
+         <property name="sessionId" value="ea5e7010-98d3-4de6-b819-b91dd833ac4d"/>
+         <property name="seleniumVersion" value="3.141.59"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0, executionList=}"/>
+         <property name="platform" value="Windows 10"/>
+      </properties>
+      <testcase name="Test Cases/C1_TextAnswer" time="66.645" classname="Test Cases/C1_TextAnswer" status="PASSED">
+         <system-out><![CDATA[2020-01-09 18:45:34 - [TEST_CASE][PASSED] - Test Cases/C1_TextAnswer: Test Cases/C1_TextAnswer
+
+2020-01-09 18:45:35 - [TEST_STEP][PASSED] - openBrowser("http://localhost:9000/"): Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:45:35 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2020-01-09 18:45:36 - [MESSAGE][INFO] - Action delay is set to 0 seconds
+
+2020-01-09 18:45:44 - [MESSAGE][PASSED] - Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:45:44 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/C1_TextAnswer_OR/Page_Login/input_Username_username"), "admin"): Text 'admin' is set on object 'Object Repository/C1_TextAnswer_OR/Page_Login/input_Username_username'
+
+2020-01-09 18:45:44 - [MESSAGE][PASSED] - Text 'admin' is set on object 'Object Repository/C1_TextAnswer_OR/Page_Login/input_Username_username'
+
+2020-01-09 18:45:44 - [TEST_STEP][PASSED] - setEncryptedText(findTestObject("Object Repository/C1_TextAnswer_OR/Page_Login/input_Password_password"), "BR2H/KIz0NBfgccJ+PbLCA=="): Text ****** has been set on object 'Object Repository/C1_TextAnswer_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:45:45 - [MESSAGE][PASSED] - Text ****** has been set on object 'Object Repository/C1_TextAnswer_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:45:45 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_Login/button_Let me in")): Object: 'Object Repository/C1_TextAnswer_OR/Page_Login/button_Let me in' is clicked on
+
+2020-01-09 18:45:46 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_Login/button_Let me in' is clicked on
+
+2020-01-09 18:45:46 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:9000/"): Navigate to 'http://localhost:9000/' successfully
+
+2020-01-09 18:45:46 - [MESSAGE][PASSED] - Navigate to 'http://localhost:9000/' successfully
+
+2020-01-09 18:45:46 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_Edit Experiment")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:45:47 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:45:47 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_Edit Experiment/div_ChoiceAndComment")): Object: 'Object Repository/C1_TextAnswer_OR/Page_Edit Experiment/div_ChoiceAndComment' is clicked on
+
+2020-01-09 18:45:48 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_Edit Experiment/div_ChoiceAndComment' is clicked on
+
+2020-01-09 18:45:48 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/span_Text Answer")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/span_Text Answer' is clicked on
+
+2020-01-09 18:45:48 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/span_Text Answer' is clicked on
+
+2020-01-09 18:45:48 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/input_textAnswer _componentName"), "textanswer sample"): Text 'textanswer sample' is set on object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/input_textAnswer _componentName'
+
+2020-01-09 18:45:49 - [MESSAGE][PASSED] - Text 'textanswer sample' is set on object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/input_textAnswer _componentName'
+
+2020-01-09 18:45:49 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_Add Option")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_Add Option' is clicked on
+
+2020-01-09 18:45:50 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_Add Option' is clicked on
+
+2020-01-09 18:45:50 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Add Option")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:45:50 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:45:50 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb"), "string:options", true): All options with value 'string:options' are selected in object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:45:52 - [MESSAGE][PASSED] - All options with value 'string:options' are selected in object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:45:52 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select csv field -- sentence"), "string:sentence", true): All options with value 'string:sentence' are selected in object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select csv field -- sentence'  using regular expression
+
+2020-01-09 18:45:53 - [MESSAGE][PASSED] - All options with value 'string:sentence' are selected in object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select csv field -- sentence'  using regular expression
+
+2020-01-09 18:45:53 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Add Option")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:45:54 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:45:54 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb"), "string:options", true): All options with value 'string:options' are selected in object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:45:55 - [MESSAGE][PASSED] - All options with value 'string:options' are selected in object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:45:55 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select csv field -- sentence"), "string:sentence", true): All options with value 'string:sentence' are selected in object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select csv field -- sentence'  using regular expression
+
+2020-01-09 18:45:55 - [MESSAGE][PASSED] - All options with value 'string:sentence' are selected in object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select csv field -- sentence'  using regular expression
+
+2020-01-09 18:45:55 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Add Condition")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Add Condition' is clicked on
+
+2020-01-09 18:45:56 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Add Condition' is clicked on
+
+2020-01-09 18:45:56 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select option -- mandatoryallowMu_2f4d0b"), "string:mandatory", true): All options with value 'string:mandatory' are selected in object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select option -- mandatoryallowMu_2f4d0b'  using regular expression
+
+2020-01-09 18:45:57 - [MESSAGE][PASSED] - All options with value 'string:mandatory' are selected in object 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/select_-- select option -- mandatoryallowMu_2f4d0b'  using regular expression
+
+2020-01-09 18:45:57 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:45:58 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:45:58 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Edit")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Edit' is clicked on
+
+2020-01-09 18:45:59 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Edit' is clicked on
+
+2020-01-09 18:45:59 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_-")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_-' is clicked on
+
+2020-01-09 18:45:59 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_-' is clicked on
+
+2020-01-09 18:45:59 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_True                                   _81d48e")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_True                                   _81d48e' is clicked on
+
+2020-01-09 18:46:00 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_True                                   _81d48e' is clicked on
+
+2020-01-09 18:46:00 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_False")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_False' is clicked on
+
+2020-01-09 18:46:00 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/div_False' is clicked on
+
+2020-01-09 18:46:00 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/input_True_114")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/input_True_114' is clicked on
+
+2020-01-09 18:46:01 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/input_True_114' is clicked on
+
+2020-01-09 18:46:01 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:46:01 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 15904, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 4f6ced25-5d06-40bd-9e08-81fb9423d4f2
+
+2020-01-09 18:46:31 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 15904, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 4f6ced25-5d06-40bd-9e08-81fb9423d4f2
+
+2020-01-09 18:46:32 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:46:32 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Done Editing")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Done Editing' is clicked on
+
+2020-01-09 18:46:33 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_Done Editing' is clicked on
+
+2020-01-09 18:46:33 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_OK")): Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_OK' is clicked on
+
+2020-01-09 18:46:39 - [MESSAGE][PASSED] - Object: 'Object Repository/C1_TextAnswer_OR/Page_LINGOturk/button_OK' is clicked on
+
+2020-01-09 18:46:39 - [TEST_STEP][PASSED] - closeBrowser(): Browser is closed
+
+2020-01-09 18:46:41 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/C2_Question" time="48.493" classname="Test Cases/C2_Question" status="PASSED">
+         <system-out><![CDATA[2020-01-09 18:46:41 - [TEST_CASE][PASSED] - Test Cases/C2_Question: Test Cases/C2_Question
+
+2020-01-09 18:46:41 - [TEST_STEP][PASSED] - openBrowser("http://localhost:9000/"): Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:46:41 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2020-01-09 18:46:54 - [MESSAGE][PASSED] - Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:46:54 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/C2_Question_OR/Page_Login/input_Username_username"), "admin"): Text 'admin' is set on object 'Object Repository/C2_Question_OR/Page_Login/input_Username_username'
+
+2020-01-09 18:46:54 - [MESSAGE][PASSED] - Text 'admin' is set on object 'Object Repository/C2_Question_OR/Page_Login/input_Username_username'
+
+2020-01-09 18:46:54 - [TEST_STEP][PASSED] - setEncryptedText(findTestObject("Object Repository/C2_Question_OR/Page_Login/input_Password_password"), "BR2H/KIz0NBfgccJ+PbLCA=="): Text ****** has been set on object 'Object Repository/C2_Question_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:46:55 - [MESSAGE][PASSED] - Text ****** has been set on object 'Object Repository/C2_Question_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:46:55 - [TEST_STEP][PASSED] - sendKeys(findTestObject("Object Repository/C2_Question_OR/Page_Login/input_Password_password"), Keys.chord(ENTER)): Keys 'ENTER + ' sent to object: 'Object Repository/C2_Question_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:46:55 - [MESSAGE][PASSED] - Keys 'ENTER + ' sent to object: 'Object Repository/C2_Question_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:46:55 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/div_Edit Experiment")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:46:57 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:46:57 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_Edit Experiment/div_ChoiceAndComment")): Object: 'Object Repository/C2_Question_OR/Page_Edit Experiment/div_ChoiceAndComment' is clicked on
+
+2020-01-09 18:46:58 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_Edit Experiment/div_ChoiceAndComment' is clicked on
+
+2020-01-09 18:46:58 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/span_Question")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/span_Question' is clicked on
+
+2020-01-09 18:46:59 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/span_Question' is clicked on
+
+2020-01-09 18:46:59 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence"), "string:sentence", true): All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence'  using regular expression
+
+2020-01-09 18:47:00 - [MESSAGE][PASSED] - All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence'  using regular expression
+
+2020-01-09 18:47:00 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:47:01 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:47:01 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb"), "string:restrictAnswer", true): All options with value 'string:restrictAnswer' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:47:02 - [MESSAGE][PASSED] - All options with value 'string:restrictAnswer' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:47:02 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1"), "string:sentence", true): All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1'  using regular expression
+
+2020-01-09 18:47:04 - [MESSAGE][PASSED] - All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1'  using regular expression
+
+2020-01-09 18:47:04 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:47:04 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:47:04 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb"), "string:restrictAnswer", true): All options with value 'string:restrictAnswer' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:47:05 - [MESSAGE][PASSED] - All options with value 'string:restrictAnswer' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:47:05 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1"), "string:sentence", true): All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1'  using regular expression
+
+2020-01-09 18:47:06 - [MESSAGE][PASSED] - All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1'  using regular expression
+
+2020-01-09 18:47:06 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Condition")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Condition' is clicked on
+
+2020-01-09 18:47:07 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Condition' is clicked on
+
+2020-01-09 18:47:07 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option -- mandatoryallowMu_2f4d0b"), "string:mandatory", true): All options with value 'string:mandatory' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option -- mandatoryallowMu_2f4d0b'  using regular expression
+
+2020-01-09 18:47:08 - [MESSAGE][PASSED] - All options with value 'string:mandatory' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option -- mandatoryallowMu_2f4d0b'  using regular expression
+
+2020-01-09 18:47:08 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- truefalse"), "string:false", true): All options with value 'string:false' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- truefalse'  using regular expression
+
+2020-01-09 18:47:09 - [MESSAGE][PASSED] - All options with value 'string:false' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- truefalse'  using regular expression
+
+2020-01-09 18:47:09 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:47:10 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:47:10 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/span_Text Answer")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/span_Text Answer' is clicked on
+
+2020-01-09 18:47:10 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/span_Text Answer' is clicked on
+
+2020-01-09 18:47:10 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_Close")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Close' is clicked on
+
+2020-01-09 18:47:11 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Close' is clicked on
+
+2020-01-09 18:47:11 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/span_Question")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/span_Question' is clicked on
+
+2020-01-09 18:47:12 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/span_Question' is clicked on
+
+2020-01-09 18:47:12 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence"), "string:sentence", true): All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence'  using regular expression
+
+2020-01-09 18:47:13 - [MESSAGE][PASSED] - All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence'  using regular expression
+
+2020-01-09 18:47:13 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:47:14 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:47:14 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb"), "string:options", true): All options with value 'string:options' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:47:15 - [MESSAGE][PASSED] - All options with value 'string:options' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:47:15 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1"), "string:sentence", true): All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1'  using regular expression
+
+2020-01-09 18:47:16 - [MESSAGE][PASSED] - All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1'  using regular expression
+
+2020-01-09 18:47:16 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:47:17 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:47:17 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb"), "string:options", true): All options with value 'string:options' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:47:18 - [MESSAGE][PASSED] - All options with value 'string:options' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:47:18 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1"), "string:sentence", true): All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1'  using regular expression
+
+2020-01-09 18:47:18 - [MESSAGE][PASSED] - All options with value 'string:sentence' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select csv field -- sentence_1'  using regular expression
+
+2020-01-09 18:47:18 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Condition")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Condition' is clicked on
+
+2020-01-09 18:47:19 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Add Condition' is clicked on
+
+2020-01-09 18:47:19 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option -- mandatoryallowMu_2f4d0b"), "string:mandatory", true): All options with value 'string:mandatory' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option -- mandatoryallowMu_2f4d0b'  using regular expression
+
+2020-01-09 18:47:20 - [MESSAGE][PASSED] - All options with value 'string:mandatory' are selected in object 'Object Repository/C2_Question_OR/Page_LINGOturk/select_-- select option -- mandatoryallowMu_2f4d0b'  using regular expression
+
+2020-01-09 18:47:20 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:47:21 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:47:21 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_Delete")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Delete' is clicked on
+
+2020-01-09 18:47:22 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_Delete' is clicked on
+
+2020-01-09 18:47:22 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_OK")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_OK' is clicked on
+
+2020-01-09 18:47:23 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_OK' is clicked on
+
+2020-01-09 18:47:23 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/span_Done Editing")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/span_Done Editing' is clicked on
+
+2020-01-09 18:47:23 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/span_Done Editing' is clicked on
+
+2020-01-09 18:47:23 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C2_Question_OR/Page_LINGOturk/button_OK")): Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_OK' is clicked on
+
+2020-01-09 18:47:29 - [MESSAGE][PASSED] - Object: 'Object Repository/C2_Question_OR/Page_LINGOturk/button_OK' is clicked on]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2020-01-09 18:45:34 - [TEST_SUITE][PASSED] - TS102_C1_C2: Test Cases/C2_Question]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>

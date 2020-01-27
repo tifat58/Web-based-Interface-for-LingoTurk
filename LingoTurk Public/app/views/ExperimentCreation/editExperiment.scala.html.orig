@@ -1,0 +1,258 @@
+@(experimentName : String)
+
+@main("LINGOturk") {
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/ExperimentCreation/editExperiment.js")"> </script>
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/editExperiment.css")">
+
+    <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th {
+                text-align:center
+            }
+            #title{
+                font-size: 16px;
+            }
+            #tabs{
+                background-color: rgba(74, 74, 74, 0.6);
+                color: black;
+                font-size:15px;
+                padding: 10px;
+                border-radius: 6px 6px 6px 6px;
+                -moz-border-radius: 6px 6px 6px 6px;
+                -webkit-border-radius: 6px 6px 6px 6px;
+                border: 2px solid #353535;
+            }
+            ol{
+                list-style-type:none
+            }
+            li{
+                display: inline;
+            }
+            #allquestions{
+                font-size:14px;
+            }
+    </style>
+
+    @** used as anchor for angular.js **@
+
+
+    <div id="angularApp" ng-app="EditExperiment" ng-controller="EditController as cc">
+        <input type="hidden" id="experimentName" value="@experimentName">
+        <div class="row">
+            <div class="col-md-2 edit-sidebar">
+                <a href="#" ng-click="cc.addElement('textAnswer')"><span>Text Answer</span></a>
+                <a href="#" ng-click="cc.addElement('textArea')"><span>Text Area</span></a>
+                <a href="#" ng-click="cc.addElement('instruction')"><span>Instruction</span></a>
+                <a href="#" ng-click="cc.addElement('question')"><span>Question</span></a>
+                <a href="#" ng-click="cc.addElement('radio')"><span>Radio</span></a>
+                <a href="#" ng-click="cc.addElement('nextSlide')"><span>Next Slide</span></a>
+                <a href="#" ng-click="cc.addElement('dragDrop')"><span>Drag and Drop</span></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="edit-main">
+                <h3 style="text-align: center;">@experimentName</h3>
+                <div ng-repeat="slide in cc.slides track by $index">
+                    <div class="row">
+                        <div class="panel panel-info">
+                            <div class="panel-heading slide-panel-heading clearfix">
+                                <div class="col-md-6 slide-panel-heading-text"><h3 class="panel-title slide-panel-title"><span>Slide {{$index + 1}}</span></h3></div>
+                                <div class="col-md-6 slide-panel-heading-button">
+                                    <div class="pull-right btn-group">
+                                        <span class="clickable-up-down" ng-click="cc.slidePosUp(slide)"><i class="glyphicon glyphicon-arrow-up" ng-if="$index > 0"></i></span>
+                                        <span class="clickable" ng-click="cc.removeSlide(slide)"><i class="glyphicon glyphicon-remove"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div ng-if="!slide.components.length" style="text-align: center"><h3>Enter Component into Slide {{$index + 1}}</h3></div>
+                                <div ng-repeat="field in slide.components track by $index">
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading component-panel-heading">
+                                            <p class="panel-header-text">{{field['name']}}</p>
+                                            <div class="pull-right btn-group component-panel-heading-button">
+                                                <span class="clickable-up-down" ng-click="cc.compPosDown(slide,field)"><i class="glyphicon glyphicon-arrow-down" ng-if="$index !== slide.components.length - 1"></i></span>
+                                                <span class="clickable-up-down" ng-click="cc.compPosUp(slide,field)"><i class="glyphicon glyphicon-arrow-up" ng-if="$index > 0"></i></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="panel panel-body component-panel-body">
+                                            <h3 style="text-transform: uppercase">{{field['name']}}</h3>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <button ng-click="cc.editElement(slide,field)" class="btn btn-primary" ng-if="field['name']!='nextSlide'">Edit</button>
+                                            <button ng-click="cc.removeField(slide,field)"  class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix" style="margin-bottom: 10px;"></div>
+                </div>
+
+
+                <button type="submit" ng-click="cc.addSlide()" class="btn btn-success center-block">Add Slide</button>
+            </div>
+        </div>
+        <div class="button_cont pull-right"><button class="example_f"  rel="nofollow" ng-click="cc.submit()"><span>Done Editing</span></button></div>
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                    <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header modal-header-default">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="cc.modalClose()">&times;</button>
+                        <h4 class="modal-title">Edit Component</h4>
+                    </div>
+                    <form id="modal_1">
+                        <div class="modal-body">
+                                <!-- textbox start
+                                <div style="margin-bottom: 20px;" ng-repeat="type in cc.textboxFields track by $index" class="form-group">-->
+                            <div style="float:right; width: 92%">
+
+                                <label name="componentName" style="text-transform: uppercase">{{cc.componentName}}</label>
+                                <select class="form-control" ng-model="fieldType.type" ng-options="type.name as type.name for type in cc.questionFieldNames" id="add_type">
+                                    <option selected value=""> -- select field -- </option>
+                                </select>
+                                <div style="clear:both"></div>
+
+                                <div style="margin-bottom: 20px;" ng-repeat="field in cc.optionFields track by $index" class="form-group">
+                                    <div style="float:left; width: 8%">
+                                        <button ng-click="cc.removeOptionField(field)" style="margin-top: 25%;" class="btn btn-default">-</button>
+                                    </div>
+                                    <div style="float:right; width: 92%">
+                                       <select class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.optionNames" >
+                                            <option selected value=""> -- select field -- </option>
+                                        </select>
+                                        <select class="form-control" ng-model="field.optionType" ng-options="type.name as type.name for type in cc.questionFieldNames" >
+                                            <option selected value=""> -- select field -- </option>
+                                        </select>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                                <div style="text-align:center">
+
+                                </div>
+                                <div style="margin-bottom: 20px;" ng-repeat="field in cc.conditionFields track by $index" class="form-group">
+                                    <div style="float:left; width: 8%">
+                                        <button ng-click="cc.removeConditionField(field)" style="margin-top: 25%;" class="btn btn-default">-</button>
+                                    </div>
+                                    <div style="float:right; width: 92%">
+                                        <select class="form-control" ng-model="field.name" ng-options="condition.name as condition.name for condition in cc.conditionNames" >
+                                            <option selected value=""> -- select field -- </option>
+                                        </select>
+                                        <div class="form-group" ng-if="field.name == 'minWordCount' || field.name == 'maxWordCount'">
+                                            <input type="text" ng-model="field.optionType" class="form-control" ng-if="field.name == 'minWordCount' ">
+                                        </div>
+                                        <div class="form-group" ng-if='field.name == "mandatory" || field.name == "allowMultipleSelection"'>
+                                            <input type="radio" ng-model="field.optionType" value="true"><span>true</span>
+                                            <input type="radio" ng-model="field.optionType" value="false"><br><span>false</span>
+                                        </div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                                <div style="text-align:center">
+
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                                <!--</div>
+                                    textbox end -->
+                                <!-- textarea start -->
+                        </div>
+                        <div class="modal-footer">
+                            <div class="pull-left">
+                                <button ng-click="cc.addOptionField()" class="btn btn-primary" type="button">Add Option</button>
+                                <button ng-click="cc.addConditionField()" class="btn btn-secondary" type="button">Add Condition</button>
+                            </div>
+                            <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="cc.addNewElement(fieldType)">Save</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="cc.modalClose()">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal fade" id="editModal" role="dialog">
+            <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="cc.modalClose()">&times;</button>
+                        <h4 class="modal-title">Edit Component</h4>
+                    </div>
+
+                    <div class="modal-body">
+                            <!-- textbox start
+                                <div style="margin-bottom: 20px;" ng-repeat="type in cc.textboxFields track by $index" class="form-group">-->
+                        <div style="float:right; width: 92%">
+                            <input type="text" ng-model="fieldValues.slideIndex" hidden >
+                            <input type="text" ng-model="fieldValues.componentIndex" hidden >
+                            <label name="componentName" style="text-transform: uppercase" ng-model="fieldValues.componentName">{{fieldValues.componentName}}</label>
+                            <select class="form-control" ng-model="fields" ng-options="type.name as type.name for type in cc.questionFieldNames" id="edit_type">
+                                <option selected value=""> -- select field -- </option>
+                            </select>
+                            <div style="clear:both"></div>
+                            <div style="margin-bottom: 20px;" ng-repeat="field in cc.optionFields track by $index" class="form-group">
+                                <div style="float:left; width: 8%">
+                                    <button ng-click="cc.removeOptionField(field)" style="margin-top: 25%;" class="btn btn-default">-</button>
+                                </div>
+                                <div style="float:right; width: 92%">
+                                    <select class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.optionNames" >
+                                        <option selected value=""> -- select field -- </option>
+                                    </select>
+
+                                    <select class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.questionFieldNames" >
+                                        <option selected value=""> -- select field -- </option>
+                                    </select>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                            <div style="margin-bottom: 20px;" ng-repeat="conditionFields in cc.conditionFields track by $index" class="form-group">
+                                <div style="float:left; width: 8%">
+                                    <button ng-click="cc.removeConditionField(field)" style="margin-top: 25%;" class="btn btn-default">-</button>
+                                </div>
+                                <div style="float:right; width: 92%">
+                                    <select class="form-control" ng-model="conditionFields.name" ng-options="condition.name as condition.name for condition in cc.conditionNames" >
+                                        <option selected value=""> -- select field -- </option>
+                                    </select>
+                                    <div class="form-group" ng-if="conditionFields.name == 'minWordCount' || conditionFields.name == 'maxWordCount'">
+                                        <input type="text" ng-model="conditionFields.value" class="form-control" ng-if="field.name == 'minWordCount' ">
+                                    </div>
+                                    <div class="form-group" ng-if='conditionFields.name == "mandatory" || conditionFields.name == "allowMultipleSelection"'>
+                                        <input type="radio" ng-model="conditionFields.value" value="true"><span>true</span>
+                                        <input type="radio" ng-model="conditionFields.value" value="false"><br><span>false</span>
+                                    </div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+                            <div style="text-align:center">
+
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button ng-click="cc.addOptionField()" class="btn btn-primary pull-left" type="button" >Add Option</button>
+                        <button ng-click="cc.addConditionField()" class="btn btn-info pull-left" type="button">Add Condition</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="cc.editAddedElement(fieldValues)">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cc.modalClose()">Close</button>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

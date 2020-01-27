@@ -1,0 +1,482 @@
+/* This file is created and compiled by Ayan Majumder, Shakhwat Ahmed Nobin, Hasan Md Tusfiqur Alam, Rayhanul Islam Rumel, Akshay Akshay,
+* Chirag Bhuvaneshwara and Khaushik Chowdhury as a Software Engineering Course project in winter semester 2019/20 */
+
+/* Body Parallex */
+
+body{
+	min-height: 500px;
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* Edit Experiment title */
+
+.edit-main  h3 b{
+	font-size: 40px !important;
+	margin-top: -20px;
+	color: black;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+
+
+
+
+
+
+
+/* Neon Title for Add Component*/
+
+/* .txt {
+    color: #ffffff;
+    background:#111;
+    text-align: center;
+	font-size: large; 
+	padding-top: 10px;
+    font-weight: bold;
+    font-family: Arial;
+    text-transform: uppercase;
+}
+.txt::before {
+    content: 'hey';
+    position: absolute;
+    mix-blend-mode: overlay;
+    filter: blur(50px);
+}
+.neon-wrapper {
+    display:inline-flex;
+    filter: brightness(100%);
+    overflow: hidden;
+}
+.gradient{
+    background: linear-gradient(114.5793141156962deg, rgba(16, 277, 250,1) 4.927083333333334%,rgba(229, 151, 64,1) 97.84374999999999%);
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 100%;
+    height:100%;
+    mix-blend-mode: multiply;
+}
+.dodge {
+    background: radial-gradient(circle,white,black 35%) center / 25% 25%;
+    position: absolute;
+    top:-100%;
+    left:-100%;
+    right:0;
+    bottom:0;
+    mix-blend-mode: color-dodge;
+    animation: dodge-area 7s linear infinite;
+}
+@keyframes dodge-area {
+    to {
+        transform: translate(50%,50%);
+    }
+} */
+
+
+
+
+
+
+
+
+
+.edit-main  h3 b:hover {
+  color: #303d3c;
+  text-shadow:0px 0px 45px #475453;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+
+.panel{
+	margin-top: 30px;
+}
+
+/* Tooltip for delete slide icon */
+.tooltipclose{
+
+display: block;
+}
+
+
+.tooltipclose:hover:after{
+	content: "Delete Slide";
+	text-align: center;
+    display: block;
+    position: absolute;
+    background: black;
+	border-radius: 6px;
+	margin-right: -10px;
+	width: 65px;
+	height: 40px;
+	color: white;
+	text-align: center;
+	border-style: solid;
+	border-bottom: 1px dotted black;
+	border-color: black transparent transparent transparent;
+	bottom: 130%;
+	
+}
+
+/* Tooltip for swap a slide up icon */
+.tooltipup{
+
+display: block;
+}
+
+
+.tooltipup:hover:after{
+	content: "Up";
+	text-align: center;
+	padding: 6px 0;
+    display: block;
+    position: absolute;
+    background: black;
+	border-radius: 6px;
+	margin-right: -10px;
+	width: 65px;
+	height: 40px;
+	color: white;
+	text-align: center;
+	border-style: solid;
+	border-bottom: 1px dotted black;
+	border-color: black transparent transparent transparent;
+	bottom: 130%;
+	
+}
+
+/* Tooltip for swap a component up icon */
+.tooltipcompup{
+
+display: block;
+}
+
+
+.tooltipcompup:hover:after{
+	content: "Up";
+	text-align: center;
+	padding: 6px 0;
+    display: block;
+    position: absolute;
+    background: black;
+	border-radius: 6px;
+	margin-right: -10px;
+	width: 65px;
+	height: 40px;
+	color: white;
+	text-align: center;
+	border-style: solid;
+	border-bottom: 1px dotted black;
+	border-color: black transparent transparent transparent;
+	bottom: 130%;
+	
+}
+
+/* Tooltip for swap a component down icon */
+.tooltipcompdown{
+
+display: block;
+}
+
+
+.tooltipcompdown:hover:after{
+	content: "Down";
+	text-align: center;
+	padding: 6px 0;
+    display: block;
+    position: absolute;
+    background: black;
+	border-radius: 6px;
+	margin-right: -10px;
+	width: 65px;
+	height: 40px;
+	color: white;
+	text-align: center;
+	border-style: solid;
+	border-bottom: 1px dotted black;
+	border-color: black transparent transparent transparent;
+	bottom: 130%;
+	
+}
+
+/* The sidebar menu */
+.edit-sidebar {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 12%; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+}
+
+@-moz-document url-prefix() {
+  .edit-sidebar {
+    
+  }
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button{ 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.edit-sidebar .edit-sidebar-container {
+    padding-top: 60px;
+}
+/* The navigation menu links */
+.edit-sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #818181;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.edit-sidebar a:hover {
+    color: #f1f1f1;
+}
+
+/* Style page content */
+.edit-main {
+    padding: 0px 10px;
+    padding-bottom: 20px !important;
+}
+.edit-slide-1{
+    background-color: lightgray;
+    min-height: 130px;
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .edit-sidebar {padding-top: 55px;padding-bottom: 55px;}
+    .edit-sidebar a {font-size: 18px;}
+}
+
+.clickable
+{
+    cursor: pointer;
+}
+
+.clickable .glyphicon
+{
+    background: #d9534f;
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px
+}
+
+.slide-panel-heading span
+{
+    margin-top: -23px;
+    font-size: 15px;
+    color: #ffffff;
+}
+a.clickable { color: inherit; }
+
+.clickable:hover {
+    text-decoration:none;
+}
+.clickable .glyphicon:hover {
+    background: #ffffff;
+}
+
+.slide-panel-heading span:hover
+{
+    color: #d9534f;
+}
+
+.slide-panel-title:hover {
+    text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+    transition: all 0.4s ease 0s;
+}
+
+.slide-panel-heading {
+    color: #31708f;
+    background: linear-gradient(141deg, rgba(93, 87, 90, 0.59) 0%, #456a76 51%, rgba(78, 72, 75, 0.9) 75%);
+    border-color: #bce8f1;
+}
+
+.slide-panel-title{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.example_f {
+    border-radius: 4px;
+    background: linear-gradient(141deg, rgba(93, 87, 90, 0.59) 0%, #456a76 51%, rgba(78, 72, 75, 0.9) 75%);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 10px;
+    transition: all 0.4s;
+    cursor: pointer;
+    margin: 5px;
+}
+.example_f span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.4s;
+}
+.example_f span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+.example_f:hover span {
+    padding-right: 25px;
+}
+.example_f:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.component-body{
+    margin-bottom:20px;
+    margin-top:20px;
+    display:block;
+    border-radius: 5px;
+    border: 1px solid #333;
+    padding: 5px;
+}
+@media (min-width: 1160px){
+    .edit-main {
+        padding-left: 14%;
+    }
+}
+@media (min-width: 1100px){
+    .edit-main {
+        padding-left: 14%;
+    }
+}
+
+.component-panel-heading {
+    padding: 5px 5px;
+}
+
+.panel-header-text{
+    text-transform: uppercase;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.component-panel-body{
+    text-align: center;
+    padding-top: 5px;
+}
+
+
+.clickable-up-down
+{
+    cursor: pointer;
+}
+
+.clickable-up-down .glyphicon
+{
+    background: forestgreen;
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px
+}
+
+a.clickable-up-down { color: inherit; }
+
+.clickable-up-down:hover {
+    text-decoration:none;
+}
+
+.clickable-up-down .glyphicon:hover {
+    background: #ffffff;
+}
+
+.component-panel-heading span
+{
+    margin-top: -30px;
+    font-size: 15px;
+    color: #ffffff;
+}
+.component-panel-heading span:hover
+{
+    color: forestgreen;
+}
+
+.slide-panel-heading-text{
+    padding-left: 0;
+    padding-top: 5px;
+}
+
+.slide-panel-heading-button{
+    padding-right: 0;
+}
+
+.component-panel-heading-button{
+    margin-top: -30px;
+}
+
+.row .edit-sidebar a{
+	
+	padding: 12px;
+  background-color: #6B6F72;
+  transition: transform .4s;
+  margin-bottom: 5px;
+  text-align: center;
+  margin-top: 5px;
+  color: black;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.row .edit-sidebar a:hover {
+	background-color: #9BC9D8;
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1); 
+}
+
+.form input.ng-invalid.ng-touched {
+    color: #FA787E;
+    border-color: #FA787E;
+}
+
+.form select.ng-invalid.ng-touched {
+    color: #FA787E;
+    border-color: #FA787E;
+}
+
+.help-block {
+    color: #FA787E;
+}
+
+.slide-panel-heading-text-link {
+    font-size: large;
+    font-weight: 700;
+    color: white;
+}
+
+.slide-panel-heading-text-link:hover {
+    color: #d6e9c6;
+}
+
+
+
+

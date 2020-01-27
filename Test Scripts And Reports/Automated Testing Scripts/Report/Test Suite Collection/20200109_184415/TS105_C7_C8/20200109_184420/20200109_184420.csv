@@ -1,0 +1,55 @@
+Suite/Test/Step Name,Browser,Description,Tag,Start time,End time,Duration,Status
+TS105_C7_C8,Firefox 72.0,,,2020-01-09 18:59:51,2020-01-09 19:03:12,3m - 20.488s,PASSED
+,,,,,,,
+Test Cases/C7_Drag_n_Drop,Firefox 72.0,,,2020-01-09 18:59:52,2020-01-09 19:01:11,1m - 19.108s,PASSED
+"openBrowser(""http://localhost:9000/"")",Firefox 72.0,,,2020-01-09 18:59:52,2020-01-09 19:00:05,12.593s,PASSED
+"navigateToUrl(""http://localhost:9000/login"")",Firefox 72.0,,,2020-01-09 19:00:05,2020-01-09 19:00:05,0.296s,PASSED
+"setText(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_Login/input_Username_username""), ""admin"")",Firefox 72.0,,,2020-01-09 19:00:05,2020-01-09 19:00:06,0.495s,PASSED
+"setEncryptedText(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_Login/input_Password_password""), ""BR2H/KIz0NBfgccJ+PbLCA=="")",Firefox 72.0,,,2020-01-09 19:00:06,2020-01-09 19:00:06,0.424s,PASSED
+"click(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_Login/button_Let me in""))",Firefox 72.0,,,2020-01-09 19:00:06,2020-01-09 19:00:07,0.741s,PASSED
+"click(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/div_Edit Experiment""))",Firefox 72.0,,,2020-01-09 19:00:07,2020-01-09 19:00:08,1.115s,PASSED
+"click(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_Edit Experiment/div_SampleTest101""))",Firefox 72.0,,,2020-01-09 19:00:08,2020-01-09 19:00:09,0.736s,PASSED
+"click(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/span_Drag and Drop""))",Firefox 72.0,,,2020-01-09 19:00:09,2020-01-09 19:00:09,0.575s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/select_-- select csv field -- t1t2t3""), ""string:t1"", true)",Firefox 72.0,,,2020-01-09 19:00:09,2020-01-09 19:00:11,1.307s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/select_-- select csv field -- t1t2t3_1""), ""string:t2"", true)",Firefox 72.0,,,2020-01-09 19:00:11,2020-01-09 19:00:14,3.858s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/select_-- select csv field -- t1t2t3_1_2""), ""string:t3"", true)",Firefox 72.0,,,2020-01-09 19:00:14,2020-01-09 19:00:21,6.154s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/select_-- select csv field -- t1t2t3_1_2_3""), ""string:t1"", true)",Firefox 72.0,,,2020-01-09 19:00:21,2020-01-09 19:00:27,6.147s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/select_-- select csv field -- t1t2t3_1_2_3_4""), ""string:t2"", true)",Firefox 72.0,,,2020-01-09 19:00:27,2020-01-09 19:00:33,6.117s,PASSED
+"setText(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/input_Splitter_splitter""), ""2,2"")",Firefox 72.0,,,2020-01-09 19:00:33,2020-01-09 19:00:34,1.392s,PASSED
+"click(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/button_Add Option""))",Firefox 72.0,,,2020-01-09 19:00:34,2020-01-09 19:00:35,0.647s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/select_-- select option name -- connectives_c2d916""), ""string:displayStyle"", true)",Firefox 72.0,,,2020-01-09 19:00:35,2020-01-09 19:00:36,1.345s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/select_-- select csv field -- t1t2t3_1_2_3_4_5""), ""string:t2"", true)",Firefox 72.0,,,2020-01-09 19:00:36,2020-01-09 19:00:37,1.011s,PASSED
+"click(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/button_Save""))",Firefox 72.0,,,2020-01-09 19:00:37,2020-01-09 19:00:38,0.502s,PASSED
+"click(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/button_Edit""))",Firefox 72.0,,,2020-01-09 19:00:38,2020-01-09 19:00:39,1.049s,PASSED
+"click(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/button_-""))",Firefox 72.0,,,2020-01-09 19:00:39,2020-01-09 19:00:39,0.542s,PASSED
+"click(findTestObject(""Object Repository/C7_Drag_n_Drop/Page_LINGOturk/button_Save""))",Firefox 72.0,,,2020-01-09 19:00:39,2020-01-09 19:01:10,30.487s,PASSED
+closeBrowser(),Firefox 72.0,,,2020-01-09 19:01:10,2020-01-09 19:01:11,1.044s,PASSED
+,,,,,,,
+Test Cases/C8_File_Input,Firefox 72.0,,,2020-01-09 19:01:11,2020-01-09 19:03:12,2m - 1.097s,PASSED
+"openBrowser(""http://localhost:9000/"")",Firefox 72.0,,,2020-01-09 19:01:11,2020-01-09 19:01:19,7.585s,PASSED
+"setText(findTestObject(""Object Repository/C8_File_Input_OR/Page_Login/input_Username_username""), ""admin"")",Firefox 72.0,,,2020-01-09 19:01:19,2020-01-09 19:01:19,0.349s,PASSED
+"setEncryptedText(findTestObject(""Object Repository/C8_File_Input_OR/Page_Login/input_Password_password""), ""BR2H/KIz0NBfgccJ+PbLCA=="")",Firefox 72.0,,,2020-01-09 19:01:19,2020-01-09 19:01:19,0.323s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_Login/span_Password_glyphicon glyphicon-log-in""))",Firefox 72.0,,,2020-01-09 19:01:19,2020-01-09 19:01:20,0.960s,PASSED
+"navigateToUrl(""http://localhost:9000/"")",Firefox 72.0,,,2020-01-09 19:01:20,2020-01-09 19:01:21,0.466s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/div_Edit Experiment""))",Firefox 72.0,,,2020-01-09 19:01:21,2020-01-09 19:01:23,2.622s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_Edit Experiment/div_SampleTest101""))",Firefox 72.0,,,2020-01-09 19:01:23,2020-01-09 19:01:26,2.597s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/span_File Input""))",Firefox 72.0,,,2020-01-09 19:01:26,2020-01-09 19:01:28,2.041s,PASSED
+"setText(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/input_fileInput _componentName""), ""file input 1"")",Firefox 72.0,,,2020-01-09 19:01:28,2020-01-09 19:01:31,3.058s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/button_Add Option""))",Firefox 72.0,,,2020-01-09 19:01:31,2020-01-09 19:01:34,2.700s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb""), ""string:restrictAnswer"", true)",Firefox 72.0,,,2020-01-09 19:01:34,2020-01-09 19:01:39,5.698s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/select_-- select csv field -- t1t2t3""), ""string:t2"", true)",Firefox 72.0,,,2020-01-09 19:01:39,2020-01-09 19:01:46,6.079s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/button_Add Option""))",Firefox 72.0,,,2020-01-09 19:01:46,2020-01-09 19:01:48,2.503s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb""), ""string:restrictAnswer"", true)",Firefox 72.0,,,2020-01-09 19:01:48,2020-01-09 19:01:54,5.494s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/select_-- select csv field -- t1t2t3""), ""string:t1"", true)",Firefox 72.0,,,2020-01-09 19:01:54,2020-01-09 19:02:00,6.389s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/button_Add Option""))",Firefox 72.0,,,2020-01-09 19:02:00,2020-01-09 19:02:02,2.502s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb""), ""string:addNone"", true)",Firefox 72.0,,,2020-01-09 19:02:02,2020-01-09 19:02:08,5.722s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/select_-- select csv field -- t1t2t3""), ""string:t2"", true)",Firefox 72.0,,,2020-01-09 19:02:08,2020-01-09 19:02:14,6.098s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/button_Add Option""))",Firefox 72.0,,,2020-01-09 19:02:14,2020-01-09 19:02:17,2.506s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb""), ""string:useScale"", true)",Firefox 72.0,,,2020-01-09 19:02:17,2020-01-09 19:02:23,5.737s,PASSED
+"selectOptionByValue(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/select_-- select csv field -- t1t2t3""), ""string:t1"", true)",Firefox 72.0,,,2020-01-09 19:02:23,2020-01-09 19:02:29,6.132s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/button_Save""))",Firefox 72.0,,,2020-01-09 19:02:29,2020-01-09 19:02:31,2.497s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/button_Edit""))",Firefox 72.0,,,2020-01-09 19:02:31,2020-01-09 19:02:33,2.025s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/button_-""))",Firefox 72.0,,,2020-01-09 19:02:33,2020-01-09 19:02:36,3.038s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/button_Save""))",Firefox 72.0,,,2020-01-09 19:02:36,2020-01-09 19:03:08,31.523s,PASSED
+"click(findTestObject(""Object Repository/C8_File_Input_OR/Page_LINGOturk/span_Done Editing""))",Firefox 72.0,,,2020-01-09 19:03:08,2020-01-09 19:03:11,2.787s,PASSED
+closeBrowser(),Firefox 72.0,,,2020-01-09 19:03:11,2020-01-09 19:03:12,1.411s,PASSED

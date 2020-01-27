@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="TS101 Edit Experiment Page Option" time="25.949" tests="1" failures="0" errors="0">
+   <testsuite name="TS101 Edit Experiment Page Option" tests="1" failures="0" errors="0" time="25.949" timestamp="2020-01-09 18:45:04" hostname="Koushik - 10.20.148.196" id="Test Suites/TS101 Edit Experiment Page Option">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="C:\\Users\\Koushik\\Katalon Studio\\LingoTurk AutomatedTesting\\Reports\\20200109_184415\\TS101 Edit Experiment Page Option\\20200109_184416"/>
+         <property name="logFiles" value="C:\\Users\\Koushik\\Katalon Studio\\LingoTurk AutomatedTesting\\Reports\\20200109_184415\\TS101 Edit Experiment Page Option\\20200109_184416\\execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="Koushik - 10.20.148.196"/>
+         <property name="os" value="Windows 10 64bit"/>
+         <property name="katalonVersion" value="7.1.2.1"/>
+         <property name="browser" value="Firefox 72.0"/>
+         <property name="hostAddress" value="10.20.148.196"/>
+         <property name="sessionId" value="77b4e7be-64a2-40dc-b57f-1913647684df"/>
+         <property name="seleniumVersion" value="3.141.59"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0, executionList=}"/>
+         <property name="platform" value="Windows 10"/>
+      </properties>
+      <testcase name="Test Cases/Edit Experiment Page Option" time="16.729" classname="Test Cases/Edit Experiment Page Option" status="PASSED">
+         <system-out><![CDATA[2020-01-09 18:45:04 - [TEST_CASE][PASSED] - Test Cases/Edit Experiment Page Option: Test Cases/Edit Experiment Page Option
+
+2020-01-09 18:45:05 - [TEST_STEP][PASSED] - openBrowser("http://localhost:9000/"): Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:45:05 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2020-01-09 18:45:05 - [MESSAGE][INFO] - Action delay is set to 0 seconds
+
+2020-01-09 18:45:13 - [MESSAGE][PASSED] - Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:45:13 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/Edit Experiment Page Option/Page_Login/input_Username_username"), "admin"): Text 'admin' is set on object 'Object Repository/Edit Experiment Page Option/Page_Login/input_Username_username'
+
+2020-01-09 18:45:14 - [MESSAGE][PASSED] - Text 'admin' is set on object 'Object Repository/Edit Experiment Page Option/Page_Login/input_Username_username'
+
+2020-01-09 18:45:14 - [TEST_STEP][PASSED] - setEncryptedText(findTestObject("Object Repository/Edit Experiment Page Option/Page_Login/input_Password_password"), "BR2H/KIz0NBfgccJ+PbLCA=="): Text ****** has been set on object 'Object Repository/Edit Experiment Page Option/Page_Login/input_Password_password'
+
+2020-01-09 18:45:14 - [MESSAGE][PASSED] - Text ****** has been set on object 'Object Repository/Edit Experiment Page Option/Page_Login/input_Password_password'
+
+2020-01-09 18:45:14 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Edit Experiment Page Option/Page_Login/strong_Let me in")): Object: 'Object Repository/Edit Experiment Page Option/Page_Login/strong_Let me in' is clicked on
+
+2020-01-09 18:45:15 - [MESSAGE][PASSED] - Object: 'Object Repository/Edit Experiment Page Option/Page_Login/strong_Let me in' is clicked on
+
+2020-01-09 18:45:15 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:9000/"): Navigate to 'http://localhost:9000/' successfully
+
+2020-01-09 18:45:16 - [MESSAGE][PASSED] - Navigate to 'http://localhost:9000/' successfully
+
+2020-01-09 18:45:16 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Edit Experiment Page Option/Page_LINGOturk/div_Edit Experiment")): Object: 'Object Repository/Edit Experiment Page Option/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:45:17 - [MESSAGE][PASSED] - Object: 'Object Repository/Edit Experiment Page Option/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:45:17 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Edit Experiment Page Option/Page_Edit Experiment/div_TestSample")): Object: 'Object Repository/Edit Experiment Page Option/Page_Edit Experiment/div_TestSample' is clicked on
+
+2020-01-09 18:45:18 - [MESSAGE][PASSED] - Object: 'Object Repository/Edit Experiment Page Option/Page_Edit Experiment/div_TestSample' is clicked on
+
+2020-01-09 18:45:18 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Edit Experiment Page Option/Page_LINGOturk/a_About")): Object: 'Object Repository/Edit Experiment Page Option/Page_LINGOturk/a_About' is clicked on
+
+2020-01-09 18:45:18 - [MESSAGE][PASSED] - Object: 'Object Repository/Edit Experiment Page Option/Page_LINGOturk/a_About' is clicked on
+
+2020-01-09 18:45:18 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Edit Experiment Page Option/Page_Contact/a_Home")): Object: 'Object Repository/Edit Experiment Page Option/Page_Contact/a_Home' is clicked on
+
+2020-01-09 18:45:19 - [MESSAGE][PASSED] - Object: 'Object Repository/Edit Experiment Page Option/Page_Contact/a_Home' is clicked on
+
+2020-01-09 18:45:19 - [TEST_STEP][PASSED] - closeBrowser(): Browser is closed
+
+2020-01-09 18:45:21 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2020-01-09 18:45:04 - [TEST_SUITE][PASSED] - TS101 Edit Experiment Page Option: Test Cases/Edit Experiment Page Option]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>

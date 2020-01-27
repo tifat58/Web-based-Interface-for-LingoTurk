@@ -1,0 +1,352 @@
+(function () {
+    var app = angular.module('EditExperiment', ["Lingoturk"]);
+
+    app.controller('EditController', ['$http', '$timeout', '$scope', function ($http, $timeout, $scope) {
+        $scope.window = window;
+        $scope.alert = alert;
+        $scope.stringify = JSON.stringify;
+        $scope.radioOptions = '';
+        var self = this;
+        this.id = -1;
+        this.types = [];
+        this.type = "";
+        this.name = "";
+        this.nameOnAmt = "";
+        this.description = "";
+        this.additionalExplanations = "";
+        this.questionType = null;
+        this.groupType = null;
+        this.section = []
+        this.exampleQuestions = [];
+        this.groups = [];
+        this.files = [];
+        this.slides = [{
+            'num': '1',
+            'components': []
+        }];
+        $scope.fieldValues = {};
+        $scope.componentName = '';
+        this.questionFieldNames = [];
+        this.optionFields = [];
+        this.delimiter = ',';
+        this.commentSequence = '#';
+        this.questionFields = [];
+        self.questionColumnNames = null;
+        $scope.map = '';
+
+        $scope.range = function (max) {
+            var arr = [];
+            for (var i = 0; i < max; ++i) {
+                arr.push(i);
+            }
+            return arr;
+        };
+
+<<<<<<< HEAD
+        var run = false
+=======
+        var run = false;
+>>>>>>> develop_ayan
+        this.submit = function(){
+            var experiment = {
+                name: self.type,
+                slides: this.slides
+
+            };
+            angular.forEach(this.slides, function(value, key){
+                if(value.components.length === 0){
+                    bootbox.alert("There is slide with empty component. Please delete that or add component there.");
+<<<<<<< HEAD
+                    run = false;
+
+                }else{
+                    run = true
+                }
+            });
+            if(run){
+                $http.post("/submitEditExperiment", experiment)
+                    .success(function () {
+                        bootbox.alert("Experiment Edited. You will be redirected to the index page!", function() {
+                            window.location.href = "/";
+                        });
+                    })
+                    .error(function (e) {
+                        alert("Error!"+e);
+                    });
+            }
+=======
+                }else{
+                    run = true;
+                }
+            });
+
+>>>>>>> develop_ayan
+            // for(var i = 0; i < self.groups.length; ++i){
+            //     var group = self.groups[i];
+            //     var questions = [];
+            //     group.questions = questions;
+            //     var content = group.parsedContent;
+            //     var columnNames = self.questionColumnNames;
+            //
+            //     for(var j = 0; j < content.length; ++j){
+            //         var question = self.createQuestion();
+            //         for(var c = 0; c < columnNames.length; ++c){
+            //             if(columnNames[c].trim() == "" || columnNames[c].trim() == "-- select field --"){
+            //                 continue;
+            //             }
+            //             question[columnNames[c]] = content[j][c];
+            //         }
+            //         questions.push(question);
+            //     }
+            // }
+            //
+            /*var experiment = {
+                //id: this.id,
+                // The name should be something like this.name!
+                name: "SentenceCompletionExperiment",//name: this.name,
+                // Might need validation JSON list as well included.
+                // Slide might need flow control options.
+                slides: [
+                    {
+                        num: "1",
+                        components: [
+                            {
+                                name: "question",
+                                model_attr: "story",
+                                options: [
+                                    {
+                                        "name": "q_op1",
+                                        "value": ""
+                                    }
+                                ]
+                            },
+                            {
+                                name: "TextArea",
+                                model_attr: "answer",
+                                options: [
+                                    {
+                                        "name": "ta_op1",
+                                        "value": ""
+                                    }
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            };*/
+            if(run) {
+                $http.post("/submitEditExperiment", experiment)
+                    .success(function () {
+                        bootbox.alert("Experiment Edited. You will be redirected to the index page!", function () {
+                            window.location.href = "/";
+                        });
+                    })
+                    .error(function (e) {
+                        alert("Error!" + e);
+                    });
+            }
+        };
+
+        this.addElement = function(value){
+            $scope.componentName = value;
+            this.componentName = value;
+            $('#add_type').val('');
+            if(value === 'nextSlide'){
+                this.addNewElement({'type' : value})
+            }else{
+                $('#myModal').modal('show');
+            }
+        };
+
+        this.Element = function (field,option) {
+            var self = this;
+            self.name = $scope.componentName;
+            self.model_attr =  field.type;
+            self.options = []
+            self.mandatory = field.mandatory
+            self.multiSelection = field.multiSelection
+            angular.forEach(option, function(value, key){
+                self.options[key] = {
+                    "name": 'option',
+                    "value": value.optionType
+                }
+                //self.slides[self.slides.length - 1].components[testRowIndex -1].options.push(new self.Option(value))
+            })
+            /*if(self.name ==='fixedRadio'){
+                self.options = [{
+                    "name": 'option',
+                    "value": field[1]
+                }]
+            }else {
+                self.options = [{
+                    "name": '',
+                    "value": ''
+                }]
+            }*/
+
+            $scope.componentName = '';
+        };
+
+
+        this.Slide = function (index) {
+            var self = this;
+            self.num = index;
+            self.components = [];
+        };
+
+        this.Option = function (item) {
+            var self = this;
+            self.name = 'option';
+            self.value = item.optionType;
+        };
+
+        this.QuestionName = function (name) {
+            var self = this;
+            self.name = name;
+            self.type = "String";
+            self.simpleTypeName = "String"
+        };
+
+        this.addField = function () {
+            self.questionFields.push(new self.Field());
+        };
+
+        this.addNewElement = function (fieldType) {
+<<<<<<< HEAD
+
+=======
+>>>>>>> develop_ayan
+            this.slides[this.slides.length - 1].components.push(new self.Element(fieldType,this.optionFields));
+
+            this.optionFields = []
+
+            //for (var key in this.questionFieldNames) {
+            //    if(this.questionFieldNames[key].name===fieldType[0]){
+            //        this.questionFieldNames.splice(key, 1);
+            //    }
+            //}
+
+        };
+
+        this.editElement = function(slide,field){
+            var slideIndex = this.slides.indexOf(slide);
+            var index = this.slides[slideIndex].components.indexOf(field);
+            $scope.fieldValues.componentName = this.slides[slideIndex].components[index].name;
+            $scope.fields = this.slides[slideIndex].components[index].model_attr;
+            $scope.fieldValues.mandatory = this.slides[slideIndex].components[index].mandatory;
+            $scope.fieldValues.multiSelection = this.slides[slideIndex].components[index].multiSelection;
+            $scope.fieldValues.slideIndex = slideIndex;
+            $scope.fieldValues.componentIndex = index;
+            this.optionFields = $scope.fieldValues.type = this.slides[slideIndex].components[index].options;
+            $('#editModal').modal('show');
+
+        };
+
+        this.editAddedElement = function(slide){
+            this.slides[$scope.fieldValues.slideIndex].components[$scope.fieldValues.componentIndex].model_attr = $scope.fields;
+            this.slides[$scope.fieldValues.slideIndex].components[$scope.fieldValues.componentIndex].options = this.optionFields;
+
+        };
+
+        this.removeField = function (slide,field) {
+            var slideIndex = this.slides.indexOf(slide);
+            var index = this.slides[slideIndex].components.indexOf(field);
+            this.slides[slideIndex].components.splice(index, 1);
+            //self.questionFieldNames.push(new self.QuestionName(field.model_attr));
+        };
+
+        this.addSlide = function(){
+            this.slides.push(new self.Slide((this.slides.length + 1).toString()));
+
+        };
+
+        this.removeSlide = function(slide){
+            var index = this.slides.indexOf(slide);
+            //for (var key in slide.components) {
+            //    self.questionFieldNames.push(new self.QuestionName(slide.components[key].model_attr));
+            //}
+            this.slides.splice(index, 1);
+        };
+
+
+        this.Field = function () {
+            var self = this;
+            self.optionName = "";
+            self.optionType = "";
+        };
+
+        this.addOptionField = function () {
+            self.optionFields.push(new self.Field());
+        };
+
+        this.removeOptionField = function (field) {
+            var index = self.optionFields.indexOf(field);
+            self.optionFields.splice(index, 1);
+        };
+
+        this.modalClose = function(){
+            this.optionFields = []
+        }
+
+        $(document).ready(function () {
+            if (typeof String.prototype.startsWith != 'function') {
+                String.prototype.startsWith = function (str) {
+                    return this.slice(0, str.length) == str;
+                };
+            }
+
+            self.type = $("#experimentName").val().trim();
+
+            $http.get("/getExperimentDetails?experimentName=" + self.type).success(function (data) {
+
+                self.types = data;
+                for (var typeName in data) {
+                    if (!data.hasOwnProperty(typeName)) continue;
+                    var obj = data[typeName];
+                    var fields = obj.fields;
+
+                    if (obj.isQuestionType) {
+                        obj.name = typeName;
+                        self.questionType = obj;
+                    }
+
+                    if (obj.isGroupType) {
+                        obj.name = typeName;
+                        self.groupType = obj;
+                    }
+
+                    var tmp = [];
+                    if(!(fields instanceof Array)){
+                        for (var key in fields) {
+                            if (fields.hasOwnProperty(key)) {
+                                tmp.push(key);
+                            }
+                        }
+                    }else{
+                        for (var i = 0; i < fields.length; ++i) {
+                            var f = fields[i];
+                            tmp.push(f.name);
+                        }
+                    }
+
+                    var func = "self[typeName] = function(" + tmp.join(",") + "){\nvar self = this;\nself._type=\"" + typeName + "\";\n";
+                    if(obj.isGroupType){
+                        func + "self.questions=null;\n";
+                    }
+                    for (var i = 0; i < fields.length; ++i) {
+                        var f = fields[i];
+                        func += "self." + f.name + " = " + f.name + ";\n"
+                    }
+                    func += "};";
+                    eval(func);
+                }
+
+                self.questionFieldNames = self.questionType.fields;
+                //this.questionFieldNames = self.questionFieldNames;
+                self.usedNames = [];
+
+            });
+        })
+    }
+    ]);
+})();

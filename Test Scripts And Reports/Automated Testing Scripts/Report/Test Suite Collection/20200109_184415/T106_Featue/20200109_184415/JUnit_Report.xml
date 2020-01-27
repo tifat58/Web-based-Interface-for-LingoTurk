@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="T106_Featue" time="36.053" tests="1" failures="0" errors="0">
+   <testsuite name="T106_Featue" tests="1" failures="0" errors="0" time="36.053" timestamp="2020-01-09 18:44:24" hostname="Koushik - 10.20.148.196" id="Test Suites/T106_Featue">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="C:\\Users\\Koushik\\Katalon Studio\\LingoTurk AutomatedTesting\\Reports\\20200109_184415\\T106_Featue\\20200109_184415"/>
+         <property name="logFiles" value="C:\\Users\\Koushik\\Katalon Studio\\LingoTurk AutomatedTesting\\Reports\\20200109_184415\\T106_Featue\\20200109_184415\\execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="Koushik - 10.20.148.196"/>
+         <property name="os" value="Windows 10 64bit"/>
+         <property name="katalonVersion" value="7.1.2.1"/>
+         <property name="browser" value="Firefox 72.0"/>
+         <property name="hostAddress" value="10.20.148.196"/>
+         <property name="sessionId" value="63d9bc97-133d-4285-8b97-3ae54348d20f"/>
+         <property name="seleniumVersion" value="3.141.59"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0, executionList=}"/>
+         <property name="platform" value="Windows 10"/>
+      </properties>
+      <testcase name="Test Cases/Feature_Next_Slide_Button" time="26.282" classname="Test Cases/Feature_Next_Slide_Button" status="PASSED">
+         <system-out><![CDATA[2020-01-09 18:44:25 - [TEST_CASE][PASSED] - Test Cases/Feature_Next_Slide_Button: Test Cases/Feature_Next_Slide_Button
+
+2020-01-09 18:44:25 - [TEST_STEP][PASSED] - openBrowser("http://localhost:9000/"): Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:44:26 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2020-01-09 18:44:26 - [MESSAGE][INFO] - Action delay is set to 0 seconds
+
+2020-01-09 18:44:35 - [MESSAGE][PASSED] - Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:44:35 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:9000/login"): Navigate to 'http://localhost:9000/login' successfully
+
+2020-01-09 18:44:36 - [MESSAGE][PASSED] - Navigate to 'http://localhost:9000/login' successfully
+
+2020-01-09 18:44:36 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_Login/input_Username_username"), "admin"): Text 'admin' is set on object 'Object Repository/Feature_Next_Slide_Button_OR/Page_Login/input_Username_username'
+
+2020-01-09 18:44:36 - [MESSAGE][PASSED] - Text 'admin' is set on object 'Object Repository/Feature_Next_Slide_Button_OR/Page_Login/input_Username_username'
+
+2020-01-09 18:44:36 - [TEST_STEP][PASSED] - setEncryptedText(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_Login/input_Password_password"), "BR2H/KIz0NBfgccJ+PbLCA=="): Text ****** has been set on object 'Object Repository/Feature_Next_Slide_Button_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:44:37 - [MESSAGE][PASSED] - Text ****** has been set on object 'Object Repository/Feature_Next_Slide_Button_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:44:37 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_Login/span_Password_glyphicon glyphicon-log-in")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_Login/span_Password_glyphicon glyphicon-log-in' is clicked on
+
+2020-01-09 18:44:38 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_Login/span_Password_glyphicon glyphicon-log-in' is clicked on
+
+2020-01-09 18:44:38 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/div_Edit Experiment")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:44:39 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:44:39 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_Edit Experiment/div_TestSample")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_Edit Experiment/div_TestSample' is clicked on
+
+2020-01-09 18:44:40 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_Edit Experiment/div_TestSample' is clicked on
+
+2020-01-09 18:44:40 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/span_Next Slide Button")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/span_Next Slide Button' is clicked on
+
+2020-01-09 18:44:40 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/span_Next Slide Button' is clicked on
+
+2020-01-09 18:44:40 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/input_nextSlideButton _componentName"), "Next Slide Button"): Text 'Next Slide Button' is set on object 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/input_nextSlideButton _componentName'
+
+2020-01-09 18:44:41 - [MESSAGE][PASSED] - Text 'Next Slide Button' is set on object 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/input_nextSlideButton _componentName'
+
+2020-01-09 18:44:41 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:44:42 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:44:42 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Add Slide")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Add Slide' is clicked on
+
+2020-01-09 18:44:42 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Add Slide' is clicked on
+
+2020-01-09 18:44:42 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Add Slide")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Add Slide' is clicked on
+
+2020-01-09 18:44:43 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Add Slide' is clicked on
+
+2020-01-09 18:44:43 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/a_Next Slide Button")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/a_Next Slide Button' is clicked on
+
+2020-01-09 18:44:44 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/a_Next Slide Button' is clicked on
+
+2020-01-09 18:44:44 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/select_123"), "number:2", true): All options with value 'number:2' are selected in object 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/select_123'  using regular expression
+
+2020-01-09 18:44:45 - [MESSAGE][PASSED] - All options with value 'number:2' are selected in object 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/select_123'  using regular expression
+
+2020-01-09 18:44:45 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/input_nextSlideButton _componentName"), "Next Slide Button 2"): Text 'Next Slide Button 2' is set on object 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/input_nextSlideButton _componentName'
+
+2020-01-09 18:44:46 - [MESSAGE][PASSED] - Text 'Next Slide Button 2' is set on object 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/input_nextSlideButton _componentName'
+
+2020-01-09 18:44:46 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:44:46 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:44:46 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/i_Slide 3_glyphicon glyphicon-remove tooltipclose")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/i_Slide 3_glyphicon glyphicon-remove tooltipclose' is clicked on
+
+2020-01-09 18:44:47 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/i_Slide 3_glyphicon glyphicon-remove tooltipclose' is clicked on
+
+2020-01-09 18:44:47 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_OK")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_OK' is clicked on
+
+2020-01-09 18:44:48 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/button_OK' is clicked on
+
+2020-01-09 18:44:48 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/span_Done Editing")): Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/span_Done Editing' is clicked on
+
+2020-01-09 18:44:49 - [MESSAGE][PASSED] - Object: 'Object Repository/Feature_Next_Slide_Button_OR/Page_LINGOturk/span_Done Editing' is clicked on
+
+2020-01-09 18:44:49 - [TEST_STEP][PASSED] - closeBrowser(): Browser is closed
+
+2020-01-09 18:44:51 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2020-01-09 18:44:24 - [TEST_SUITE][PASSED] - T106_Featue: Test Cases/Feature_Next_Slide_Button]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>

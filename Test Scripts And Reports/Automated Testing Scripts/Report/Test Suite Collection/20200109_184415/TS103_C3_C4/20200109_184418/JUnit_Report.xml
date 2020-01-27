@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="TS103_C3_C4" time="453.893" tests="2" failures="0" errors="0">
+   <testsuite name="TS103_C3_C4" tests="2" failures="0" errors="0" time="453.893" timestamp="2020-01-09 18:47:52" hostname="Koushik - 10.20.148.196" id="Test Suites/TS103_C3_C4">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="C:\\Users\\Koushik\\Katalon Studio\\LingoTurk AutomatedTesting\\Reports\\20200109_184415\\TS103_C3_C4\\20200109_184418"/>
+         <property name="logFiles" value="C:\\Users\\Koushik\\Katalon Studio\\LingoTurk AutomatedTesting\\Reports\\20200109_184415\\TS103_C3_C4\\20200109_184418\\execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="Koushik - 10.20.148.196"/>
+         <property name="os" value="Windows 10 64bit"/>
+         <property name="katalonVersion" value="7.1.2.1"/>
+         <property name="browser" value="Firefox 72.0"/>
+         <property name="hostAddress" value="10.20.148.196"/>
+         <property name="sessionId" value="1bbdf2a1-12f5-408f-9f40-8e63e6d5e6fc"/>
+         <property name="seleniumVersion" value="3.141.59"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0, executionList=}"/>
+         <property name="platform" value="Windows 10"/>
+      </properties>
+      <testcase name="Test Cases/C3_Radio" time="341.613" classname="Test Cases/C3_Radio" status="PASSED">
+         <system-out><![CDATA[2020-01-09 18:47:52 - [TEST_CASE][PASSED] - Test Cases/C3_Radio: Test Cases/C3_Radio
+
+2020-01-09 18:47:53 - [TEST_STEP][PASSED] - openBrowser("http://localhost:9000/"): Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:47:53 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2020-01-09 18:47:53 - [MESSAGE][INFO] - Action delay is set to 0 seconds
+
+2020-01-09 18:48:08 - [MESSAGE][PASSED] - Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:48:08 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:9000/login"): Navigate to 'http://localhost:9000/login' successfully
+
+2020-01-09 18:48:08 - [MESSAGE][PASSED] - Navigate to 'http://localhost:9000/login' successfully
+
+2020-01-09 18:48:08 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/C3_Radio_OR/Page_Login/input_Username_username"), "admin"): Text 'admin' is set on object 'Object Repository/C3_Radio_OR/Page_Login/input_Username_username'
+
+2020-01-09 18:48:09 - [MESSAGE][PASSED] - Text 'admin' is set on object 'Object Repository/C3_Radio_OR/Page_Login/input_Username_username'
+
+2020-01-09 18:48:09 - [TEST_STEP][PASSED] - setEncryptedText(findTestObject("Object Repository/C3_Radio_OR/Page_Login/input_Password_password"), "BR2H/KIz0NBfgccJ+PbLCA=="): Text ****** has been set on object 'Object Repository/C3_Radio_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:48:09 - [MESSAGE][PASSED] - Text ****** has been set on object 'Object Repository/C3_Radio_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:48:09 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_Login/span_Password_glyphicon glyphicon-log-in")): Object: 'Object Repository/C3_Radio_OR/Page_Login/span_Password_glyphicon glyphicon-log-in' is clicked on
+
+2020-01-09 18:48:10 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_Login/span_Password_glyphicon glyphicon-log-in' is clicked on
+
+2020-01-09 18:48:10 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/div_Edit Experiment")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:48:11 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:48:11 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_Edit Experiment/div_AnswerQuestions")): Object: 'Object Repository/C3_Radio_OR/Page_Edit Experiment/div_AnswerQuestions' is clicked on
+
+2020-01-09 18:48:12 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_Edit Experiment/div_AnswerQuestions' is clicked on
+
+2020-01-09 18:48:12 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/a_Radio")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/a_Radio' is clicked on
+
+2020-01-09 18:48:13 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/a_Radio' is clicked on
+
+2020-01-09 18:48:13 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/select_-- select csv field -- storyquestions"), "string:story", true): All options with value 'string:story' are selected in object 'Object Repository/C3_Radio_OR/Page_LINGOturk/select_-- select csv field -- storyquestions'  using regular expression
+
+2020-01-09 18:48:14 - [MESSAGE][PASSED] - All options with value 'string:story' are selected in object 'Object Repository/C3_Radio_OR/Page_LINGOturk/select_-- select csv field -- storyquestions'  using regular expression
+
+2020-01-09 18:48:14 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/select_-- select csv field -- storyquestions"), "string:story", true): All options with value 'string:story' are selected in object 'Object Repository/C3_Radio_OR/Page_LINGOturk/select_-- select csv field -- storyquestions'  using regular expression
+
+2020-01-09 18:48:15 - [MESSAGE][PASSED] - All options with value 'string:story' are selected in object 'Object Repository/C3_Radio_OR/Page_LINGOturk/select_-- select csv field -- storyquestions'  using regular expression
+
+2020-01-09 18:48:15 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:48:16 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:48:16 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/button_Edit")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Edit' is clicked on
+
+2020-01-09 18:49:00 - [MESSAGE][INFO] - Unable to find the element located by 'By.xpath: //div[@id='angularApp']/div[2]/div/div/div/div/div[2]/div/div/div[3]/button'. Please recheck the objects properties to make sure the desired element is located. 
+
+2020-01-09 18:49:00 - [MESSAGE][INFO] - [SMART_XPATH] Auto-trying out other XPath values in the test object.
+
+2020-01-09 18:49:00 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '//div[@id='angularApp']/div[2]/div/div/div/div/div[2]/div/div/div[3]/button'.
+
+2020-01-09 18:49:00 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='radio'])[2]/following::button[1]'.
+
+2020-01-09 18:49:01 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Slide 1'])[1]/following::button[1]'.
+
+2020-01-09 18:49:01 - [MESSAGE][INFO] - [SMART_XPATH] Screenshot: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/Object Repository/C3_Radio_OR/Page_LINGOturk/button_Edit_neighbor_0.png
+
+2020-01-09 18:49:01 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Delete'])[1]/preceding::button[1]'.
+
+2020-01-09 18:49:02 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Add Slide'])[1]/preceding::button[2]'.
+
+2020-01-09 18:49:02 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '//*/text()[normalize-space(.)='Edit']/parent::*'.
+
+2020-01-09 18:49:02 - [MESSAGE][ERROR] - [SMART_XPATH] Cannot save screenshot to: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath, reason: negative or zero width
+
+2020-01-09 18:49:03 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '//button'.
+
+2020-01-09 18:49:03 - [MESSAGE][INFO] - [SMART_XPATH] Screenshot: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/Object Repository/C3_Radio_OR/Page_LINGOturk/button_Edit_position.png
+
+2020-01-09 18:49:03 - [MESSAGE][ERROR] - [SMART_XPATH] C:\Users\Koushik\Katalon Studio\LingoTurk AutomatedTesting\Reports\smart_xpath\waiting-for-approval.json (The system cannot find the file specified)
+
+2020-01-09 18:49:03 - [MESSAGE][ERROR] - [SMART_XPATH] C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/waiting-for-approval.json does not exist or is provided by Smart XPath Plugin!
+
+2020-01-09 18:49:03 - [MESSAGE][INFO] - [SMART_XPATH] Selected Smart XPath: '(.//*[normalize-space(text()) and normalize-space(.)='Slide 1'])[1]/following::button[1]'.
+
+2020-01-09 18:49:03 - [MESSAGE][INFO] - [SMART_XPATH] Continuing executing the test case!
+
+2020-01-09 18:49:04 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Edit' is clicked on
+
+2020-01-09 18:49:04 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/button_Add Option")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:49:04 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 19760, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 25299a06-671c-49f0-99a7-84be8da1fff2
+
+2020-01-09 18:49:34 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 19760, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 25299a06-671c-49f0-99a7-84be8da1fff2
+
+2020-01-09 18:49:34 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:49:34 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/select_-- select csv field -- storyquestions"), "string:questions", true): All options with value 'string:questions' are selected in object 'Object Repository/C3_Radio_OR/Page_LINGOturk/select_-- select csv field -- storyquestions'  using regular expression
+
+2020-01-09 18:49:36 - [MESSAGE][PASSED] - All options with value 'string:questions' are selected in object 'Object Repository/C3_Radio_OR/Page_LINGOturk/select_-- select csv field -- storyquestions'  using regular expression
+
+2020-01-09 18:49:36 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/button_Add Condition")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Add Condition' is clicked on
+
+2020-01-09 18:49:36 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 19760, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 25299a06-671c-49f0-99a7-84be8da1fff2
+
+2020-01-09 18:50:06 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 19760, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 25299a06-671c-49f0-99a7-84be8da1fff2
+
+2020-01-09 18:50:06 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Add Condition' is clicked on
+
+2020-01-09 18:50:06 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:50:07 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:50:07 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/button_Edit")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Edit' is clicked on
+
+2020-01-09 18:50:51 - [MESSAGE][INFO] - Unable to find the element located by 'By.xpath: //div[@id='angularApp']/div[2]/div/div/div/div/div[2]/div/div/div[3]/button'. Please recheck the objects properties to make sure the desired element is located. 
+
+2020-01-09 18:50:51 - [MESSAGE][INFO] - [SMART_XPATH] Auto-trying out other XPath values in the test object.
+
+2020-01-09 18:50:51 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '//div[@id='angularApp']/div[2]/div/div/div/div/div[2]/div/div/div[3]/button'.
+
+2020-01-09 18:50:51 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='radio'])[2]/following::button[1]'.
+
+2020-01-09 18:50:52 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Slide 1'])[1]/following::button[1]'.
+
+2020-01-09 18:50:52 - [MESSAGE][INFO] - [SMART_XPATH] Screenshot: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/Object Repository/C3_Radio_OR/Page_LINGOturk/button_Edit_neighbor_1.png
+
+2020-01-09 18:50:52 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Delete'])[1]/preceding::button[1]'.
+
+2020-01-09 18:50:52 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Add Slide'])[1]/preceding::button[2]'.
+
+2020-01-09 18:50:53 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '//*/text()[normalize-space(.)='Edit']/parent::*'.
+
+2020-01-09 18:50:53 - [MESSAGE][ERROR] - [SMART_XPATH] Cannot save screenshot to: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath, reason: negative or zero width
+
+2020-01-09 18:50:53 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '//button'.
+
+2020-01-09 18:50:54 - [MESSAGE][INFO] - [SMART_XPATH] Screenshot: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/Object Repository/C3_Radio_OR/Page_LINGOturk/button_Edit_position.png
+
+2020-01-09 18:50:54 - [MESSAGE][ERROR] - [SMART_XPATH] C:\Users\Koushik\Katalon Studio\LingoTurk AutomatedTesting\Reports\smart_xpath\waiting-for-approval.json (The system cannot find the file specified)
+
+2020-01-09 18:50:54 - [MESSAGE][ERROR] - [SMART_XPATH] C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/waiting-for-approval.json does not exist or is provided by Smart XPath Plugin!
+
+2020-01-09 18:50:54 - [MESSAGE][INFO] - [SMART_XPATH] Selected Smart XPath: '(.//*[normalize-space(text()) and normalize-space(.)='Slide 1'])[1]/following::button[1]'.
+
+2020-01-09 18:50:54 - [MESSAGE][INFO] - [SMART_XPATH] Continuing executing the test case!
+
+2020-01-09 18:50:54 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Edit' is clicked on
+
+2020-01-09 18:50:54 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/button_-")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_-' is clicked on
+
+2020-01-09 18:51:29 - [MESSAGE][INFO] - Unable to find the element located by 'By.xpath: //div[@id='editModal']/div/div/div[2]/form/div[2]/div[2]/div/div[3]/button'. Please recheck the objects properties to make sure the desired element is located. 
+
+2020-01-09 18:51:29 - [MESSAGE][INFO] - [SMART_XPATH] Auto-trying out other XPath values in the test object.
+
+2020-01-09 18:51:31 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '//div[@id='editModal']/div/div/div[2]/form/div[2]/div[2]/div/div[3]/button'.
+
+2020-01-09 18:51:33 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='False'])[1]/following::button[1]'.
+
+2020-01-09 18:51:35 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='True'])[1]/following::button[1]'.
+
+2020-01-09 18:51:37 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Add Condition'])[2]/preceding::button[1]'.
+
+2020-01-09 18:51:37 - [MESSAGE][ERROR] - [SMART_XPATH] Cannot save screenshot to: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath, reason: negative or zero width
+
+2020-01-09 18:51:39 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Save'])[2]/preceding::button[2]'.
+
+2020-01-09 18:51:40 - [MESSAGE][ERROR] - [SMART_XPATH] Cannot save screenshot to: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath, reason: negative or zero width
+
+2020-01-09 18:51:42 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '//form/div[2]/div[2]/div/div[3]/button'.
+
+2020-01-09 18:51:42 - [MESSAGE][INFO] - [SMART_XPATH] Screenshot: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/Object Repository/C3_Radio_OR/Page_LINGOturk/button_-_position.png
+
+2020-01-09 18:51:42 - [MESSAGE][ERROR] - [SMART_XPATH] C:\Users\Koushik\Katalon Studio\LingoTurk AutomatedTesting\Reports\smart_xpath\waiting-for-approval.json (The system cannot find the file specified)
+
+2020-01-09 18:51:42 - [MESSAGE][ERROR] - [SMART_XPATH] C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/waiting-for-approval.json does not exist or is provided by Smart XPath Plugin!
+
+2020-01-09 18:51:42 - [MESSAGE][INFO] - [SMART_XPATH] Selected Smart XPath: '(.//*[normalize-space(text()) and normalize-space(.)='Add Condition'])[2]/preceding::button[1]'.
+
+2020-01-09 18:51:42 - [MESSAGE][INFO] - [SMART_XPATH] Continuing executing the test case!
+
+2020-01-09 18:51:42 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 19760, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 25299a06-671c-49f0-99a7-84be8da1fff2
+
+2020-01-09 18:52:13 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 19760, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 25299a06-671c-49f0-99a7-84be8da1fff2
+
+2020-01-09 18:52:13 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_-' is clicked on
+
+2020-01-09 18:52:13 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/button_-")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_-' is clicked on
+
+2020-01-09 18:52:43 - [MESSAGE][INFO] - Unable to find the element located by 'By.xpath: //div[@id='editModal']/div/div/div[2]/form/div[2]/div[2]/div/div[3]/button'. Please recheck the objects properties to make sure the desired element is located. 
+
+2020-01-09 18:52:43 - [MESSAGE][INFO] - [SMART_XPATH] Auto-trying out other XPath values in the test object.
+
+2020-01-09 18:52:45 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '//div[@id='editModal']/div/div/div[2]/form/div[2]/div[2]/div/div[3]/button'.
+
+2020-01-09 18:52:47 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='False'])[1]/following::button[1]'.
+
+2020-01-09 18:52:49 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='True'])[1]/following::button[1]'.
+
+2020-01-09 18:52:51 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Add Condition'])[2]/preceding::button[1]'.
+
+2020-01-09 18:52:52 - [MESSAGE][ERROR] - [SMART_XPATH] Cannot save screenshot to: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath, reason: negative or zero width
+
+2020-01-09 18:52:54 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Save'])[2]/preceding::button[2]'.
+
+2020-01-09 18:52:54 - [MESSAGE][ERROR] - [SMART_XPATH] Cannot save screenshot to: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath, reason: negative or zero width
+
+2020-01-09 18:52:56 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '//form/div[2]/div[2]/div/div[3]/button'.
+
+2020-01-09 18:52:57 - [MESSAGE][INFO] - [SMART_XPATH] Screenshot: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/Object Repository/C3_Radio_OR/Page_LINGOturk/button_-_position.png
+
+2020-01-09 18:52:57 - [MESSAGE][ERROR] - [SMART_XPATH] C:\Users\Koushik\Katalon Studio\LingoTurk AutomatedTesting\Reports\smart_xpath\waiting-for-approval.json (The system cannot find the file specified)
+
+2020-01-09 18:52:57 - [MESSAGE][ERROR] - [SMART_XPATH] C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/waiting-for-approval.json does not exist or is provided by Smart XPath Plugin!
+
+2020-01-09 18:52:57 - [MESSAGE][INFO] - [SMART_XPATH] Selected Smart XPath: '(.//*[normalize-space(text()) and normalize-space(.)='Add Condition'])[2]/preceding::button[1]'.
+
+2020-01-09 18:52:57 - [MESSAGE][INFO] - [SMART_XPATH] Continuing executing the test case!
+
+2020-01-09 18:52:57 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 19760, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 25299a06-671c-49f0-99a7-84be8da1fff2
+
+2020-01-09 18:53:27 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 19760, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 25299a06-671c-49f0-99a7-84be8da1fff2
+
+2020-01-09 18:53:27 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_-' is clicked on
+
+2020-01-09 18:53:27 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:53:30 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:53:30 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C3_Radio_OR/Page_LINGOturk/span_Done Editing")): Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/span_Done Editing' is clicked on
+
+2020-01-09 18:53:32 - [MESSAGE][PASSED] - Object: 'Object Repository/C3_Radio_OR/Page_LINGOturk/span_Done Editing' is clicked on
+
+2020-01-09 18:53:32 - [TEST_STEP][PASSED] - closeBrowser(): Browser is closed
+
+2020-01-09 18:53:34 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/C4_CheckBoxAnswer" time="105.301" classname="Test Cases/C4_CheckBoxAnswer" status="PASSED">
+         <system-out><![CDATA[2020-01-09 18:53:34 - [TEST_CASE][PASSED] - Test Cases/C4_CheckBoxAnswer: Test Cases/C4_CheckBoxAnswer
+
+2020-01-09 18:53:34 - [TEST_STEP][PASSED] - openBrowser("http://localhost:9000/"): Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:53:34 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2020-01-09 18:53:46 - [MESSAGE][PASSED] - Browser is opened with url: 'http://localhost:9000/'
+
+2020-01-09 18:53:46 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/C4_CheckBox_OR/Page_Login/input_Username_username"), "admin"): Text 'admin' is set on object 'Object Repository/C4_CheckBox_OR/Page_Login/input_Username_username'
+
+2020-01-09 18:53:47 - [MESSAGE][PASSED] - Text 'admin' is set on object 'Object Repository/C4_CheckBox_OR/Page_Login/input_Username_username'
+
+2020-01-09 18:53:47 - [TEST_STEP][PASSED] - setEncryptedText(findTestObject("Object Repository/C4_CheckBox_OR/Page_Login/input_Password_password"), "BR2H/KIz0NBfgccJ+PbLCA=="): Text ****** has been set on object 'Object Repository/C4_CheckBox_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:53:47 - [MESSAGE][PASSED] - Text ****** has been set on object 'Object Repository/C4_CheckBox_OR/Page_Login/input_Password_password'
+
+2020-01-09 18:53:47 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_Login/span_Password_glyphicon glyphicon-log-in")): Object: 'Object Repository/C4_CheckBox_OR/Page_Login/span_Password_glyphicon glyphicon-log-in' is clicked on
+
+2020-01-09 18:53:48 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_Login/span_Password_glyphicon glyphicon-log-in' is clicked on
+
+2020-01-09 18:53:48 - [TEST_STEP][PASSED] - navigateToUrl("http://localhost:9000/"): Navigate to 'http://localhost:9000/' successfully
+
+2020-01-09 18:53:48 - [MESSAGE][PASSED] - Navigate to 'http://localhost:9000/' successfully
+
+2020-01-09 18:53:48 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/div_Edit Experiment")): Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:53:50 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/div_Edit Experiment' is clicked on
+
+2020-01-09 18:53:50 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_Edit Experiment/div_TestSample")): Object: 'Object Repository/C4_CheckBox_OR/Page_Edit Experiment/div_TestSample' is clicked on
+
+2020-01-09 18:53:50 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_Edit Experiment/div_TestSample' is clicked on
+
+2020-01-09 18:53:50 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/span_Checkbox Answer")): Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/span_Checkbox Answer' is clicked on
+
+2020-01-09 18:53:51 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/span_Checkbox Answer' is clicked on
+
+2020-01-09 18:53:51 - [TEST_STEP][PASSED] - setText(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/input_checkBox _componentName"), "CBox1"): Text 'CBox1' is set on object 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/input_checkBox _componentName'
+
+2020-01-09 18:53:51 - [MESSAGE][PASSED] - Text 'CBox1' is set on object 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/input_checkBox _componentName'
+
+2020-01-09 18:53:51 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select csv field -- s1s2s3s4s5"), "string:s1", true): All options with value 'string:s1' are selected in object 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select csv field -- s1s2s3s4s5'  using regular expression
+
+2020-01-09 18:53:53 - [MESSAGE][PASSED] - All options with value 'string:s1' are selected in object 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select csv field -- s1s2s3s4s5'  using regular expression
+
+2020-01-09 18:53:53 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select csv field -- s1s2s3s4s5"), "string:s1", true): All options with value 'string:s1' are selected in object 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select csv field -- s1s2s3s4s5'  using regular expression
+
+2020-01-09 18:53:54 - [MESSAGE][PASSED] - All options with value 'string:s1' are selected in object 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select csv field -- s1s2s3s4s5'  using regular expression
+
+2020-01-09 18:53:54 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Add Option")): Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:53:55 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:53:55 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb"), "string:restrictAnswer", true): All options with value 'string:restrictAnswer' are selected in object 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:53:56 - [MESSAGE][PASSED] - All options with value 'string:restrictAnswer' are selected in object 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select option name -- restrictAns_55f4fb'  using regular expression
+
+2020-01-09 18:53:56 - [TEST_STEP][PASSED] - selectOptionByValue(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select csv field -- s1s2s3s4s5"), "string:s2", true): All options with value 'string:s2' are selected in object 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select csv field -- s1s2s3s4s5'  using regular expression
+
+2020-01-09 18:53:57 - [MESSAGE][PASSED] - All options with value 'string:s2' are selected in object 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/select_-- select csv field -- s1s2s3s4s5'  using regular expression
+
+2020-01-09 18:53:57 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:53:58 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:53:58 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Edit")): Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Edit' is clicked on
+
+2020-01-09 18:54:42 - [MESSAGE][INFO] - Unable to find the element located by 'By.xpath: //div[@id='angularApp']/div[2]/div/div/div/div/div[2]/div/div/div[3]/button'. Please recheck the objects properties to make sure the desired element is located. 
+
+2020-01-09 18:54:42 - [MESSAGE][INFO] - [SMART_XPATH] Auto-trying out other XPath values in the test object.
+
+2020-01-09 18:54:42 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '//div[@id='angularApp']/div[2]/div/div/div/div/div[2]/div/div/div[3]/button'.
+
+2020-01-09 18:54:42 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='checkBox'])[2]/following::button[1]'.
+
+2020-01-09 18:54:43 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Slide 1'])[1]/following::button[1]'.
+
+2020-01-09 18:54:43 - [MESSAGE][INFO] - [SMART_XPATH] Screenshot: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Edit_neighbor_4.png
+
+2020-01-09 18:54:43 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Delete'])[1]/preceding::button[1]'.
+
+2020-01-09 18:54:44 - [MESSAGE][INFO] - [SMART_XPATH] FAILED XPATH: '(.//*[normalize-space(text()) and normalize-space(.)='Add Slide'])[1]/preceding::button[2]'.
+
+2020-01-09 18:54:44 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '//*/text()[normalize-space(.)='Edit']/parent::*'.
+
+2020-01-09 18:54:44 - [MESSAGE][ERROR] - [SMART_XPATH] Cannot save screenshot to: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath, reason: negative or zero width
+
+2020-01-09 18:54:44 - [MESSAGE][INFO] - [SMART_XPATH] WORKING XPATH: '//button'.
+
+2020-01-09 18:54:45 - [MESSAGE][INFO] - [SMART_XPATH] Screenshot: C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Edit_position.png
+
+2020-01-09 18:54:45 - [MESSAGE][ERROR] - [SMART_XPATH] C:\Users\Koushik\Katalon Studio\LingoTurk AutomatedTesting\Reports\smart_xpath\waiting-for-approval.json (The system cannot find the file specified)
+
+2020-01-09 18:54:45 - [MESSAGE][ERROR] - [SMART_XPATH] C:/Users/Koushik/Katalon Studio/LingoTurk AutomatedTesting/Reports/smart_xpath/waiting-for-approval.json does not exist or is provided by Smart XPath Plugin!
+
+2020-01-09 18:54:45 - [MESSAGE][INFO] - [SMART_XPATH] Selected Smart XPath: '(.//*[normalize-space(text()) and normalize-space(.)='Slide 1'])[1]/following::button[1]'.
+
+2020-01-09 18:54:45 - [MESSAGE][INFO] - [SMART_XPATH] Continuing executing the test case!
+
+2020-01-09 18:54:45 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Edit' is clicked on
+
+2020-01-09 18:54:45 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Add Option")): Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:54:46 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Add Option' is clicked on
+
+2020-01-09 18:54:46 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_-")): Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_-' is clicked on
+
+2020-01-09 18:54:46 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 22716, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 1bbdf2a1-12f5-408f-9f40-8e63e6d5e6fc
+
+2020-01-09 18:55:17 - [MESSAGE][ERROR] - TypeError: rect is undefined
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:53'
+System info: host: 'DESKTOP-PDN4RJ0', ip: '10.20.148.196', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_181'
+Driver info: com.kms.katalon.core.webui.driver.firefox.CGeckoDriver
+Capabilities {acceptInsecureCerts: true, browserName: firefox, browserVersion: 72.0.1, javascriptEnabled: true, moz:accessibilityChecks: false, moz:buildID: 20200107212822, moz:geckodriverVersion: 0.23.0, moz:headless: false, moz:processID: 22716, moz:profile: C:\Users\Koushik\AppData\Lo..., moz:shutdownTimeout: 60000, moz:useNonSpecCompliantPointerOrigin: false, moz:webdriverClick: true, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, platformVersion: 10.0, proxy: Proxy(direct), rotatable: false, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 1bbdf2a1-12f5-408f-9f40-8e63e6d5e6fc
+
+2020-01-09 18:55:17 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_-' is clicked on
+
+2020-01-09 18:55:17 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Save")): Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:55:18 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/button_Save' is clicked on
+
+2020-01-09 18:55:18 - [TEST_STEP][PASSED] - click(findTestObject("Object Repository/C4_CheckBox_OR/Page_LINGOturk/span_Done Editing")): Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/span_Done Editing' is clicked on
+
+2020-01-09 18:55:18 - [MESSAGE][PASSED] - Object: 'Object Repository/C4_CheckBox_OR/Page_LINGOturk/span_Done Editing' is clicked on
+
+2020-01-09 18:55:18 - [TEST_STEP][PASSED] - closeBrowser(): Browser is closed
+
+2020-01-09 18:55:19 - [MESSAGE][PASSED] - Browser is closed]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2020-01-09 18:47:52 - [TEST_SUITE][PASSED] - TS103_C3_C4: Test Cases/C4_CheckBoxAnswer]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>

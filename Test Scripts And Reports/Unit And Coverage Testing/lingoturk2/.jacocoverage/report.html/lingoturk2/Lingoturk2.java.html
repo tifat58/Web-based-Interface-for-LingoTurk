@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Lingoturk2.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;lingoturk2&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">lingoturk2</a> &gt; <span class="el_source">Lingoturk2.java</span></div><h1>Lingoturk2.java</h1><pre class="source lang-java linenums">
+package lingoturk2;
+//package controllers;
+
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.select.Elements;
+
+
+
+
+
+//import javax.inject.Inject;
+
+import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+
+import javax.json.*;
+
+
+<span class="fc" id="L36">class Condition {</span>
+    String name;
+    String value;
+}
+
+<span class="fc" id="L41">class Option {</span>
+    String name;
+    String value;
+}
+
+<span class="fc" id="L46">class Slide {</span>
+    String num;
+    ArrayList&lt;Component&gt; components;
+}
+
+<span class="fc" id="L51">class EditedExperiment {</span>
+    String name; // name of experiment
+    ArrayList&lt;Slide&gt; slides; // list of component objects.
+}
+
+<span class="fc" id="L56">class Component {</span>
+    String name; // name identifier of component
+    String model_attr; // this is the ng-model attr we need to attach to.
+    String mandatory;
+    ArrayList&lt;Option&gt; options; // list of options
+    // Adding new thing! List of conditions.
+    ArrayList&lt;Condition&gt; conditions; // list of conditions.
+}
+
+
+
+
+<span class="fc" id="L68">public class Lingoturk2 {</span>
+
+    public String submitEditExperiment(String jsonstring) throws IOException {
+        try {
+<span class="fc" id="L72">            int componentCounter = 0;</span>
+<span class="fc" id="L73">            System.out.println(&quot;Here&quot;);</span>
+            //ObjectMapper mapper = new ObjectMapper();
+<span class="fc" id="L75">            ObjectMapper mapper = new ObjectMapper();</span>
+<span class="fc" id="L76">            JsonNode json = mapper.readTree(jsonstring);</span>
+            //how to do string to json
+            //JsonObject body = Json.createReader(new StringReader(jsonstring)).readObject();
+            //JsonNode json = request().body().asJson();
+            //System.out.println(request().body());
+            //String name = json.get(&quot;name&quot;).asText();
+            //Component[] myObjects = mapper.readValue(json.get(&quot;component&quot;), Component[].class);
+            //Object ex = mapper.treeToValue(json, EditedExperiment.class);
+<span class="fc" id="L84">            EditedExperiment ex = new EditedExperiment();</span>
+<span class="fc" id="L85">            ex.name = json.get(&quot;name&quot;).asText() + &quot;Experiment&quot;;</span>
+<span class="fc" id="L86">            System.out.println(&quot;Exp Name: &quot; + ex.name);</span>
+<span class="fc" id="L87">            ArrayNode slideArr = (ArrayNode) json.get(&quot;slides&quot;);</span>
+<span class="fc" id="L88">            int totalNumSlides = slideArr.size();</span>
+<span class="fc" id="L89">            boolean dragDropPresent = false;</span>
+<span class="fc" id="L90">            ex.slides = new ArrayList&lt;Slide&gt;();</span>
+<span class="fc" id="L91">            String slideNum = &quot;0&quot;;</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">            if (slideArr != null) {</span>
+                // Loop through each slide
+<span class="fc bfc" id="L94" title="All 2 branches covered.">                for (Iterator&lt;JsonNode&gt; i = slideArr.iterator(); i.hasNext(); ) {</span>
+                    // Create this slide's object
+<span class="fc" id="L96">                    Slide s = new Slide();</span>
+<span class="fc" id="L97">                    JsonNode n_s = i.next();</span>
+<span class="fc" id="L98">                    s.num = n_s.get(&quot;num&quot;).asText();</span>
+<span class="fc" id="L99">                    System.out.println(&quot;Slide Num:&quot; + s.num);</span>
+<span class="fc" id="L100">                    ArrayNode compArr = (ArrayNode) n_s.get(&quot;components&quot;);</span>
+<span class="fc" id="L101">                    s.components = new ArrayList&lt;Component&gt;();</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">                    if (compArr != null) {</span>
+                        // Loop through the components
+<span class="fc bfc" id="L104" title="All 2 branches covered.">                        for (Iterator&lt;JsonNode&gt; it = compArr.iterator(); it.hasNext(); ) {</span>
+<span class="fc" id="L105">                            JsonNode n = it.next();</span>
+<span class="fc" id="L106">                            String compName = n.get(&quot;name&quot;).asText();</span>
+                            // Create component object.
+<span class="fc" id="L108">                            Component c = new Component();</span>
+<span class="fc" id="L109">                            c.name = compName;</span>
+<span class="fc" id="L110">                            System.out.println(&quot;Component Name: &quot; + compName);</span>
+                            // The following needs to be done only for components other
+                            // than the Next Slide button, as that one's field attribute
+                            // is the button text.
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">                            if (!c.name.equals(&quot;nextSlideButton&quot;)) {</span>
+                                try {
+<span class="fc" id="L116">                                    c.model_attr = n.get(&quot;model_attr&quot;).asText();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">                                    if (c.model_attr.equals(&quot;&quot;)) {</span>
+<span class="fc" id="L118">                                        componentCounter += 1;</span>
+<span class="fc" id="L119">                                        c.model_attr = compName + &quot;Response&quot; + Integer.toString(componentCounter);</span>
+                                    }
+<span class="nc" id="L121">                                } catch (Exception e) {</span>
+                                    // Now we are going to set the model attribute automatically for all components.
+                                    // This will remove the need to send it from front-end all the time, which is
+                                    // redundant.
+<span class="nc" id="L125">                                    componentCounter += 1;</span>
+<span class="nc" id="L126">                                    c.model_attr = compName + &quot;Response&quot; + Integer.toString(componentCounter);</span>
+                                    //c.model_attr = null;
+<span class="fc" id="L128">                                }</span>
+                            }
+<span class="fc" id="L130">                            System.out.println(&quot;Component Corresponding model attr: &quot; + c.model_attr);</span>
+<span class="fc" id="L131">                            c.options = new ArrayList&lt;Option&gt;();</span>
+<span class="fc" id="L132">                            ArrayNode optArr = (ArrayNode) n.get(&quot;options&quot;);</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">                            if (optArr != null) {</span>
+                                // Loop through the options.
+<span class="fc bfc" id="L135" title="All 2 branches covered.">                                for (Iterator&lt;JsonNode&gt; it1 = optArr.iterator(); it1.hasNext(); ) {</span>
+<span class="fc" id="L136">                                    JsonNode node = it1.next();</span>
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">                                    if (node.has(&quot;name&quot;)) {</span>
+<span class="fc" id="L138">                                        String optName = node.get(&quot;name&quot;).asText();</span>
+                                        // Create single option object.
+<span class="fc" id="L140">                                        Option o = new Option();</span>
+<span class="fc" id="L141">                                        o.name = optName;</span>
+<span class="fc" id="L142">                                        System.out.println(&quot;Option Name: &quot; + optName);</span>
+<span class="fc" id="L143">                                        String optVal = node.get(&quot;value&quot;).asText();</span>
+<span class="fc" id="L144">                                        o.value = optVal;</span>
+                                        // Add the option to component's option list
+<span class="fc" id="L146">                                        c.options.add(o);</span>
+                                    }
+<span class="fc" id="L148">                                }</span>
+                            }
+                            // Now we do for conditions.
+<span class="fc" id="L151">                            c.conditions = new ArrayList&lt;Condition&gt;();</span>
+<span class="fc" id="L152">                            ArrayNode condArr = (ArrayNode) n.get(&quot;conditions&quot;);</span>
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">                            if (condArr != null) {</span>
+                                // Loop through the conditions.
+<span class="fc bfc" id="L155" title="All 2 branches covered.">                                for (Iterator&lt;JsonNode&gt; it2 = condArr.iterator(); it2.hasNext();) {</span>
+<span class="fc" id="L156">                                    JsonNode node = it2.next();</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">                                    if (node.has(&quot;name&quot;)) {</span>
+<span class="fc" id="L158">                                        String condName = node.get(&quot;name&quot;).asText();</span>
+                                        // Create single condition object.
+<span class="fc" id="L160">                                        Condition cd = new Condition();</span>
+<span class="fc" id="L161">                                        cd.name = condName;</span>
+<span class="fc" id="L162">                                        String condVal = node.get(&quot;value&quot;).asText();</span>
+<span class="fc" id="L163">                                        cd.value = condVal;</span>
+<span class="fc" id="L164">                                        c.conditions.add(cd);</span>
+                                    }
+<span class="fc" id="L166">                                }</span>
+                            }
+                            // Add the component to the slide.
+<span class="fc" id="L169">                            s.components.add(c);</span>
+<span class="fc" id="L170">                        }</span>
+                    }
+                    // Add the slide to the experiment.
+<span class="fc" id="L173">                    ex.slides.add(s);</span>
+<span class="fc" id="L174">                }</span>
+            }
+            // Now to read the files
+
+<span class="fc" id="L178">            String fileName = ex.name;</span>
+            //fileNameWhole =
+<span class="fc" id="L180">            Path currentPath = Paths.get(System.getProperty(&quot;user.dir&quot;));</span>
+            //Path filePath = Paths.get(currentPath.toString(), &quot;app&quot;, &quot;views&quot;, &quot;ExperimentRendering&quot;, ex.name, ex.name+&quot;_render.html&quot;);
+<span class="fc" id="L182">            Path filePath = Paths.get(currentPath.toString(), &quot;templateExperimentRendering.html&quot;);</span>
+<span class="fc" id="L183">            System.out.println(filePath.toString());</span>
+
+            //Jsoup
+
+<span class="fc" id="L187">            File input = new File(filePath.toString());</span>
+<span class="fc" id="L188">            Document doc = Jsoup.parse(input, &quot;UTF-8&quot;, &quot;&quot;);</span>
+
+<span class="fc" id="L190">            Element content = doc.getElementById(&quot;experiment_content&quot;);</span>
+
+<span class="fc" id="L192">            Element heading = content.getElementById(&quot;experiment_heading_1&quot;);</span>
+<span class="fc" id="L193">            Element body = content.getElementById(&quot;experiment_body_1&quot;);</span>
+<span class="fc" id="L194">            Element panel = content.getElementById(&quot;experiment_panel_1&quot;);</span>
+
+<span class="fc" id="L196">            String panel_html = panel.outerHtml();</span>
+
+
+<span class="fc" id="L199">            content.attr(&quot;ng-init&quot;, &quot;RC.subslide = 1&quot;);</span>
+
+<span class="fc" id="L201">            Element child_panel1 = content.getElementById(&quot;experiment_panel_1&quot;);</span>
+
+<span class="fc" id="L203">            content = content.empty();</span>
+
+            // Get the button child of body. We need to add that back eventually.
+            // TODO: ENSURE THAT THE BUTTON IS THIS ONE. TEMPLATE HAS TWO STYLE OF BUTTONS. MAYBE ADD AN OPTION IN FRONT-END.
+<span class="fc" id="L207">            Elements body_button = body.getElementsByAttributeValue(&quot;ng-click&quot;, &quot;RC.nextQuestion()&quot;);</span>
+<span class="fc" id="L208">            Element button = body_button.get(0);</span>
+
+            // Clean the whole body
+            //body = body.empty();
+            // Start the loop
+<span class="fc" id="L213">            System.out.println(&quot;Now iterate the Exp object&quot;);</span>
+<span class="fc" id="L214">            Element panel_body = panel.getElementById(&quot;experiment_body_1&quot;);</span>
+            // New List to track all mandatory fields. These need to be added to final Submit button.
+<span class="fc" id="L216">            ArrayList&lt;String&gt; mandatoryFields = new ArrayList&lt;String&gt;();</span>
+            // Checkers for conditions on text-answer.
+<span class="fc" id="L218">            ArrayList&lt;String&gt; textCheckers = new ArrayList&lt;String&gt;();</span>
+<span class="fc bfc" id="L219" title="All 2 branches covered.">            for (Iterator&lt;Slide&gt; it = ex.slides.iterator(); it.hasNext(); ) {</span>
+
+<span class="fc" id="L221">                dragDropPresent = false;</span>
+
+<span class="fc" id="L223">                Slide s = it.next();</span>
+
+<span class="fc" id="L225">                String slide_html = &quot;&lt;div ng-if=\&quot;RC.subslide == &quot; + s.num + &quot;\&quot; id=\&quot;slide_&quot; + s.num + &quot;\&quot; style=\&quot;width:90% ; margin:auto\&quot;&gt;&lt;/div&gt;&quot;;</span>
+<span class="fc" id="L226">                String slide_name = &quot;slide_&quot; + s.num;</span>
+
+<span class="fc" id="L228">                content = content.append(slide_html);</span>
+
+<span class="fc" id="L230">                Element slide = content.getElementById(slide_name);</span>
+
+<span class="fc" id="L232">                slideNum = s.num;</span>
+
+<span class="fc bfc" id="L234" title="All 2 branches covered.">                if (!s.num.equals(&quot;1&quot;)) {</span>
+<span class="fc" id="L235">                    slide.append(panel_html);</span>
+
+<span class="fc" id="L237">                    panel = content.getElementById(&quot;experiment_panel_1&quot;);</span>
+                }
+
+<span class="fc" id="L240">                String panel_id = &quot;experiment_panel_1_&quot; + s.num; // example experiment_panel_1_(slidenum)</span>
+<span class="fc" id="L241">                panel = panel.attr(&quot;id&quot;, panel_id);</span>
+
+<span class="fc" id="L243">                Element panel_heading = panel.getElementById(&quot;experiment_heading_1&quot;);</span>
+<span class="fc" id="L244">                panel_heading.attr(&quot;id&quot;, &quot;experiment_heading_1_&quot; + s.num);</span>
+                // Unsure what will go here... For now putting Experiment Name
+<span class="fc" id="L246">                panel_heading.text(ex.name);</span>
+
+<span class="fc" id="L248">                panel_body = panel.getElementById(&quot;experiment_body_1&quot;);</span>
+<span class="fc" id="L249">                panel_body.attr(&quot;id&quot;, &quot;experiment_body_1_&quot; + s.num);</span>
+
+<span class="fc" id="L251">                panel_body = panel_body.empty();</span>
+
+                //System.out.println(&quot;************\n&quot;+content.outerHtml()+&quot;\n**************&quot;);
+
+<span class="fc" id="L255">                ArrayList&lt;Component&gt; components = s.components;</span>
+
+<span class="fc" id="L257">                ArrayList&lt;String&gt; slideMandatoryFields = new ArrayList&lt;String&gt;();</span>
+
+<span class="fc" id="L259">                int slideChangeButtonAdded = 0;</span>
+
+<span class="fc bfc" id="L261" title="All 2 branches covered.">                for (Iterator&lt;Component&gt; it1 = components.iterator(); it1.hasNext(); ) {</span>
+<span class="fc" id="L262">                    Component c = it1.next();</span>
+<span class="fc" id="L263">                    String name = c.name;</span>
+<span class="fc" id="L264">                    String field = c.model_attr;</span>
+
+                    // TODO: ALSO PARSE AND ADD THE OPTIONS
+                    // TODO: ALSO PARSE AND ADD THE CONDITIONS
+                    //System.out.println(&quot;Component_Name:&quot; + name);
+                    // TODO: These HTML bits need to be stored somewhere ideally, and we would use as a lookup!
+<span class="fc bfc" id="L270" title="All 2 branches covered.">                    if (name.equals(&quot;question&quot;)) {</span>
+<span class="fc" id="L271">                        panel_body.append(&quot;&lt;span&gt;{{question.&quot; + field + &quot;}}&lt;/span&gt;&quot;);</span>
+                    }
+<span class="pc bpc" id="L273" title="1 of 2 branches missed.">                    if (name.equals(&quot;textArea&quot;)) {</span>
+                        // &lt;textarea class=&quot;form-control textInput&quot; ng-model=&quot;question.answer&quot;&gt;&lt;/textarea&gt;
+<span class="nc" id="L275">                        panel_body.append(&quot;&lt;textarea class=\&quot;form-control textInput\&quot; ng-model=\&quot;question.&quot; + field + &quot;\&quot;&gt;&lt;/textarea&gt;&quot;);</span>
+                        // Look for conditions in text-area as well now.
+<span class="nc" id="L277">                        ArrayList&lt;Condition&gt; conds = c.conditions;</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">                        for (Iterator&lt;Condition&gt; i = conds.iterator(); i.hasNext();) {</span>
+<span class="nc" id="L279">                            Condition cd = i.next();</span>
+<span class="nc bnc" id="L280" title="All 2 branches missed.">                            if (cd.name.equals(&quot;minWordCount&quot;)) {</span>
+<span class="nc bnc" id="L281" title="All 2 branches missed.">                                if (Integer.parseInt(cd.value) &gt; 0) {</span>
+<span class="nc" id="L282">                                    textCheckers.add(&quot;question.&quot; + field + &quot; === undefined || question.&quot; + field + &quot; === '' || question.&quot; + field + &quot; == {} || RC.checkMinWordCount(question.&quot; + field + &quot;,&quot; + cd.value + &quot;)&quot;);</span>
+                                }
+//                                else {
+//                                    textCheckers.add(&quot;RC.checkMinWordCount(question.&quot; + field + &quot;,&quot; + cd.value + &quot;)&quot;);
+//                                }
+                            }
+<span class="nc bnc" id="L288" title="All 2 branches missed.">                            else if(cd.name.equals(&quot;maxWordCount&quot;)) {</span>
+<span class="nc" id="L289">                                textCheckers.add(&quot;RC.checkMaxWordCount(question.&quot;+field+&quot;,&quot;+cd.value+&quot;)&quot;);</span>
+                            }
+<span class="nc bnc" id="L291" title="All 2 branches missed.">                            else if(cd.name.equals(&quot;preventCharacters&quot;)) {</span>
+<span class="nc" id="L292">                                System.out.println(cd.value);</span>
+<span class="nc" id="L293">                                textCheckers.add(&quot;RC.preventCharacters(question.&quot;+field+&quot;,\&quot;&quot;+cd.value+&quot;\&quot;)&quot;);</span>
+                            }
+<span class="nc" id="L295">                        }</span>
+                    }
+<span class="pc bpc" id="L297" title="1 of 2 branches missed.">                    if (name.equals(&quot;instruction&quot;)) {</span>
+                        //panel_body.append((&quot;&lt;h5&gt;This is where some friendly instruction to answer will go!&lt;/h5&gt;&lt;hr/&gt;&quot;));
+                        //panel_body.append(&quot;&lt;h5&gt;&quot; )
+<span class="nc" id="L300">                        String html = &quot;&lt;h5&gt; &quot;;</span>
+
+<span class="nc bnc" id="L302" title="All 2 branches missed.">                        if (field != null) {</span>
+<span class="nc bnc" id="L303" title="All 2 branches missed.">                            if (!field.equals(&quot;null&quot;)) {</span>
+                                //panel_body.append(&quot;&lt;text-answer answer=\&quot;question.&quot; + field + &quot;\&quot; &quot;);
+<span class="nc" id="L305">                                html += &quot;{{question.&quot; + field + &quot;}}&quot;;</span>
+                            }
+                        }
+
+<span class="nc" id="L309">                        html += &quot;&lt;/h5&quot;;</span>
+<span class="nc" id="L310">                        panel_body.append(html);</span>
+                    }
+<span class="pc bpc" id="L312" title="1 of 2 branches missed.">                    if (name.equals(&quot;textAnswer&quot;)) {</span>
+<span class="nc" id="L313">                        String html = &quot;&quot;;</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">                        if (field != null) {</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">                            if (!field.equals(&quot;null&quot;)) {</span>
+                                //panel_body.append(&quot;&lt;text-answer answer=\&quot;question.&quot; + field + &quot;\&quot; &quot;);
+<span class="nc" id="L317">                                html += &quot;&lt;text-answer answer=\&quot;question.&quot; + field + &quot;\&quot; &quot;;</span>
+                            } else {
+                                //panel_body.append(&quot;&lt;input type=\&quot;text\&quot; class=\&quot;form-control textInput\&quot;&gt;&lt;/input&gt;&quot;);
+                                //panel_body.append(&quot;&lt;text-answer &quot;);
+<span class="nc" id="L321">                                html += &quot;&lt;text-answer &quot;;</span>
+                            }
+                        } else {
+                            //panel_body.append(&quot;&lt;input type=\&quot;text\&quot; class=\&quot;form-control textInput\&quot;&gt;&lt;/input&gt;&quot;);
+                            //panel_body.append(&quot;&lt;text-answer &quot;);
+<span class="nc" id="L326">                            html += &quot;&lt;text-answer &quot;;</span>
+                        }
+<span class="nc" id="L328">                        ArrayList&lt;Option&gt; opts = c.options;</span>
+<span class="nc" id="L329">                        ArrayList&lt;Condition&gt; conds = c.conditions;</span>
+                        // Parse options
+<span class="nc bnc" id="L331" title="All 2 branches missed.">                        for (Iterator&lt;Option&gt; k = opts.iterator(); k.hasNext();) {</span>
+<span class="nc" id="L332">                            Option opt = k.next();</span>
+<span class="nc bnc" id="L333" title="All 2 branches missed.">                            if (opt.name.equals(&quot;restrictAnswer&quot;)) {</span>
+                                //TODO: This needs to be ensured that it is functional. This checks regex.
+                                //TODO: See if question.value or {{question.value}} should be sent
+<span class="nc" id="L336">                                html += &quot;restrictAnswer=\&quot;question.&quot; + opt.value + &quot;\&quot; &quot;;</span>
+                            }
+<span class="nc" id="L338">                        }</span>
+                        // TODO: ADD CONDITION CODE
+<span class="nc bnc" id="L340" title="All 2 branches missed.">                        for (Iterator&lt;Condition&gt; k = conds.iterator(); k.hasNext();) {</span>
+<span class="nc" id="L341">                            Condition cd = k.next();</span>
+<span class="nc bnc" id="L342" title="All 2 branches missed.">                            if (cd.name.equals(&quot;minWordCount&quot;)) {</span>
+<span class="nc bnc" id="L343" title="All 2 branches missed.">                                if (Integer.parseInt(cd.value) &gt; 0) {</span>
+<span class="nc" id="L344">                                    textCheckers.add(&quot;question.&quot; + field + &quot; === undefined || question.&quot; + field + &quot; === '' || question.&quot; + field + &quot; == {} || RC.checkMinWordCount(question.&quot; + field + &quot;,&quot; + cd.value + &quot;)&quot;);</span>
+                                }
+//                                else {
+//                                    textCheckers.add(&quot;RC.checkMinWordCount(question.&quot; + field + &quot;,&quot; + cd.value + &quot;)&quot;);
+//                                }
+                            }
+<span class="nc bnc" id="L350" title="All 2 branches missed.">                            else if(cd.name.equals(&quot;maxWordCount&quot;)) {</span>
+<span class="nc" id="L351">                                textCheckers.add(&quot;RC.checkMaxWordCount(question.&quot;+field+&quot;,&quot;+cd.value+&quot;)&quot;);</span>
+                            }
+<span class="nc bnc" id="L353" title="All 2 branches missed.">                            else if(cd.name.equals(&quot;preventCharacters&quot;)) {</span>
+<span class="nc" id="L354">                                System.out.println(cd.value);</span>
+<span class="nc" id="L355">                                textCheckers.add(&quot;RC.preventCharacters(question.&quot;+field+&quot;,\&quot;&quot;+cd.value+&quot;\&quot;)&quot;);</span>
+                            }
+<span class="nc" id="L357">                        }</span>
+                        // Close the tag.
+<span class="nc" id="L359">                        html += &quot;&gt;&lt;/text-answer&gt;&quot;;</span>
+<span class="nc" id="L360">                        panel_body.append(html);</span>
+                    }
+<span class="pc bpc" id="L362" title="1 of 2 branches missed.">                    if (name.equals((&quot;radio&quot;))) {</span>
+<span class="nc" id="L363">                        String html = &quot;&quot;;</span>
+
+<span class="nc bnc" id="L365" title="All 2 branches missed.">                        if (field != null) {</span>
+<span class="nc" id="L366">                            html = &quot;&lt;radio-answer answer=question.&quot; + field;</span>
+                        } else {
+<span class="nc" id="L368">                            html = &quot;&lt;radio-answer&quot;;</span>
+                        }
+
+<span class="nc" id="L371">                        ArrayList&lt;Option&gt; opts = c.options;</span>
+<span class="nc bnc" id="L372" title="All 2 branches missed.">                        for (Iterator&lt;Option&gt; it3 = opts.iterator(); it3.hasNext(); ) {</span>
+<span class="nc" id="L373">                            Option op = it3.next();</span>
+<span class="nc bnc" id="L374" title="All 2 branches missed.">                            if (op.name.equals(&quot;options&quot;)) {</span>
+<span class="nc" id="L375">                                html = html + &quot; options=\&quot;[&quot;;</span>
+<span class="nc" id="L376">                                String val = op.value;</span>
+                                // THIS MIGHT NEED TO CHANGE!
+<span class="nc" id="L378">                                String[] arrOfVals = val.split(&quot;,&quot;);</span>
+<span class="nc bnc" id="L379" title="All 2 branches missed.">                                for (String a : arrOfVals) {</span>
+                                    //html = html + &quot;\'&quot; + a.trim() + &quot;\',&quot;;
+<span class="nc" id="L381">                                    html = html + &quot;question.&quot; + a.trim() + &quot;,&quot;;</span>
+                                }
+<span class="nc" id="L383">                                html = html + &quot;]\&quot;&quot;;</span>
+<span class="nc" id="L384">                            }</span>
+<span class="nc bnc" id="L385" title="All 2 branches missed.">                            else if (op.name.equals(&quot;inline&quot;)) {</span>
+<span class="nc" id="L386">                                html += &quot; inline=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+<span class="nc" id="L388">                        }</span>
+<span class="nc" id="L389">                        html = html + &quot; &gt;&lt;/radio-answer&quot;;</span>
+<span class="nc" id="L390">                        panel_body.append(html);</span>
+                    }
+
+
+                    //checkbox
+<span class="pc bpc" id="L395" title="1 of 2 branches missed.">                    if (name.equals((&quot;checkBox&quot;))) {</span>
+<span class="nc" id="L396">                        String html = &quot;&quot;;</span>
+
+<span class="nc bnc" id="L398" title="All 2 branches missed.">                        if (field != null) {</span>
+<span class="nc" id="L399">                            html = &quot;&lt;checkbox-answer answer=question.&quot; + field;</span>
+                        } else {
+<span class="nc" id="L401">                            html = &quot;&lt;checkbox-answer&quot;;</span>
+                        }
+
+<span class="nc" id="L404">                        ArrayList&lt;Option&gt; opts = c.options;</span>
+<span class="nc bnc" id="L405" title="All 2 branches missed.">                        for (Iterator&lt;Option&gt; it3 = opts.iterator(); it3.hasNext(); ) {</span>
+<span class="nc" id="L406">                            Option op = it3.next();</span>
+<span class="nc bnc" id="L407" title="All 2 branches missed.">                            if (op.name.equals(&quot;options&quot;)) {</span>
+<span class="nc" id="L408">                                html = html + &quot; options=\&quot;[&quot;;</span>
+<span class="nc" id="L409">                                String val = op.value;</span>
+                                // THIS MIGHT NEED TO CHANGE!
+<span class="nc" id="L411">                                String[] arrOfVals = val.split(&quot;,&quot;);</span>
+<span class="nc" id="L412">                                String lastEl = arrOfVals[arrOfVals.length-1];</span>
+
+<span class="nc bnc" id="L414" title="All 2 branches missed.">                                for (String a : arrOfVals) {</span>
+<span class="nc bnc" id="L415" title="All 2 branches missed.">                                    if (a != lastEl){</span>
+                                        //html = html + &quot;\'&quot; + a.trim() + &quot;\',&quot;;
+<span class="nc" id="L417">                                        html = html + &quot;question.&quot; + a.trim() + &quot;,&quot;;</span>
+                                    }
+                                    else {
+<span class="nc" id="L420">                                        html = html + &quot;question.&quot; + a.trim();</span>
+                                    }
+                                }
+<span class="nc" id="L423">                                html = html + &quot;]\&quot;&quot;;</span>
+<span class="nc" id="L424">                            }</span>
+<span class="nc bnc" id="L425" title="All 2 branches missed.">                            else if (op.name.equals(&quot;descriptions&quot;)) {</span>
+<span class="nc" id="L426">                                html = html + &quot; descriptions=\&quot;[&quot;;</span>
+<span class="nc" id="L427">                                String val = op.value;</span>
+                                // THIS MIGHT NEED TO CHANGE!
+<span class="nc" id="L429">                                String[] arrOfVals = val.split(&quot;,&quot;);</span>
+<span class="nc" id="L430">                                String lastEl = arrOfVals[arrOfVals.length-1];</span>
+
+<span class="nc bnc" id="L432" title="All 2 branches missed.">                                for (String a : arrOfVals) {</span>
+<span class="nc bnc" id="L433" title="All 2 branches missed.">                                    if (a != lastEl){</span>
+                                        //html = html + &quot;\'&quot; + a.trim() + &quot;\',&quot;;
+<span class="nc" id="L435">                                        html = html + &quot;question.&quot; + a.trim() + &quot;,&quot;;</span>
+                                    }
+                                    else {
+<span class="nc" id="L438">                                        html = html + &quot;question.&quot; + a.trim();</span>
+                                    }
+                                }
+<span class="nc" id="L441">                                html = html + &quot;]\&quot;&quot;;</span>
+                                //html += &quot; descriptions=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+<span class="nc" id="L443">                            }</span>
+<span class="nc bnc" id="L444" title="All 2 branches missed.">                            else if (op.name.equals(&quot;addNone&quot;)) {</span>
+<span class="nc" id="L445">                                html += &quot; add-none=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+<span class="nc" id="L447">                        }</span>
+<span class="nc" id="L448">                        html = html + &quot;&gt;&lt;/checkbox-answer&quot;;</span>
+<span class="nc" id="L449">                        panel_body.append(html);</span>
+                    }
+
+                    //sliderAnswer
+                    // TODO: implement option for usescale features in the frontend and handle them in backend.
+<span class="fc bfc" id="L454" title="All 2 branches covered.">                    if (name.equals((&quot;sliderAnswer&quot;))) {</span>
+<span class="fc" id="L455">                        String html = &quot;&quot;;</span>
+
+<span class="pc bpc" id="L457" title="1 of 2 branches missed.">                        if (field != null) {</span>
+<span class="fc" id="L458">                            html = &quot;&lt;slider-answer answer=question.&quot; + field;</span>
+                        } else {
+<span class="nc" id="L460">                            html = &quot;&lt;slider-answer&quot;;</span>
+                        }
+
+<span class="fc" id="L463">                        ArrayList&lt;Option&gt; opts = c.options;</span>
+<span class="pc bpc" id="L464" title="1 of 2 branches missed.">                        for (Iterator&lt;Option&gt; it3 = opts.iterator(); it3.hasNext(); ) {</span>
+<span class="nc" id="L465">                            Option op = it3.next();</span>
+<span class="nc bnc" id="L466" title="All 2 branches missed.">                            if (op.name.equals(&quot;options&quot;)) {</span>
+<span class="nc" id="L467">                                html = html + &quot; options=\&quot;&quot;;</span>
+<span class="nc" id="L468">                                String val = op.value;</span>
+                                // THIS MIGHT NEED TO CHANGE!
+<span class="nc" id="L470">                                String[] arrOfVals = val.split(&quot;,&quot;);</span>
+<span class="nc" id="L471">                                String lastEl = arrOfVals[arrOfVals.length-1];</span>
+
+<span class="nc bnc" id="L473" title="All 2 branches missed.">                                for (String a : arrOfVals) {</span>
+
+<span class="nc bnc" id="L475" title="All 2 branches missed.">                                    if (a != lastEl){</span>
+                                        //html = html + &quot;\'&quot; + a.trim() + &quot;\',&quot;;
+<span class="nc" id="L477">                                        html = html + &quot;{{question.&quot; + a.trim() + &quot;}},&quot;;</span>
+                                    }
+                                    else {
+<span class="nc" id="L480">                                        html = html + &quot;{{question.&quot; + a.trim() + &quot;}}&quot;;</span>
+                                    }
+
+                                }
+<span class="nc" id="L484">                                html = html + &quot;\&quot;&quot;;</span>
+<span class="nc" id="L485">                            }</span>
+<span class="nc bnc" id="L486" title="All 2 branches missed.">                            else if (op.name.equals(&quot;useScale&quot;)) {</span>
+<span class="nc" id="L487">                                html += &quot; use-scale=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+<span class="nc" id="L489">                        }</span>
+<span class="fc" id="L490">                        html = html + &quot; &gt;&lt;/slider-answer&quot;;</span>
+<span class="fc" id="L491">                        panel_body.append(html);</span>
+                    }
+
+                    //starAnswer
+<span class="fc bfc" id="L495" title="All 2 branches covered.">                    if (name.equals((&quot;starAnswer&quot;))) {</span>
+<span class="fc" id="L496">                        String html = &quot;&quot;;</span>
+
+<span class="pc bpc" id="L498" title="1 of 2 branches missed.">                        if (field != null) {</span>
+<span class="fc" id="L499">                            html = &quot;&lt;star-answer answer=question.&quot; + field;</span>
+                        } else {
+<span class="nc" id="L501">                            html = &quot;&lt;star-answer&quot;;</span>
+                        }
+
+<span class="fc" id="L504">                        ArrayList&lt;Option&gt; opts = c.options;</span>
+<span class="pc bpc" id="L505" title="1 of 2 branches missed.">                        for (Iterator&lt;Option&gt; it3 = opts.iterator(); it3.hasNext(); ) {</span>
+<span class="nc" id="L506">                            Option op = it3.next();</span>
+<span class="nc bnc" id="L507" title="All 2 branches missed.">                            if (op.name.equals(&quot;options_wrong&quot;)) {</span>
+<span class="nc" id="L508">                                html = html + &quot; options=\&quot;[&quot;;</span>
+<span class="nc" id="L509">                                String val = op.value;</span>
+                                // THIS MIGHT NEED TO CHANGE!
+<span class="nc" id="L511">                                String[] arrOfVals = val.split(&quot;,&quot;);</span>
+<span class="nc bnc" id="L512" title="All 2 branches missed.">                                for (String a : arrOfVals) {</span>
+                                    //html = html + &quot;\'&quot; + a.trim() + &quot;\',&quot;;
+<span class="nc" id="L514">                                    html = html + &quot;question.&quot; + a.trim() + &quot;,&quot;;</span>
+                                }
+<span class="nc" id="L516">                                html = html + &quot;]\&quot;&quot;;</span>
+<span class="nc" id="L517">                            }</span>
+<span class="nc bnc" id="L518" title="All 2 branches missed.">                            else if (op.name.equals(&quot;maxStars&quot;)) {</span>
+<span class="nc" id="L519">                                html += &quot; max-stars=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+
+<span class="nc" id="L522">                        }</span>
+<span class="fc" id="L523">                        html = html + &quot; &gt;&lt;/star-answer&quot;;</span>
+<span class="fc" id="L524">                        panel_body.append(html);</span>
+                    }
+
+                    //fileInput
+<span class="pc bpc" id="L528" title="1 of 2 branches missed.">                    if (name.equals((&quot;fileInput&quot;))) {</span>
+<span class="nc" id="L529">                        String html = &quot;&quot;;</span>
+
+<span class="nc" id="L531">                        html = &quot;&lt;file-input &quot; ;</span>
+
+<span class="nc" id="L533">                        ArrayList&lt;Option&gt; opts = c.options;</span>
+<span class="nc bnc" id="L534" title="All 2 branches missed.">                        for (Iterator&lt;Option&gt; it3 = opts.iterator(); it3.hasNext(); ) {</span>
+<span class="nc" id="L535">                            Option op = it3.next();</span>
+<span class="nc bnc" id="L536" title="All 2 branches missed.">                            if (op.name.equals(&quot;content&quot;)) {</span>
+<span class="nc" id="L537">                                html = html + &quot; content=\&quot;&quot;+ op.value + &quot;\&quot;&quot;;</span>
+                            }
+<span class="nc bnc" id="L539" title="All 2 branches missed.">                            else if (op.name.equals(&quot;encoding&quot;)) {</span>
+<span class="nc" id="L540">                                html += &quot; encoding=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+
+<span class="nc" id="L543">                        }</span>
+<span class="nc" id="L544">                        html = html + &quot; &gt;Load .csv&lt;/file-input&quot;;</span>
+<span class="nc" id="L545">                        panel_body.append(html);</span>
+                    }
+
+
+                    //dragAndDrop
+<span class="fc bfc" id="L550" title="All 2 branches covered.">                    if (name.equals((&quot;dragDrop&quot;))) {</span>
+<span class="fc" id="L551">                        dragDropPresent = true;</span>
+<span class="fc" id="L552">                        String html = &quot;&quot;;</span>
+
+<span class="pc bpc" id="L554" title="1 of 2 branches missed.">                        if (field != null) {</span>
+<span class="pc bpc" id="L555" title="1 of 2 branches missed.">                            if (Integer.parseInt(slideNum) &lt; totalNumSlides) {</span>
+<span class="nc" id="L556">                                html = &quot;&lt;drag-and-drop content=\&quot;question\&quot; click=\&quot;RC.switchSlide\&quot; answer=question.&quot; + field;</span>
+                            }
+                            else {
+<span class="fc" id="L559">                                html = &quot;&lt;drag-and-drop content=\&quot;question\&quot; click=\&quot;RC.nextQuestion\&quot; answer=question.&quot; + field;</span>
+                            }
+                        } else {
+<span class="nc bnc" id="L562" title="All 2 branches missed.">                            if (Integer.parseInt((slideNum)) &lt; totalNumSlides) {</span>
+<span class="nc" id="L563">                                html = &quot;&lt;drag-and-drop content=\&quot;question\&quot; click=\&quot;RC.switchSlide\&quot;&quot;;</span>
+                            }
+                            else {
+<span class="nc" id="L566">                                html = &quot;&lt;drag-and-drop content=\&quot;question\&quot; click=\&quot;RC.nextQuestion\&quot;&quot;;</span>
+                            }
+                        }
+
+<span class="fc" id="L570">                        ArrayList&lt;Option&gt; opts = c.options;</span>
+<span class="fc bfc" id="L571" title="All 2 branches covered.">                        for (Iterator&lt;Option&gt; it3 = opts.iterator(); it3.hasNext(); ) {</span>
+<span class="fc" id="L572">                            Option op = it3.next();</span>
+<span class="pc bpc" id="L573" title="1 of 2 branches missed.">                            if (op.name.equals(&quot;options_wrong&quot;)) {</span>
+<span class="nc" id="L574">                                html = html + &quot; options=\&quot;[&quot;;</span>
+<span class="nc" id="L575">                                String val = op.value;</span>
+                                // THIS MIGHT NEED TO CHANGE!
+<span class="nc" id="L577">                                String[] arrOfVals = val.split(&quot;,&quot;);</span>
+<span class="nc bnc" id="L578" title="All 2 branches missed.">                                for (String a : arrOfVals) {</span>
+                                    //html = html + &quot;\'&quot; + a.trim() + &quot;\',&quot;;
+<span class="nc" id="L580">                                    html = html + &quot;question.&quot; + a.trim() + &quot;,&quot;;</span>
+                                }
+<span class="nc" id="L582">                                html = html + &quot;]\&quot;&quot;;</span>
+<span class="nc" id="L583">                            }</span>
+                            //else if (op.name.equals(&quot;content&quot;)) {
+                            //    html += &quot; content=\&quot;question&quot;+ &quot;\&quot;&quot;;
+                            //}
+
+<span class="fc bfc" id="L588" title="All 2 branches covered.">                            else if (op.name.equals(&quot;click&quot;)) {</span>
+
+<span class="fc" id="L590">                                html += &quot; click=\&quot;RC.nextQuestion&quot;+ &quot;\&quot;&quot;;</span>
+                            }
+
+<span class="fc bfc" id="L593" title="All 2 branches covered.">                            else if (op.name.equals(&quot;instructions1&quot;)) {</span>
+<span class="fc" id="L594">                                html += &quot; instructions1=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; instructions1=\&quot;{{question.&quot; + op.value + &quot;}}\&quot;&quot;;
+                            }
+
+<span class="fc bfc" id="L598" title="All 2 branches covered.">                            else if (op.name.equals(&quot;instructions2&quot;)) {</span>
+<span class="fc" id="L599">                                html += &quot; instructions2=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; instructions2=\&quot;{{question.&quot; + op.value + &quot;}}\&quot;&quot;;
+                            }
+
+<span class="fc bfc" id="L603" title="All 2 branches covered.">                            else if (op.name.equals(&quot;connectives&quot;)) {</span>
+<span class="fc" id="L604">                                html = html + &quot; connectives=\&quot;&quot;;</span>
+<span class="fc" id="L605">                                String val = op.value;</span>
+                                // THIS MIGHT NEED TO CHANGE!
+<span class="fc" id="L607">                                String[] arrOfVals = val.split(&quot;,&quot;);</span>
+<span class="fc" id="L608">                                String lastEl = arrOfVals[arrOfVals.length-1];</span>
+
+<span class="fc bfc" id="L610" title="All 2 branches covered.">                                for (String a : arrOfVals) {</span>
+
+<span class="pc bpc" id="L612" title="1 of 2 branches missed.">                                    if (a != lastEl){</span>
+                                        //html = html + &quot;\'&quot; + a.trim() + &quot;\',&quot;;
+<span class="nc" id="L614">                                        html = html + &quot;{{question.&quot; + a.trim() + &quot;}},&quot;;</span>
+                                    }
+                                    else {
+<span class="fc" id="L617">                                        html = html + &quot;{{question.&quot; + a.trim() + &quot;}}&quot;;</span>
+                                    }
+
+                                }
+<span class="fc" id="L621">                                html = html + &quot;\&quot;&quot;;</span>
+<span class="fc" id="L622">                            }</span>
+
+<span class="pc bpc" id="L624" title="1 of 2 branches missed.">                            else if (op.name.equals(&quot;add-connectives-text&quot;)) {</span>
+<span class="nc" id="L625">                                html += &quot; add-connectives-text=\&quot;{{question.&quot; + op.value + &quot;}}\&quot;&quot;;</span>
+                            }
+<span class="fc bfc" id="L627" title="All 2 branches covered.">                            else if (op.name.equals(&quot;splitter&quot;)) {</span>
+<span class="fc" id="L628">                                html += &quot; splitter=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; splitter=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+                            }
+<span class="fc bfc" id="L631" title="All 2 branches covered.">                            else if (op.name.equals(&quot;context1&quot;)) {</span>
+<span class="fc" id="L632">                                html += &quot; context1=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+<span class="fc bfc" id="L634" title="All 2 branches covered.">                            else if (op.name.equals(&quot;context2&quot;)) {</span>
+<span class="fc" id="L635">                                html += &quot; context2=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+<span class="fc bfc" id="L637" title="All 2 branches covered.">                            else if (op.name.equals(&quot;sentence1&quot;)) {</span>
+<span class="fc" id="L638">                                html += &quot; sentence1=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+<span class="fc bfc" id="L640" title="All 2 branches covered.">                            else if (op.name.equals(&quot;sentence2&quot;)) {</span>
+<span class="fc" id="L641">                                html += &quot; sentence2=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+
+<span class="fc bfc" id="L644" title="All 2 branches covered.">                            else if (op.name.equals(&quot;htmlInput&quot;)) {</span>
+<span class="fc" id="L645">                                html += &quot; html-input = \&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; html-input=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+                            }
+<span class="fc bfc" id="L648" title="All 2 branches covered.">                            else if (op.name.equals(&quot;boxTitle&quot;)) {</span>
+<span class="fc" id="L649">                                html += &quot; box-title=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; box-title=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+                            }
+<span class="fc bfc" id="L652" title="All 2 branches covered.">                            else if (op.name.equals(&quot;goBackText&quot;)) {</span>
+<span class="fc" id="L653">                                html += &quot; go-back-text=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; go-back-text=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+                            }
+<span class="fc bfc" id="L656" title="All 2 branches covered.">                            else if (op.name.equals(&quot;noneStyle&quot;)) {</span>
+<span class="fc" id="L657">                                html += &quot; none-style=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; none-style=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+                            }
+<span class="fc bfc" id="L660" title="All 2 branches covered.">                            else if (op.name.equals(&quot;defaultConnective&quot;)) {</span>
+<span class="fc" id="L661">                                html += &quot; default-connectives=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; default-connective=\&quot;{{question.&quot; + op.value + &quot;}}\&quot;&quot;;
+                            }
+<span class="pc bpc" id="L664" title="1 of 2 branches missed.">                            else if (op.name.equals(&quot;none-of-these-text&quot;)) {</span>
+<span class="nc" id="L665">                                html += &quot; none-of-these-text=\&quot;{{question.&quot; + op.value + &quot;}}\&quot;&quot;;</span>
+                            }
+<span class="fc bfc" id="L667" title="All 2 branches covered.">                            else if (op.name.equals(&quot;allowNoneOfThese&quot;)) {</span>
+<span class="fc" id="L668">                                html += &quot; allow-none-of-these=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; allow-none-of-these=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+                            }
+<span class="fc bfc" id="L671" title="All 2 branches covered.">                            else if (op.name.equals(&quot;boxPosition&quot;)) {</span>
+<span class="fc" id="L672">                                html += &quot; box-position=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; box-position=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+                            }
+<span class="pc bpc" id="L675" title="1 of 2 branches missed.">                            else if (op.name.equals(&quot;display-style&quot;)) {</span>
+<span class="nc" id="L676">                                html += &quot; display-style=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; display-style=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+                            }
+<span class="fc bfc" id="L679" title="All 2 branches covered.">                            else if (op.name.equals(&quot;allowNone&quot;)) {</span>
+<span class="fc" id="L680">                                html += &quot; allow-none=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; allow-none=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+                            }
+<span class="pc bpc" id="L683" title="1 of 2 branches missed.">                            else if (op.name.equals(&quot;none-text&quot;)) {</span>
+<span class="nc" id="L684">                                html += &quot; none-text=\&quot;{{question.&quot; + op.value + &quot;}}\&quot;&quot;;</span>
+                            }
+<span class="fc bfc" id="L686" title="All 2 branches covered.">                            else if (op.name.equals(&quot;contentClass&quot;)) {</span>
+<span class="fc" id="L687">                                html += &quot; content-class=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+//                                html += &quot; content-class=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;
+                            }
+<span class="pc bpc" id="L690" title="1 of 2 branches missed.">                            else if (op.name.equals(&quot;add-connectives&quot;)) {</span>
+<span class="nc" id="L691">                                html += &quot; add-connectives=\&quot;question.&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+<span class="fc bfc" id="L693" title="All 2 branches covered.">                            else if (op.name.equals(&quot;allowMultiple&quot;)) {</span>
+<span class="fc" id="L694">                                html += &quot; allow-multiple=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+<span class="fc bfc" id="L696" title="All 2 branches covered.">                            else if (op.name.equals(&quot;randomizeConnectives&quot;)){</span>
+<span class="fc" id="L697">                                html += &quot; randomize-connectives=\&quot;&quot; + op.value + &quot;\&quot;&quot;;</span>
+                            }
+<span class="fc" id="L699">                        }</span>
+
+<span class="fc" id="L701">                        ArrayList&lt;Condition&gt; conds = c.conditions;</span>
+<span class="pc bpc" id="L702" title="1 of 2 branches missed.">                        for (Iterator&lt;Condition&gt; it4 = conds.iterator(); it4.hasNext();) {</span>
+<span class="nc" id="L703">                            Condition cd = it4.next();</span>
+
+                            //                           these are commented out because we are now taking allow multiple in options
+//                            if (cd.name.equals(&quot;randomize-connectives&quot;)) {
+//                                html += &quot; randomize-connectives=&quot;+cd.value.toLowerCase()+&quot;\&quot;&quot;;
+//                            }
+
+//                            else if (cd.name.equals(&quot;allowMultipleSelection&quot;)) {
+//                                html += &quot; allow-multiple=&quot;+cd.value.toLowerCase()+&quot;&quot;;
+//                            }
+<span class="nc" id="L713">                        }</span>
+
+<span class="fc" id="L715">                        html = html + &quot; &gt;&lt;/drag-and-drop&quot;;</span>
+<span class="fc" id="L716">                        panel_body.append(html);</span>
+                    }
+
+
+                    //dragAndDrop
+                    // TODO: implement more features in the frontend and handle them in backend.
+
+                    // IMP: CHECKING FOR MANDATORY CONDITION.
+<span class="fc" id="L724">                    ArrayList&lt;Condition&gt; conds = c.conditions;</span>
+<span class="fc bfc" id="L725" title="All 2 branches covered.">                    for (Iterator&lt;Condition&gt; it4 = conds.iterator(); it4.hasNext();) {</span>
+<span class="fc" id="L726">                        Condition cd = it4.next();</span>
+<span class="pc bpc" id="L727" title="1 of 2 branches missed.">                        if (cd.name.equals(&quot;mandatory&quot;)) {</span>
+<span class="pc bpc" id="L728" title="1 of 2 branches missed.">                            if (cd.value.toLowerCase().equals(&quot;true&quot;)) {</span>
+<span class="fc" id="L729">                                mandatoryFields.add(c.model_attr);</span>
+<span class="fc" id="L730">                                slideMandatoryFields.add(c.model_attr);</span>
+                            }
+                        }
+<span class="fc" id="L733">                    }</span>
+<span class="fc" id="L734">                    String slideChangeHtml = &quot;&quot;;</span>
+<span class="pc bpc" id="L735" title="3 of 4 branches missed.">                    if (name.equals(&quot;nextSlideButton&quot;) &amp;&amp; !dragDropPresent) {</span>
+<span class="nc" id="L736">                        slideChangeButtonAdded = 1;</span>
+<span class="nc bnc" id="L737" title="All 4 branches missed.">                        if (field == null || field.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L738">                            slideChangeHtml = &quot;&lt;button id=next_slide_&quot; + s.num + &quot; type=\&quot;button\&quot; ng-click=\&quot;RC.switchSlide()\&quot; class=\&quot;btn btn-default\&quot; style=\&quot;float:right ; margin-top:20px\&quot;&gt; Next Slide &lt;/button&gt;&quot;;</span>
+                        }
+                        else {
+<span class="nc" id="L741">                            slideChangeHtml = &quot;&lt;button id=next_slide_&quot; + s.num + &quot; type=\&quot;button\&quot; ng-click=\&quot;RC.switchSlide()\&quot; class=\&quot;btn btn-default\&quot; style=\&quot;float:right ; margin-top:20px\&quot;&gt; &quot; + field + &quot; &lt;/button&gt;&quot;;</span>
+                        }
+<span class="nc" id="L743">                        System.out.println(slideChangeHtml);</span>
+<span class="nc" id="L744">                        panel_body.append(slideChangeHtml);</span>
+                    }
+
+                    //slideChangeHtml += slideDisable + &quot;&gt; Next Slide &lt;/button&gt;&quot;;
+
+<span class="fc" id="L749">                }</span>
+                // If this slide is not last slide and slide change button was not added...
+                // Add slide change button automatically.
+<span class="pc bpc" id="L752" title="1 of 4 branches missed.">                if (slideChangeButtonAdded == 0 &amp;&amp; Integer.parseInt(s.num) &lt; totalNumSlides) {</span>
+                    // Adding default text for next slide.
+<span class="fc" id="L754">                    panel_body.append(&quot;&lt;button id=next_slide_&quot; + s.num + &quot; type=\&quot;button\&quot; ng-click=\&quot;RC.switchSlide()\&quot; class=\&quot;btn btn-default\&quot; style=\&quot;float:right ; margin-top:20px\&quot;&gt; Next Slide &lt;/button&gt;&quot;);</span>
+<span class="fc" id="L755">                    slideChangeButtonAdded = 1;</span>
+                }
+                // Give disable option to the Slide Change Button.
+<span class="fc bfc" id="L758" title="All 2 branches covered.">                if (slideChangeButtonAdded == 1) {</span>
+<span class="fc" id="L759">                    String slideDisable = &quot;&quot;;</span>
+<span class="fc bfc" id="L760" title="All 2 branches covered.">                    for (Iterator&lt;String&gt; j = slideMandatoryFields.iterator(); j.hasNext(); ) {</span>
+<span class="fc" id="L761">                        String field = j.next();</span>
+<span class="pc bpc" id="L762" title="1 of 2 branches missed.">                        if (!slideDisable.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L763">                            slideDisable = slideDisable + &quot; || &quot;;</span>
+                        }
+<span class="fc" id="L765">                        slideDisable = slideDisable + &quot;question.&quot; + field + &quot; === undefined || question.&quot; + field + &quot; === '' || question.&quot; + field + &quot; == {}&quot;;</span>
+<span class="fc" id="L766">                    }</span>
+                    // Now add the textCheckers
+<span class="pc bpc" id="L768" title="1 of 2 branches missed.">                    if(textCheckers.size() &gt; 0) {</span>
+<span class="nc bnc" id="L769" title="All 2 branches missed.">                        for (Iterator&lt;String&gt; b = textCheckers.iterator(); b.hasNext();) {</span>
+<span class="nc bnc" id="L770" title="All 2 branches missed.">                            if (!slideDisable.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L771">                                slideDisable = slideDisable + &quot; || &quot;;</span>
+                            }
+
+<span class="nc" id="L774">                            slideDisable = slideDisable + b.next();</span>
+
+                        }
+                    }
+<span class="fc bfc" id="L778" title="All 2 branches covered.">                    if (!slideDisable.equals(&quot;&quot;)) {</span>
+<span class="fc" id="L779">                        System.out.println(&quot;next_slide_&quot;+s.num);</span>
+<span class="fc" id="L780">                        Element slideButton = panel_body.getElementById(&quot;next_slide_&quot; + s.num);</span>
+<span class="fc" id="L781">                        slideButton.attr(&quot;ng-disabled&quot;, slideDisable);</span>
+                    }
+                }
+
+
+                //System.out.println(&quot;\n$$$$$$$$$$\n&quot;+content.outerHtml()+&quot;\n$$$$$$$$$$&quot;);
+<span class="fc bfc" id="L787" title="All 2 branches covered.">                if(s.num.equals(&quot;1&quot;)) {</span>
+<span class="fc" id="L788">                    slide.append(panel.outerHtml());</span>
+                }
+                //System.out.println(&quot;\n#########\n&quot;+content.outerHtml()+&quot;\n#########&quot;);
+<span class="fc" id="L791">            }</span>
+            // Finally, add our button back!
+            // TODO: MODIFY SUBMIT BUTTON BASED ON MANDATORY/OPTIONAL SETTING.
+<span class="fc" id="L794">            String disable = &quot;&quot;;</span>
+
+//            // TODO: REMOVE THIS. THIS IS ONLY FOR TESTING!
+//            if (mandatoryFields.size() == 0) {
+//                mandatoryFields.add(&quot;answer&quot;);
+//            }
+
+<span class="fc bfc" id="L801" title="All 2 branches covered.">            for (Iterator&lt;String&gt; j = mandatoryFields.iterator(); j.hasNext();) {</span>
+<span class="fc" id="L802">                String field = j.next();</span>
+<span class="pc bpc" id="L803" title="1 of 2 branches missed.">                if (!disable.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L804">                    disable = disable + &quot; || &quot;;</span>
+                }
+<span class="fc" id="L806">                disable = disable + &quot;question.&quot; + field + &quot; === undefined || question.&quot; + field + &quot; === '' || question.&quot; + field + &quot; == {}&quot;;</span>
+<span class="fc" id="L807">            }</span>
+            // Now add the textCheckers
+<span class="pc bpc" id="L809" title="1 of 2 branches missed.">            if(textCheckers.size() &gt; 0) {</span>
+<span class="nc bnc" id="L810" title="All 2 branches missed.">                for (Iterator&lt;String&gt; b = textCheckers.iterator(); b.hasNext();) {</span>
+<span class="nc bnc" id="L811" title="All 2 branches missed.">                    if(!disable.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L812">                        disable = disable + &quot; || &quot;;</span>
+                    }
+<span class="nc" id="L814">                    disable = disable + b.next();</span>
+                }
+            }
+<span class="pc bpc" id="L817" title="1 of 2 branches missed.">            if (!disable.equals(&quot;&quot;)) {</span>
+<span class="fc" id="L818">                System.out.println(&quot;Modifying submit button disabled option&quot;);</span>
+<span class="fc" id="L819">                System.out.println(slideNum);</span>
+<span class="fc" id="L820">                button.attr(&quot;ng-disabled&quot;, disable);</span>
+            }
+<span class="fc" id="L822">            panel_body = content.getElementById(&quot;experiment_body_1_&quot;+slideNum);</span>
+            // Do not add the button if drag drop component is there in last slide!
+<span class="pc bpc" id="L824" title="1 of 2 branches missed.">            if (!dragDropPresent) {</span>
+<span class="nc" id="L825">                panel_body.append(button.outerHtml());</span>
+            }
+            // Now write the file in! And we are done!
+
+            //Path filePathOut = Paths.get(currentPath.toString(), &quot;app&quot;, &quot;views&quot;, &quot;ExperimentRendering&quot;, ex.name, ex.name + &quot;_render.html&quot;);
+            //File f = new File(filePathOut.toString());
+            //FileUtils.writeStringToFile(f, doc.outerHtml(), &quot;UTF-8&quot;);
+<span class="fc" id="L832">            System.out.println(content);</span>
+            
+<span class="fc" id="L834">            String name = &quot;Successfully checked&quot;;</span>
+
+<span class="fc" id="L836">            return name;</span>
+        }
+<span class="nc" id="L838">        catch (Exception e) {</span>
+<span class="nc" id="L839">            String error = &quot;Unsuccessful attempt&quot;;</span>
+            //System.out.println(error);
+<span class="nc" id="L841">            return error;</span>
+            //throw e;
+            
+        
+            //return error; 
+        }
+    }
+public static void main(String[] args){
+        //Case:1: One Slide, radio button, one condition and one option
+        //String jsonString = &quot;{\&quot;name\&quot;:\&quot;LanguageGameListener1\&quot;,\&quot;slides\&quot;:[{\&quot;num\&quot;:1,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;radio\&quot;,\&quot;model_attr\&quot;:\&quot;stimuli\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;dc1,dc2,dc3\&quot;}],\&quot;conditions\&quot;:[{\&quot;name\&quot;:\&quot;mandatory\&quot;,\&quot;value\&quot;:\&quot;true\&quot;}]}]}]}&quot;;
+        //Case:2: One Slide, checkbox, 3 options
+        //String jsonString = &quot;{\&quot;name\&quot;:\&quot;testLingoturkUI2\&quot;,\&quot;slides\&quot;:[{\&quot;num\&quot;:1,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;checkBox\&quot;,\&quot;model_attr\&quot;:\&quot;Interests\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op2,op3\&quot;}],\&quot;conditions\&quot;:[]}]}]}&quot;;
+        //Case:3: Two Slides, radio button, 2 options, slide answer, 2 options, checkbox, 2 answer  
+        //String jsonString = &quot;{\&quot;name\&quot;:\&quot;testLingoturkUI3\&quot;,\&quot;slides\&quot;:[{\&quot;num\&quot;:1,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;radio\&quot;,\&quot;model_attr\&quot;:\&quot;Radio 1\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op2\&quot;}],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;sliderAnswer\&quot;,\&quot;model_attr\&quot;:\&quot;Slider 1\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op2\&quot;}],\&quot;conditions\&quot;:[]}]},{\&quot;num\&quot;:2,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;checkBox\&quot;,\&quot;model_attr\&quot;:\&quot;Checkbox 1\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op2\&quot;}],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;starAnswer\&quot;,\&quot;model_attr\&quot;:\&quot;Star 1\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;maxStars\&quot;,\&quot;value\&quot;:\&quot;stars\&quot;}],\&quot;conditions\&quot;:[]}]}]}&quot;;
+        //Case:4: Invalid string
+        //String jsonString = &quot;{\&quot;name\&quot;:\&quot;testLingoturkUI3\&quot;,\&quot;slides\&quot;:[{\&quot;n\&quot;:1,\&quot;components\&quot;:[{\&quot;ne\&quot;:\&quot;rio\&quot;,\&quot;model_attr\&quot;:\&quot;Radio 1\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op2\&quot;}],\&quot;conditions\&quot;:[]},{\&quot;na\&quot;:\&quot;sliderAnswer\&quot;,\&quot;model_attr\&quot;:\&quot;Slider 1\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op2\&quot;}],\&quot;conditions\&quot;:[]}]},{\&quot;num\&quot;:2,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;checkBox\&quot;,\&quot;model_attr\&quot;:\&quot;Checkbox 1\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op2\&quot;}],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;starAnswer\&quot;,\&quot;model_attr\&quot;:\&quot;Star 1\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;maxStars\&quot;,\&quot;value\&quot;:\&quot;stars\&quot;}],\&quot;conditions\&quot;:[]}]}]}&quot;;
+        //Case:5:
+        //String jsonString = &quot;{\&quot;name\&quot;:\&quot;testLingoturkUIPrint\&quot;,\&quot;slides\&quot;:[{\&quot;num\&quot;:1,\&quot;name\&quot;:\&quot;Slide 1\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;textArea\&quot;,\&quot;model_attr\&quot;:\&quot;textAnswer\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[{\&quot;name\&quot;:\&quot;minWordCount\&quot;,\&quot;value\&quot;:50},{\&quot;name\&quot;:\&quot;maxWordCount\&quot;,\&quot;value\&quot;:500},{\&quot;name\&quot;:\&quot;preventCharacters\&quot;,\&quot;value\&quot;:\&quot;-!\&quot;}]}]},{\&quot;num\&quot;:2,\&quot;name\&quot;:\&quot;New Slide\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;starAnswer\&quot;,\&quot;model_attr\&quot;:\&quot;starAnswer1\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[{\&quot;name\&quot;:\&quot;mandatory\&quot;,\&quot;value\&quot;:\&quot;true\&quot;}]},{\&quot;name\&quot;:\&quot;dragDrop\&quot;,\&quot;model_attr\&quot;:\&quot;dragDrop\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;connectives\&quot;,\&quot;value\&quot;:\&quot;conncectives,conncectives\&quot;},{\&quot;name\&quot;:\&quot;context1\&quot;,\&quot;value\&quot;:\&quot;context1\&quot;},{\&quot;name\&quot;:\&quot;context2\&quot;,\&quot;value\&quot;:\&quot;context2\&quot;},{\&quot;name\&quot;:\&quot;sentence1\&quot;,\&quot;value\&quot;:\&quot;sentence1\&quot;},{\&quot;name\&quot;:\&quot;sentence2\&quot;,\&quot;value\&quot;:\&quot;sentence2\&quot;},{\&quot;name\&quot;:\&quot;content\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;htmlInput\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;boxPosition\&quot;,\&quot;value\&quot;:\&quot;middle\&quot;},{\&quot;name\&quot;:\&quot;boxTitle\&quot;,\&quot;value\&quot;:\&quot;Candidate connectives\&quot;},{\&quot;name\&quot;:\&quot;displayStyle\&quot;,\&quot;value\&quot;:\&quot;default\&quot;},{\&quot;name\&quot;:\&quot;allowMultiple\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;instructions1\&quot;,\&quot;value\&quot;:\&quot;Please drag the best-suited connective into the green target box below.\&quot;},{\&quot;name\&quot;:\&quot;instructions2\&quot;,\&quot;value\&quot;:\&quot;You can now drag one more connective into the box below.\&quot;},{\&quot;name\&quot;:\&quot;goBackText\&quot;,\&quot;value\&quot;:\&quot;go back\&quot;},{\&quot;name\&quot;:\&quot;allowNoneOfThese\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;noneOfTheseText\&quot;,\&quot;value\&quot;:\&quot;none of these\&quot;},{\&quot;name\&quot;:\&quot;allowNone\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;allowNoneText\&quot;,\&quot;value\&quot;:\&quot;no connective\&quot;},{\&quot;name\&quot;:\&quot;noneStyle\&quot;,\&quot;value\&quot;:\&quot;block\&quot;},{\&quot;name\&quot;:\&quot;defaultConnective\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;contentClass\&quot;,\&quot;value\&quot;:\&quot;col-md-12\&quot;},{\&quot;name\&quot;:\&quot;click\&quot;,\&quot;value\&quot;:\&quot;RC.nextQuestion\&quot;},{\&quot;name\&quot;:\&quot;randomizeConnectives\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;splitter\&quot;,\&quot;value\&quot;:\&quot;,\&quot;}],\&quot;conditions\&quot;:[]}]}]}&quot;;
+        //Case:6:
+        //String jsonString = &quot;{\&quot;name\&quot;:\&quot;testLingoturkUIPrint\&quot;,\&quot;slides\&quot;:[{\&quot;num\&quot;:1,\&quot;name\&quot;:\&quot;Slide 1\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;instructionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;radio\&quot;,\&quot;model_attr\&quot;:\&quot;radio1\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op2\&quot;}],\&quot;conditions\&quot;:[{\&quot;name\&quot;:\&quot;mandatory\&quot;,\&quot;value\&quot;:\&quot;true\&quot;}]}]},{\&quot;num\&quot;:2,\&quot;name\&quot;:\&quot;Slide 2\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;instructionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;checkBox\&quot;,\&quot;model_attr\&quot;:\&quot;checkbox\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op2,op3\&quot;},{\&quot;name\&quot;:\&quot;descriptions\&quot;,\&quot;value\&quot;:\&quot;checkboxDescription\&quot;}],\&quot;conditions\&quot;:[{\&quot;name\&quot;:\&quot;mandatory\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;allowMultipleSelection\&quot;,\&quot;value\&quot;:\&quot;false\&quot;}]}]},{\&quot;num\&quot;:3,\&quot;name\&quot;:\&quot;Slide 3\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;descriptionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;sliderAnswer\&quot;,\&quot;model_attr\&quot;:\&quot;slider\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]}]},{\&quot;num\&quot;:4,\&quot;name\&quot;:\&quot;Slide 4\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;instructionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;dragDrop\&quot;,\&quot;model_attr\&quot;:\&quot;dd1\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;connectives\&quot;,\&quot;value\&quot;:\&quot;conncectives\&quot;},{\&quot;name\&quot;:\&quot;context1\&quot;,\&quot;value\&quot;:\&quot;context1\&quot;},{\&quot;name\&quot;:\&quot;context2\&quot;,\&quot;value\&quot;:\&quot;context2\&quot;},{\&quot;name\&quot;:\&quot;sentence1\&quot;,\&quot;value\&quot;:\&quot;sentence1\&quot;},{\&quot;name\&quot;:\&quot;sentence2\&quot;,\&quot;value\&quot;:\&quot;sentence2\&quot;},{\&quot;name\&quot;:\&quot;content\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;htmlInput\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;boxPosition\&quot;,\&quot;value\&quot;:\&quot;middle\&quot;},{\&quot;name\&quot;:\&quot;boxTitle\&quot;,\&quot;value\&quot;:\&quot;Candidate connectives\&quot;},{\&quot;name\&quot;:\&quot;displayStyle\&quot;,\&quot;value\&quot;:\&quot;default\&quot;},{\&quot;name\&quot;:\&quot;allowMultiple\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;instructions1\&quot;,\&quot;value\&quot;:\&quot;Please drag the best-suited connective into the green target box below.\&quot;},{\&quot;name\&quot;:\&quot;instructions2\&quot;,\&quot;value\&quot;:\&quot;You can now drag one more connective into the box below.\&quot;},{\&quot;name\&quot;:\&quot;goBackText\&quot;,\&quot;value\&quot;:\&quot;go back\&quot;},{\&quot;name\&quot;:\&quot;allowNoneOfThese\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;noneOfTheseText\&quot;,\&quot;value\&quot;:\&quot;none of these\&quot;},{\&quot;name\&quot;:\&quot;allowNone\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;allowNoneText\&quot;,\&quot;value\&quot;:\&quot;no connective\&quot;},{\&quot;name\&quot;:\&quot;noneStyle\&quot;,\&quot;value\&quot;:\&quot;block\&quot;},{\&quot;name\&quot;:\&quot;defaultConnective\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;contentClass\&quot;,\&quot;value\&quot;:\&quot;col-md-12\&quot;},{\&quot;name\&quot;:\&quot;click\&quot;,\&quot;value\&quot;:\&quot;RC.nextQuestion\&quot;},{\&quot;name\&quot;:\&quot;randomizeConnectives\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;splitter\&quot;,\&quot;value\&quot;:\&quot;,\&quot;}],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;nextSlideButton\&quot;,\&quot;model_attr\&quot;:\&quot;next\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]}]},{\&quot;num\&quot;:5,\&quot;name\&quot;:\&quot;Slide 5\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;questionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;textAnswer\&quot;,\&quot;model_attr\&quot;:\&quot;text4\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[{\&quot;name\&quot;:\&quot;minWordCount\&quot;,\&quot;value\&quot;:50},{\&quot;name\&quot;:\&quot;maxWordCount\&quot;,\&quot;value\&quot;:500},{\&quot;name\&quot;:\&quot;preventCharacters\&quot;,\&quot;value\&quot;:\&quot;.,\&quot;}]},{\&quot;name\&quot;:\&quot;nextSlideButton\&quot;,\&quot;model_attr\&quot;:\&quot;next 2\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]}]}]}&quot;;
+        //Case:7:
+        //String jsonString = &quot;{\&quot;name\&quot;:\&quot;testLingoturkUIPrint\&quot;,\&quot;slides\&quot;:[{\&quot;num\&quot;:1,\&quot;name\&quot;:\&quot;Slide 1\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;descriptionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;dragDrop\&quot;,\&quot;model_attr\&quot;:\&quot;\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;connectives\&quot;,\&quot;value\&quot;:\&quot;conncectives\&quot;},{\&quot;name\&quot;:\&quot;context1\&quot;,\&quot;value\&quot;:\&quot;context1\&quot;},{\&quot;name\&quot;:\&quot;context2\&quot;,\&quot;value\&quot;:\&quot;context2\&quot;},{\&quot;name\&quot;:\&quot;sentence1\&quot;,\&quot;value\&quot;:\&quot;sentence1\&quot;},{\&quot;name\&quot;:\&quot;sentence2\&quot;,\&quot;value\&quot;:\&quot;sentence2\&quot;},{\&quot;name\&quot;:\&quot;content\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;htmlInput\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;boxPosition\&quot;,\&quot;value\&quot;:\&quot;middle\&quot;},{\&quot;name\&quot;:\&quot;boxTitle\&quot;,\&quot;value\&quot;:\&quot;Candidate connectives\&quot;},{\&quot;name\&quot;:\&quot;displayStyle\&quot;,\&quot;value\&quot;:\&quot;default\&quot;},{\&quot;name\&quot;:\&quot;allowMultiple\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;instructions1\&quot;,\&quot;value\&quot;:\&quot;Please drag the best-suited connective into the green target box below.\&quot;},{\&quot;name\&quot;:\&quot;instructions2\&quot;,\&quot;value\&quot;:\&quot;You can now drag one more connective into the box below.\&quot;},{\&quot;name\&quot;:\&quot;goBackText\&quot;,\&quot;value\&quot;:\&quot;go back\&quot;},{\&quot;name\&quot;:\&quot;allowNoneOfThese\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;noneOfTheseText\&quot;,\&quot;value\&quot;:\&quot;none of these\&quot;},{\&quot;name\&quot;:\&quot;allowNone\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;allowNoneText\&quot;,\&quot;value\&quot;:\&quot;no connective\&quot;},{\&quot;name\&quot;:\&quot;noneStyle\&quot;,\&quot;value\&quot;:\&quot;block\&quot;},{\&quot;name\&quot;:\&quot;defaultConnective\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;contentClass\&quot;,\&quot;value\&quot;:\&quot;col-md-12\&quot;},{\&quot;name\&quot;:\&quot;click\&quot;,\&quot;value\&quot;:\&quot;RC.nextQuestion\&quot;},{\&quot;name\&quot;:\&quot;randomizeConnectives\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;splitter\&quot;,\&quot;value\&quot;:\&quot;,\&quot;}],\&quot;conditions\&quot;:[]}]},{\&quot;num\&quot;:2,\&quot;name\&quot;:\&quot;New Slide\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;instructionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;dragDrop\&quot;,\&quot;model_attr\&quot;:\&quot;\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;connectives\&quot;,\&quot;value\&quot;:\&quot;conncectives\&quot;},{\&quot;name\&quot;:\&quot;context1\&quot;,\&quot;value\&quot;:\&quot;context1\&quot;},{\&quot;name\&quot;:\&quot;context2\&quot;,\&quot;value\&quot;:\&quot;context2\&quot;},{\&quot;name\&quot;:\&quot;sentence1\&quot;,\&quot;value\&quot;:\&quot;sentence1\&quot;},{\&quot;name\&quot;:\&quot;sentence2\&quot;,\&quot;value\&quot;:\&quot;sentence2\&quot;},{\&quot;name\&quot;:\&quot;content\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;htmlInput\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;boxPosition\&quot;,\&quot;value\&quot;:\&quot;middle\&quot;},{\&quot;name\&quot;:\&quot;boxTitle\&quot;,\&quot;value\&quot;:\&quot;Candidate connectives\&quot;},{\&quot;name\&quot;:\&quot;displayStyle\&quot;,\&quot;value\&quot;:\&quot;default\&quot;},{\&quot;name\&quot;:\&quot;allowMultiple\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;instructions1\&quot;,\&quot;value\&quot;:\&quot;Please drag the best-suited connective into the green target box below.\&quot;},{\&quot;name\&quot;:\&quot;instructions2\&quot;,\&quot;value\&quot;:\&quot;You can now drag one more connective into the box below.\&quot;},{\&quot;name\&quot;:\&quot;goBackText\&quot;,\&quot;value\&quot;:\&quot;go back\&quot;},{\&quot;name\&quot;:\&quot;allowNoneOfThese\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;noneOfTheseText\&quot;,\&quot;value\&quot;:\&quot;none of these\&quot;},{\&quot;name\&quot;:\&quot;allowNone\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;allowNoneText\&quot;,\&quot;value\&quot;:\&quot;no connective\&quot;},{\&quot;name\&quot;:\&quot;noneStyle\&quot;,\&quot;value\&quot;:\&quot;block\&quot;},{\&quot;name\&quot;:\&quot;defaultConnective\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;contentClass\&quot;,\&quot;value\&quot;:\&quot;col-md-12\&quot;},{\&quot;name\&quot;:\&quot;click\&quot;,\&quot;value\&quot;:\&quot;RC.nextQuestion\&quot;},{\&quot;name\&quot;:\&quot;randomizeConnectives\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;splitter\&quot;,\&quot;value\&quot;:\&quot;,\&quot;}],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;instructionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;dragDrop\&quot;,\&quot;model_attr\&quot;:\&quot;\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;connectives\&quot;,\&quot;value\&quot;:\&quot;conncectives\&quot;},{\&quot;name\&quot;:\&quot;context1\&quot;,\&quot;value\&quot;:\&quot;context1\&quot;},{\&quot;name\&quot;:\&quot;context2\&quot;,\&quot;value\&quot;:\&quot;context2\&quot;},{\&quot;name\&quot;:\&quot;sentence1\&quot;,\&quot;value\&quot;:\&quot;sentence1\&quot;},{\&quot;name\&quot;:\&quot;sentence2\&quot;,\&quot;value\&quot;:\&quot;sentence2\&quot;},{\&quot;name\&quot;:\&quot;content\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;htmlInput\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;boxPosition\&quot;,\&quot;value\&quot;:\&quot;middle\&quot;},{\&quot;name\&quot;:\&quot;boxTitle\&quot;,\&quot;value\&quot;:\&quot;Candidate connectives\&quot;},{\&quot;name\&quot;:\&quot;displayStyle\&quot;,\&quot;value\&quot;:\&quot;default\&quot;},{\&quot;name\&quot;:\&quot;allowMultiple\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;instructions1\&quot;,\&quot;value\&quot;:\&quot;Please drag the best-suited connective into the green target box below.\&quot;},{\&quot;name\&quot;:\&quot;instructions2\&quot;,\&quot;value\&quot;:\&quot;You can now drag one more connective into the box below.\&quot;},{\&quot;name\&quot;:\&quot;goBackText\&quot;,\&quot;value\&quot;:\&quot;go back\&quot;},{\&quot;name\&quot;:\&quot;allowNoneOfThese\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;noneOfTheseText\&quot;,\&quot;value\&quot;:\&quot;none of these\&quot;},{\&quot;name\&quot;:\&quot;allowNone\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;allowNoneText\&quot;,\&quot;value\&quot;:\&quot;no connective\&quot;},{\&quot;name\&quot;:\&quot;noneStyle\&quot;,\&quot;value\&quot;:\&quot;block\&quot;},{\&quot;name\&quot;:\&quot;defaultConnective\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;contentClass\&quot;,\&quot;value\&quot;:\&quot;col-md-12\&quot;},{\&quot;name\&quot;:\&quot;click\&quot;,\&quot;value\&quot;:\&quot;RC.nextQuestion\&quot;},{\&quot;name\&quot;:\&quot;randomizeConnectives\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;splitter\&quot;,\&quot;value\&quot;:\&quot;,\&quot;}],\&quot;conditions\&quot;:[]}]}]}&quot;;
+        //Case:8:
+        //String jsonString = &quot;{\&quot;name\&quot;:\&quot;testLingoturkUIPrint\&quot;,\&quot;slides\&quot;:[{\&quot;num\&quot;:1,\&quot;name\&quot;:\&quot;Slide 1\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;instructionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]}]},{\&quot;num\&quot;:2,\&quot;name\&quot;:\&quot;New Slide\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;instructionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;sliderAnswer\&quot;,\&quot;model_attr\&quot;:\&quot;\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]}]},{\&quot;num\&quot;:3,\&quot;name\&quot;:\&quot;New Slide\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;instructionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;radio\&quot;,\&quot;model_attr\&quot;:\&quot;\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op2\&quot;}],\&quot;conditions\&quot;:[{\&quot;name\&quot;:\&quot;mandatory\&quot;,\&quot;value\&quot;:\&quot;true\&quot;}]},{\&quot;name\&quot;:\&quot;checkBox\&quot;,\&quot;model_attr\&quot;:\&quot;\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;options\&quot;,\&quot;value\&quot;:\&quot;op1,op3\&quot;}],\&quot;conditions\&quot;:[{\&quot;name\&quot;:\&quot;mandatory\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;allowMultipleSelection\&quot;,\&quot;value\&quot;:\&quot;false\&quot;}]}]},{\&quot;num\&quot;:4,\&quot;name\&quot;:\&quot;New Slide\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;dragDrop\&quot;,\&quot;model_attr\&quot;:\&quot;\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;connectives\&quot;,\&quot;value\&quot;:\&quot;conncectives\&quot;},{\&quot;name\&quot;:\&quot;context1\&quot;,\&quot;value\&quot;:\&quot;context1\&quot;},{\&quot;name\&quot;:\&quot;context2\&quot;,\&quot;value\&quot;:\&quot;context2\&quot;},{\&quot;name\&quot;:\&quot;sentence1\&quot;,\&quot;value\&quot;:\&quot;sentence1\&quot;},{\&quot;name\&quot;:\&quot;sentence2\&quot;,\&quot;value\&quot;:\&quot;sentence2\&quot;},{\&quot;name\&quot;:\&quot;content\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;htmlInput\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;boxPosition\&quot;,\&quot;value\&quot;:\&quot;middle\&quot;},{\&quot;name\&quot;:\&quot;boxTitle\&quot;,\&quot;value\&quot;:\&quot;Candidate connectives\&quot;},{\&quot;name\&quot;:\&quot;displayStyle\&quot;,\&quot;value\&quot;:\&quot;default\&quot;},{\&quot;name\&quot;:\&quot;allowMultiple\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;instructions1\&quot;,\&quot;value\&quot;:\&quot;Please drag the best-suited connective into the green target box below.\&quot;},{\&quot;name\&quot;:\&quot;instructions2\&quot;,\&quot;value\&quot;:\&quot;You can now drag one more connective into the box below.\&quot;},{\&quot;name\&quot;:\&quot;goBackText\&quot;,\&quot;value\&quot;:\&quot;go back\&quot;},{\&quot;name\&quot;:\&quot;allowNoneOfThese\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;noneOfTheseText\&quot;,\&quot;value\&quot;:\&quot;none of these\&quot;},{\&quot;name\&quot;:\&quot;allowNone\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;allowNoneText\&quot;,\&quot;value\&quot;:\&quot;no connective\&quot;},{\&quot;name\&quot;:\&quot;noneStyle\&quot;,\&quot;value\&quot;:\&quot;block\&quot;},{\&quot;name\&quot;:\&quot;defaultConnective\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;contentClass\&quot;,\&quot;value\&quot;:\&quot;col-md-12\&quot;},{\&quot;name\&quot;:\&quot;click\&quot;,\&quot;value\&quot;:\&quot;RC.nextQuestion\&quot;},{\&quot;name\&quot;:\&quot;randomizeConnectives\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;splitter\&quot;,\&quot;value\&quot;:\&quot;,\&quot;}],\&quot;conditions\&quot;:[]}]}]}&quot;;
+        //Case:9:
+<span class="fc" id="L866">        String jsonString = &quot;{\&quot;name\&quot;:\&quot;testLingoturkUIPrint\&quot;,\&quot;slides\&quot;:[{\&quot;num\&quot;:1,\&quot;name\&quot;:\&quot;Slide 1\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;instructionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;starAnswer\&quot;,\&quot;model_attr\&quot;:\&quot;\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[{\&quot;name\&quot;:\&quot;mandatory\&quot;,\&quot;value\&quot;:\&quot;true\&quot;}]}]},{\&quot;num\&quot;:2,\&quot;name\&quot;:\&quot;New Slide\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;instructionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;sliderAnswer\&quot;,\&quot;model_attr\&quot;:\&quot;\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]}]},{\&quot;num\&quot;:3,\&quot;name\&quot;:\&quot;New Slide\&quot;,\&quot;components\&quot;:[{\&quot;name\&quot;:\&quot;question\&quot;,\&quot;model_attr\&quot;:\&quot;descriptionText\&quot;,\&quot;options\&quot;:[],\&quot;conditions\&quot;:[]},{\&quot;name\&quot;:\&quot;dragDrop\&quot;,\&quot;model_attr\&quot;:\&quot;\&quot;,\&quot;options\&quot;:[{\&quot;name\&quot;:\&quot;connectives\&quot;,\&quot;value\&quot;:\&quot;conncectives\&quot;},{\&quot;name\&quot;:\&quot;context1\&quot;,\&quot;value\&quot;:\&quot;context1\&quot;},{\&quot;name\&quot;:\&quot;context2\&quot;,\&quot;value\&quot;:\&quot;context2\&quot;},{\&quot;name\&quot;:\&quot;sentence1\&quot;,\&quot;value\&quot;:\&quot;sentence1\&quot;},{\&quot;name\&quot;:\&quot;sentence2\&quot;,\&quot;value\&quot;:\&quot;sentence2\&quot;},{\&quot;name\&quot;:\&quot;content\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;htmlInput\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;boxPosition\&quot;,\&quot;value\&quot;:\&quot;middle\&quot;},{\&quot;name\&quot;:\&quot;boxTitle\&quot;,\&quot;value\&quot;:\&quot;Candidate connectives\&quot;},{\&quot;name\&quot;:\&quot;displayStyle\&quot;,\&quot;value\&quot;:\&quot;default\&quot;},{\&quot;name\&quot;:\&quot;allowMultiple\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;instructions1\&quot;,\&quot;value\&quot;:\&quot;Please drag the best-suited connective into the green target box below.\&quot;},{\&quot;name\&quot;:\&quot;instructions2\&quot;,\&quot;value\&quot;:\&quot;You can now drag one more connective into the box below.\&quot;},{\&quot;name\&quot;:\&quot;goBackText\&quot;,\&quot;value\&quot;:\&quot;go back\&quot;},{\&quot;name\&quot;:\&quot;allowNoneOfThese\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;noneOfTheseText\&quot;,\&quot;value\&quot;:\&quot;none of these\&quot;},{\&quot;name\&quot;:\&quot;allowNone\&quot;,\&quot;value\&quot;:\&quot;false\&quot;},{\&quot;name\&quot;:\&quot;allowNoneText\&quot;,\&quot;value\&quot;:\&quot;no connective\&quot;},{\&quot;name\&quot;:\&quot;noneStyle\&quot;,\&quot;value\&quot;:\&quot;block\&quot;},{\&quot;name\&quot;:\&quot;defaultConnective\&quot;,\&quot;value\&quot;:\&quot;\&quot;},{\&quot;name\&quot;:\&quot;contentClass\&quot;,\&quot;value\&quot;:\&quot;col-md-12\&quot;},{\&quot;name\&quot;:\&quot;click\&quot;,\&quot;value\&quot;:\&quot;RC.nextQuestion\&quot;},{\&quot;name\&quot;:\&quot;randomizeConnectives\&quot;,\&quot;value\&quot;:\&quot;true\&quot;},{\&quot;name\&quot;:\&quot;splitter\&quot;,\&quot;value\&quot;:\&quot;,\&quot;}],\&quot;conditions\&quot;:[]}]}]}&quot;;</span>
+        //Case:10:
+        //String jsonString = &quot;&quot;;
+        //Case:11:
+        //String jsonString = &quot;&quot;;
+        //Case:12:
+        //String jsonString = &quot;&quot;;
+        //Case:13:
+        //String jsonString = &quot;&quot;;
+        //Case:14:
+        //String jsonString = &quot;&quot;;
+        //Case:15:
+        //String jsonString = &quot;&quot;;
+        //Case:16:
+        //String jsonString = &quot;&quot;;
+        //Case:17:
+        //String jsonString = &quot;&quot;;
+        
+        
+<span class="fc" id="L885">        Lingoturk2 lingobaba = new Lingoturk2();</span>
+        try{
+<span class="fc" id="L887">            String ret = lingobaba.submitEditExperiment(jsonString);</span>
+<span class="fc" id="L888">            System.out.println(ret);</span>
+        }
+<span class="nc" id="L890">        catch (Exception e){</span>
+<span class="nc" id="L891">            System.out.println(e);</span>
+<span class="fc" id="L892">        }</span>
+<span class="fc" id="L893">        }</span>
+    }
+    
+    
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

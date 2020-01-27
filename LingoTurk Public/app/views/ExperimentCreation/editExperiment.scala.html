@@ -1,0 +1,966 @@
+@** This file is created and compiled by Ayan Majumder, Shakhwat Ahmed Nobin, Hasan Md Tusfiqur Alam, Rayhanul Islam Rumel, Akshay Akshay,
+* Chirag Bhuvaneshwara and Khaushik Chowdhury as a Software Engineering Course project in winter semester 2019/20 **@
+
+@(experimentName : String)
+
+@main("LINGOturk") {
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/ExperimentCreation/editExperiment.js")"> </script>
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/editExperiment.css")">
+
+    <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th {
+                text-align:center
+            }
+            #title{
+                font-size: 16px;
+            }
+            #tabs{
+                background-color: rgba(74, 74, 74, 0.6);
+                color: black;
+                font-size:15px;
+                padding: 10px;
+                border-radius: 6px 6px 6px 6px;
+                -moz-border-radius: 6px 6px 6px 6px;
+                -webkit-border-radius: 6px 6px 6px 6px;
+                border: 2px solid #353535;
+            }
+            ol{
+                list-style-type:none
+            }
+            li{
+                display: inline;
+            }
+            #allquestions{
+                font-size:14px;
+            }
+    </style>
+
+    @** used as anchor for angular.js **@
+
+
+    <div id="angularApp" ng-app="EditExperiment" ng-controller="EditController as cc">
+        <input type="hidden" id="experimentName" value="@experimentName">
+        <div class="row">
+            @** this is the side menu. if you want to add new component or rename the component you can do it here **@
+            <div class="col-md-2 edit-sidebar">
+                <p style="text-align: center; color: white;  font-size: large; padding-top: 10px;">Add Component</p>
+                <a href="#" ng-click="cc.addElement('textAnswer')"><span>Text Answer</span></a>
+                <a href="#" ng-click="cc.addElement('textArea')"><span>Text Answer (Expandable)</span></a>
+                <a href="#" ng-click="cc.addElement('question')"><span>Instruction</span></a>
+                <a href="#" ng-click="cc.addElement('radio')"><span>Radio</span></a>
+                <a href="#" ng-click="cc.addElement('checkBox')"><span>Checkbox Answer</span></a>
+                <a href="#" ng-click="cc.addElement('sliderAnswer')"><span>Slider Answer</span></a>
+                <a href="#" ng-click="cc.addElement('starAnswer')"><span>Star Answer</span></a>
+                <a href="#" ng-click="cc.addElement('dragDrop')"><span>Drag and Drop</span></a>
+                <a href="#" ng-click="cc.addElement('fileInput')"><span>File Input</span></a>
+                @** ADD NEW COMPONENT HERE like <a href="#" ng-click="cc.addElement('newComponent')"><span>New Component</span></a>**@
+                <br>
+                <p style="text-align: center; color: white;  font-size: large; padding-top: 10px;">Optional Component</p>
+                <a href="#" ng-click="cc.addElement('nextSlideButton')"><span>Next Slide Button</span></a>
+				<br />
+				<br><br>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="edit-main">
+                @** body part of our page **@
+                <h3 class="panel-heading" style="text-align: center; color: #0a6cd6;"><b>@experimentName</b></h3>
+                @** looping through the slides to show them in dashboard**@
+                <div ng-repeat="slide in cc.slides track by $index">
+                    <div class="row">
+                        <div class="panel panel-info">
+                            <div class="panel-heading slide-panel-heading clearfix">
+                                @** panel header**@
+                                <div class="col-md-6 slide-panel-heading-text " >
+                                    @**Clikable slide name where new modal for change slide name will be appear**@
+                                    <a href="#" style="text-decoration: none" data-toggle="tooltip" title="Click to change Slide name" class="slide-panel-heading-text-link" ng-click="cc.openChangeSlideModal(slide)">
+                                        {{slide.name}}
+                                    </a>
+                                </div>
+                                @** panel header buttons for removing slide and also reorder slides **@
+                                <div class="col-md-6 slide-panel-heading-button">
+                                    <div class="pull-right btn-group">
+                                        <span class="clickable-up-down" ng-click="cc.slidePosUp(slide)"><i class="glyphicon glyphicon-arrow-up tooltipup" ng-if="$index > 0"></i></span>
+                                        <span class="clickable" ng-click="cc.removeSlide(slide)"><i class="glyphicon glyphicon-remove tooltipclose"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            @** slide panel body **@
+                            <div class="panel-body">
+                                @** if there is no component into the slide then this bellow message will show **@
+                                <div ng-if="!slide.components.length" style="text-align: center"><h3>Enter Component into Slide {{$index + 1}}</h3></div>
+                                @** loop through the component inside the slide **@
+                                <div ng-repeat="field in slide.components track by $index">
+                                    @** component panel **@
+                                    <div class="panel panel-success">
+                                        @** component panel header**@
+                                        <div class="panel-heading component-panel-heading">
+                                            @** showing component name into component header panel. Need to add codition as qusetion will now show Instruction and textArea will show as  Text Answer (Expandable)**@
+                                            <p class="panel-header-text">{{field.name === 'question' ? 'Instruction' : field.name === 'textArea' ? 'Text Answer (Expandable)' : field.name | splitCamelCase}}</p>
+                                            @** panel header buttons for removing component from the coresponding slide and also reorder component inside the silde **@
+                                            <div class="pull-right btn-group component-panel-heading-button">
+                                                <span class="clickable-up-down" ng-click="cc.compPosDown(slide,field)"><i class="glyphicon glyphicon-arrow-down tooltipcompdown" ng-if="$index !== slide.components.length - 1"></i></span>
+                                                <span class="clickable-up-down" ng-click="cc.compPosUp(slide,field)"><i class="glyphicon glyphicon-arrow-up tooltipcompup" ng-if="$index > 0"></i></span>
+                                            </div>
+                                        </div>
+                                        @** component panel body**@
+                                        <div class="panel panel-body component-panel-body">
+                                            @** here we are showing those options fields which are mapped from csv file**@
+                                            <div ng-repeat="fieldValue in field.options" ng-if="field.options">
+                                                @** if there is any field with the bellow condition then it will show the mapping with csv file**@
+                                                <div ng-if="fieldValue.name == 'connectives' || fieldValue.name == 'context1'
+                                                || fieldValue.name == 'context2' || fieldValue.name == 'sentence1'
+                                                || fieldValue.name == 'sentence2' || fieldValue.name == 'options'
+                                                || fieldValue.name == 'descriptions'">
+                                                    <label>{{fieldValue.name | splitCamelCase}} -> </label>
+                                                    <label> {{fieldValue.value}}</label>
+                                                </div>
+                                            </div>
+                                            @** here we are showing question which is renamed as instruction later and rest which does not have field with csv mapping  **@
+                                            <div ng-if="!field.options.length">
+                                                <div ng-if="field['name'] == 'question'">
+                                                    <label >Instruction -></label>
+                                                    <label > {{field.model_attr}}</label>
+                                                </div>
+                                                @** Show in bold big font the component names which do not have csv mapping fields **@
+                                                <div  ng-if="field['name'] != 'question'">
+                                                    <h3 style="text-transform: uppercase">{{field.name === 'textArea' ? 'Text Answer (Expandable)' : field.name | splitCamelCase}}</h3>
+                                                </div>
+                                            </div>
+                                            @** as slider answer may have csv mapping value or may not have depending on the useScale field value, they are handle here separately **@
+                                            <div ng-if="field.name == 'sliderAnswer'">
+                                                <div ng-if="field.options[0].value != 'custom' ">
+                                                    <h3 style="text-transform: uppercase" >Slider Answer</h3>
+                                                </div>
+                                            </div>
+                                            @** StarAnswer and fileInput component has option but they are not mapped from csv. so we are showing them here **@
+                                            <h3 style="text-transform: uppercase" ng-if="field.name == 'starAnswer'">Star Answer</h3>
+                                            <h3 style="text-transform: uppercase" ng-if="field.name == 'fileInput'">file Input</h3>
+                                        </div>
+                                        @**component panel footer with edit delete button **@
+                                        <div class="panel-footer">
+                                            <button ng-click="cc.editElement(slide,field)" class="btn btn-primary">Edit</button>
+                                            <button ng-click="cc.removeField(slide,field)"  class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix" style="margin-bottom: 10px;"></div>
+                </div>
+
+                @**Add new slide button **@
+                <button type="submit" ng-click="cc.addSlide()" class="btn btn-success center-block">Add Slide</button>
+            </div>
+        </div>
+        @** Final done Editing button **@
+        <div class="button_cont pull-right"><button class="example_f"  rel="nofollow" ng-click="cc.submit()"><span>Done Editing</span></button></div>
+        @** here we have use 3 modals. One for adding component, one for editing modal and one for slide rename
+        As for the complexity we are divide the add modal and edit modal. As in out initial plan edit modal was not there.
+        It might be little bit confusing but hope you can mange.
+        **@
+        <!--Start: Add modal -->
+        @** this modal is for add component into slide **@
+        <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                <div class="modal-content">
+                    <form name ='modal_1' class="form" id="modal_1">
+                            <!-- Modal header with chose button and also has the name of the component -->
+                        <div class="modal-header modal-header-success">
+                            <button type="button" class="close" data-dismiss="modal" ng-click="cc.modalClose()">&times;</button>
+                            <h4 class="modal-title" style="color: #0a6cd6"><b>Add <b style="color: darkgreen;">{{cc.componentName === 'question' ? 'Instruction' : cc.componentName === 'textArea' ? 'Text Answer (Expandable)' : cc.componentName | splitCamelCase}} </b>Component into slide
+                                <!-- here you can select the slide number on which slide do you want to put the component manually -->
+                                <select ng-model="slideNum" ng-options="slide.num as slide.num for slide in cc.slides">
+                                </select>
+                            </b></h4>
+                        </div>
+                        @** modal body **@
+                        <div class="modal-body">
+                            <div class="panel-body" >
+                                <div class="form-group row">
+                                    @** question component
+                                    if the component name is question then the value has to be mapped from csv. this is also a required field. **@
+                                    <div ng-if="cc.componentName =='question'">
+                                        <div class="col-md-3" style="margin-top: 7px;">
+                                            <label for="add_type" name="componentName" style="text-transform: uppercase">Instruction *</label>
+                                        </div>
+                                        @** mapping from csv **@
+                                        <div class="col-md-7">
+                                            <select class="form-control selectpicker" name='ques-component' ng-model="fieldType.ques" ng-options="type.name as type.name for type in cc.questionFieldNames" id="add_type"  required>
+                                                <option selected value=""> -- select csv field -- </option>
+                                            </select>
+                                            @** show error msg if the field is empty **@
+                                            <p ng-show="modal_1.ques-component.$invalid && !modal_1.ques-component.$pristine" class="help-block">This field is required.</p>
+                                        </div>
+                                    </div>
+                                    @** if the component name is not question then only an optional field with answer field. If user do not provide anything
+                                    in backend it will be genarated automatically **@
+                                    <div ng-if="cc.componentName !='question'">
+                                        <div class="col-md-3" style="margin-top: 7px;">
+                                            <label for="add_type" name="componentName" style="text-transform: uppercase">{{cc.componentName === 'textArea' ? 'Text Answer (Expandable)' : cc.componentName | splitCamelCase}}</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <input type="text" ng-model="fieldType['type']" class="form-control" name='componentName' placeholder="response variable name">
+                                        </div>
+                                    </div>
+                                    @** Add your new component here
+                                    if it has some fields that needed to be mapped from csv file then
+                                    do as similar to question component. otherwise it will show default answer input field
+                                    and do not forget to add conditions along with the other question field
+                                    **@
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- component options and conditions -->
+                            @** as question,nextSlideButton, textArea and textAnswer components has no options they will not be shown this part **@
+                            <div  ng-if="cc.componentName !='nextSlideButton' && cc.componentName !='question'">
+                                <!-- component options -->
+                                <div  ng-if=" cc.componentName !='textAnswer' && cc.componentName !='textArea'">
+                                    <label>Add Options for this Component</label>
+                                     <!-- component options panel body -->
+                                    <div style="" class="panel-body">
+                                        <!-- drag drop component options starts -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <!-- drag drop connectives options which is mendatory and mapped from csv -->
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>connectives *</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" name="connectives" ng-model="fieldType['connectives']" ng-options="type.name as type.name for type in cc.questionFieldNames" required>
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                                <p ng-show="modal_1.connectives.$invalid && !modal_1.connectives.$pristine" class="help-block">This field is required.</p>
+                                            </div>
+                                        </div>
+                                        <!-- drag drop context1 options which is mendatory and mapped from csv -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>context1 *</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" name="context1" ng-model="fieldType['context1']" ng-options="type.name as type.name for type in cc.questionFieldNames" required>
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                                <p ng-show="modal_1.context1.$invalid && !modal_1.context1.$pristine" class="help-block">This field is required.</p>
+                                            </div>
+                                        </div>
+                                        <!-- drag drop context2 options which is mendatory and mapped from csv -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>context2 *</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" name="context2" ng-model="fieldType['context2']" ng-options="type.name as type.name for type in cc.questionFieldNames" required>
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                                <p ng-show="modal_1.context2.$invalid && !modal_1.context2.$pristine" class="help-block">This field is required.</p>
+                                            </div>
+                                        </div>
+                                        <!-- drag drop sentence1 options which is mendatory and mapped from csv -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>sentence1 *</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" name="sentence1" ng-model="fieldType['sentence1']" ng-options="type.name as type.name for type in cc.questionFieldNames" required>
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                                <p ng-show="modal_1.sentence1.$invalid && !modal_1.sentence1.$pristine" class="help-block">This field is required.</p>
+                                            </div>
+                                        </div>
+                                        <!-- drag drop sentence2 options which is mendatory and mapped from csv -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>sentence2 *</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" name="sentence2" ng-model="fieldType['sentence2']" ng-options="type.name as type.name for type in cc.questionFieldNames" required>
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                                <p ng-show="modal_1.sentence2.$invalid && !modal_1.sentence2.$pristine" class="help-block">This field is required.</p>
+                                            </div>
+                                        </div>
+                                        <!-- drag drop Randomize Connectives options which is optional and options can be true or false -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Randomize Connectives</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.randomizeConnectives" ng-options="type.name as type.name for type in cc.trueFalse" >
+                                                    <option selected value=""> -- select value -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- drag drop Splitter options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Splitter</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['splitter']" class="form-control" name='splitter' placeholder="splitter">
+                                            </div>
+                                        </div>
+                                        <!-- drag drop Content options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Content</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['content']" class="form-control" name='content' placeholder="content">
+                                            </div>
+                                        </div>
+                                        <!-- drag drop Html Input options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Html Input</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.htmlInput" ng-options="type.name as type.name for type in cc.trueFalse" >
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- drag drop Box Position options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Box Position</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.boxPosition" ng-options="type.name as type.name for type in cc.middleBottom" >
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Box Title options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Box Title</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['boxTitle']" class="form-control" name='boxTitle' placeholder="Box Title">
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Display Style options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Display Style</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.displayStyle" ng-options="type.name as type.name for type in cc.displayStyle" >
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Allow Multiple options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Allow Multiple</label>
+                                        </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.allowMultiple" ng-options="type.name as type.name for type in cc.trueFalse" >
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Instructions 1 options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Instructions 1</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['instructions1']" class="form-control" name='instructions1' placeholder="Instructions 1">
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Instructions 2 options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Instructions 2</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['instructions2']" class="form-control" name='instructions2' placeholder="Instructions 2">
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Go Back Text options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Go Back Text</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['goBackText']" class="form-control" name='goBackText' placeholder="Go Back Text">
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Allow none of these options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Allow none of these</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.allowNoneOfThese" ng-options="type.name as type.name for type in cc.trueFalse" >
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                            <!-- drag drop None Of These Text options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>None Of These Text</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['noneOfTheseText']" class="form-control" name='noneOfTheseText' placeholder="None Of These Text">
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Allow None options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Allow None</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.allowNone" ng-options="type.name as type.name for type in cc.trueFalse" >
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Allow None Text options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Allow None Text</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['allowNoneText']" class="form-control" name='allowNoneText' placeholder="Allow None Text">
+                                            </div>
+                                        </div>
+                                            <!-- drag drop None Style options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>None Style</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.noneStyle" ng-options="type.name as type.name for type in cc.noneStyleOptions" >
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Default Connective options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Default Connective</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['defaultConnective']" class="form-control" name='defaultConnective' placeholder="Default Connective">
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Content Class options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Content Class</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['contentClass']" class="form-control" name='contentClass' placeholder="Content Class">
+                                            </div>
+                                        </div>
+                                            <!-- drag drop Click options which is optional  -->
+                                        <div class="form-group row" ng-if="componentName == 'dragDrop' ">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Click</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" ng-model="fieldType['click']" class="form-control" name='click' placeholder="click">
+                                            </div>
+                                        </div>
+                                        <!-- drag drop component options ends -->
+                                        <!-- starAnswer component Max Star options  -->
+                                        <div class="form-group row" ng-if="componentName == 'starAnswer'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Max Star</label>
+                                            </div>
+                                            <div class="col-md-5" ng-init="fieldType['maxStars'] = 5">
+                                                <input type="number" ng-model="fieldType['maxStars']" class="form-control" name='maxStars' min="0" max="100">
+                                            </div>
+                                        </div>
+                                        <!-- starAnswer component options ends -->
+                                        <!-- sliderAnswer component Use Scale options starts -->
+                                        <div class="form-group row" ng-if="componentName == 'sliderAnswer'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Use Scale </label>
+                                            </div>
+                                                <!--wet have set default value scale -->
+                                            <div class="col-md-5" ng-init="fieldType['useScale']='scale'">
+                                                    <!-- check if the useScale value is custom then add option button will be shown-->
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.useScale" ng-options="type.name as type.name for type in cc.useScaleOptions" ng-change="cc.checkUseScale(fieldType.useScale,false)">
+                                                    <option selected value=""> -- select option -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- sliderAnswer component options ends -->
+                                        <!-- fileInput component Encoding options starts -->
+                                        <div class="form-group row" ng-if="componentName == 'fileInput'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>Encoding </label>
+                                            </div>
+                                            <div class="col-md-5" ng-init="fieldType['encoding']='UTF-8'">
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.encoding" ng-options="type.name as type.name for type in cc.encodingOptions" >
+                                                    <option selected value=""> -- select option -- </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- fileInput component options ends -->
+
+                                        @** Add your new component default options this here **@
+
+                                        <!-- this part is for dynamic options. If user wants to add more options -->
+                                        <div class="form-group row" ng-repeat="field in cc.optionFields track by $index" >
+                                            @**  start the label or left field of dynamically added fields**@
+                                            <!-- dynamic options for All the component except drag drop -->
+                                            <div class="col-md-5" ng-if="componentName != 'dragDrop'">
+                                                    <!-- for radio and checkBox  -->
+                                                <div ng-if="componentName == 'radio' || componentName == 'checkBox'">
+                                                        <!-- first 2 fields are mandatory  -->
+                                                    <select ng-if="$index < 2" style="margin-top: 0px;" class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.radioCheckBoxOptions" ng-init="field.name='options'" disabled>
+                                                        <option selected value=""> -- select option name -- </option>
+                                                    </select>
+                                                        <!-- after the first 2 fields all are optional.   -->
+                                                    <select ng-if="$index >= 2 && componentName == 'checkBox'" style="margin-top: 0px;" class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.radioCheckBoxOptions">
+                                                        <option selected value=""> -- select option name -- </option>
+                                                    </select>
+                                                    <select ng-if="$index >= 2 && componentName == 'radio'" style="margin-top: 0px;" class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.radioOptions">
+                                                        <option selected value=""> -- select option name -- </option>
+                                                    </select>
+                                                </div>
+                                                    <!-- dynamic options for All others except radio and checkBox  -->
+                                                <div ng-if="componentName != 'radio' && componentName != 'checkBox'">
+                                                        <!-- dynamic options for sliderAnswer. I have to part these components because each have different dropdown option values   -->
+                                                    <div ng-if="componentName == 'sliderAnswer'">
+                                                        <select style="margin-top: 0px;" class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.sliderAnswerOptions" >
+                                                            <option selected value=""> -- select option name -- </option>
+                                                        </select>
+                                                    </div>
+                                                    <div ng-if="componentName != 'sliderAnswer'">
+                                                            <!-- dynamic options for all other except radio, checkbox, sliderAnswer and dragDrop -->
+                                                        <select style="margin-top: 0px;" class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.optionNames" >
+                                                            <option selected value=""> -- select option name -- </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @**  end is the left side field **@
+                                            @**  start is the right side field **@
+
+                                            <div class="col-md-5" ng-if="componentName == 'dragDrop'">
+                                                <select style="margin-top: 0px;" class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.dragDropOptions" >
+                                                    <option selected value=""> -- select option name -- </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-5">
+                                                    <!-- for radio and checkBox first 2 field will be mendatory and rest are optional -->
+                                                <div ng-if="componentName == 'radio' || componentName == 'checkBox'">
+                                                        <!-- for radio and checkBox first 2 field -->
+                                                    <select style="margin-top: 0px;" class="form-control" ng-model="field.optionType" ng-options="type.name as type.name for type in cc.questionFieldNames" ng-if="$index < 2" required>
+                                                        <option selected value=""> -- select csv field -- </option>
+                                                    </select>
+                                                        <!-- for radio and checkBox rest of the field -->
+                                                    <select style="margin-top: 0px;" class="form-control" ng-model="field.optionType" ng-options="type.name as type.name for type in cc.questionFieldNames" ng-if="$index >= 2" >
+                                                        <option selected value=""> -- select csv field -- </option>
+                                                    </select>
+                                                </div>
+
+                                                <div ng-if="componentName != 'radio' && componentName != 'checkBox'">
+                                                        <!-- for all other component  -->
+                                                    <select style="margin-top: 0px;" class="form-control" ng-model="field.optionType" ng-options="type.name as type.name for type in cc.questionFieldNames" >
+                                                        <option selected value=""> -- select csv field -- </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- button for delete dynamically added options -->
+                                            <div class="col-md-1">
+                                                <div ng-if="componentName == 'radio' || componentName == 'checkBox'">
+                                                        <!-- for radio and checkBox first 2 field will be mendatory and this button will be shown when index is greater than 2 -->
+                                                    <button ng-click="cc.removeOptionField(field)" style="margin-top: 0px;" class="btn btn-default" ng-if="$index >= 2">-</button>
+                                                </div>
+                                                    <!-- for all others -->
+                                                <div ng-if="componentName != 'radio' && componentName != 'checkBox'">
+                                                    <button ng-click="cc.removeOptionField(field)" style="margin-top: 0px;" class="btn btn-default">-</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- button for add dynamically new options -->
+                                        <div class="pull-right" ng-if="componentName != 'starAnswer' && componentName != 'sliderAnswer' && componentName != 'fileInput'" >
+                                            <button ng-click="cc.addOptionField()" class="btn btn-primary" type="button">Add Option</button>
+                                        </div>
+                                        <!-- button for add dynamically new options if useScale = custom -->
+                                        <div class="pull-right" ng-if="fieldType.useScale === 'custom'">
+                                            <button ng-click="cc.addOptionField()" class="btn btn-primary" type="button">Add Option</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- end of component options -->
+                                <!-- start of component conditions -->
+                                <div  ng-if="cc.componentName !='fileInput' && cc.componentName !='dragDrop' && cc.componentName !='sliderAnswer'" >
+                                    <label>Add Conditions for this Component</label>
+                                    <div style="" class="panel-body">
+                                        <!-- conditions for checkBox,radio and starAnswer-->
+                                        <div class="form-group row" ng-if="cc.componentName =='checkBox' || componentName == 'radio' || componentName == 'starAnswer'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <div class="form-group">
+                                                    <label>Mandatory</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                    <!-- by default set mandatory field true -->
+                                                <div class="form-group" ng-init="fieldType.mandatory = 'true'">
+                                                    <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.mandatory" ng-options="type.name as type.name for type in cc.trueFalse" >
+                                                        <option selected value=""> -- select -- </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <!-- additional conditions allowMultipleSelection for checkBox-->
+                                        <div class="form-group row" ng-if="cc.componentName =='checkBox'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <div class="form-group">
+                                                    <label>allowMultipleSelection</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                    <!-- by default set allowMultipleSelection field false -->
+                                                <div class="form-group" ng-init="fieldType.allowMultipleSelection = 'false'">
+                                                    <select style="margin-top: 0px;" class="form-control" ng-model="fieldType.allowMultipleSelection" ng-options="type.name as type.name for type in cc.trueFalse" >
+                                                        <option selected value=""> -- select csv field -- </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <!-- conditions for textAnswer, textArea-->
+                                        <div class="form-group row" ng-if="cc.componentName =='textAnswer' || componentName == 'textArea'">
+                                                <!-- minWordCount -->
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <div class="form-group">
+                                                    <label>minWordCount</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <input type="number" ng-model="fieldType['minWordCount']" class="form-control" step="1" min="0" oninput="validity.valid||(value='');" ng-keyup="fieldType['maxWordCount'] = fieldType['minWordCount']" placeholder="set minimum word for the answer. e.g. 5">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" ng-if="cc.componentName =='textAnswer' || componentName == 'textArea'" >
+                                                <!-- maxWordCount -->
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <div class="form-group" >
+                                                    <label>maxWordCount</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group" >
+                                                    <input type="number" ng-model="fieldType['maxWordCount']" class="form-control" step="1" min="fieldType.minWordCount" oninput="validity.valid||(value='');" ng-keyup="cc.checkAmount($event,fieldType['minWordCount'],fieldType.maxWordCount)" placeholder="set maximum word for the answer. e.g. 15">
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <!-- preventCharacters -->
+                                        <div class="form-group row" ng-if="cc.componentName =='textAnswer' || componentName == 'textArea'">
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <div class="form-group">
+                                                    <label>preventCharacters</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <input type="text" ng-model="fieldType['preventCharacters']" class="form-control" placeholder="set character which will not be accepted. e.g. %">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of condition -->
+                            </div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                            <!-- modal footer with save and close button. Save button will call addNewElement() function where we are putting those value into slide object and make a slides json object -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" ng-click="cc.addNewElement(fieldType,slideNum)" ng-disabled="modal_1.$invalid">Save</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="cc.modalClose()">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <!-- add modal end-->
+
+        <!-- Edit modal start-->
+        <div class="modal fade" id="editModal" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                    <!-- Edit Modal content-->
+                <div class="modal-content">
+                        <!-- Edit Modal header same as add modal -->
+                    <div class="modal-header modal-header-info">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="cc.modalClose()">&times;</button>
+                        <h4 class="modal-title" style="color: #0a6cd6"><b>Edit</b> <b style="color: darkgreen;">{{cc.componentName === 'question' ? 'Instruction' : cc.componentName === 'textArea' ? 'Text Answer (Expandable)' : cc.componentName | splitCamelCase}} </b> <b>Component of</b> <b style="color: darkgreen;"> slide {{fieldValues.slideIndex + 1 }}</b></h4>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                        <!-- Edit Modal body -->
+                    <div class="modal-body">
+                        <form name="modal_2">
+                            <div class="panel-body" >
+                                <input type="text" ng-model="fieldValues.slideIndex" hidden >
+                                <input type="text" ng-model="fieldValues.componentIndex" hidden >
+                                <div class="form-group row">
+                                        <!-- if the component name is  question then show the drop down mapped with csv-->
+                                    <div ng-if="cc.componentName =='question'">
+                                        <div class="col-md-3" style="margin-top: 7px;">
+                                            <label name="componentName" style="text-transform: uppercase" ng-model="fieldValues.componentName">Instruction *</label>
+                                        </div>
+
+                                        <div class="col-md-7"  >
+                                            <select class="form-control selectpicker" name='ques-component' ng-model="fieldValues.model_attr" ng-options="type.name as type.name for type in cc.questionFieldNames" id="edit_type"  required>
+                                                <option selected value=""> -- select csv field -- </option>
+                                            </select>
+                                            <p ng-show="modal_2.ques-component.$invalid && !modal_2.ques-component.$pristine" class="help-block">This field is required.</p>
+                                        </div>
+                                    </div>
+                                        <!-- for all other cases an input field -->
+                                    <div ng-if="cc.componentName !='question'">
+                                        <div class="col-md-3" style="margin-top: 7px;">
+                                            <label name="componentName" style="text-transform: uppercase" ng-model="fieldValues.componentName">{{cc.componentName === 'textArea' ? 'Text Answer (Expandable)' : cc.componentName | splitCamelCase}}</label>
+                                        </div>
+
+                                        <div class="col-md-7">
+                                            <div class="col-md-7"  ng-if="cc.componentName !='question'">
+                                                <input type="text" ng-model="fieldValues.model_attr" class="form-control" name='component-name' placeholder="response variable name." >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <!-- edit modal component options and conditions starts -->
+                            <div ng-if="fieldValues.componentName != 'nextSlideButton'">
+                                    <!-- edit modal component options starts -->
+                                    <!-- here we are ignore the cases where we do not need to show the options -->
+                                <div  ng-if=" fieldValues.componentName !='textAnswer' && fieldValues.componentName !='textArea' && fieldValues.componentName !='question'">
+                                    <label>Add Options for this Component</label>
+                                    <div style="" class="panel-body">
+                                            <!-- loop through the optionFields which was stored from add modal -->
+                                        <div class="form-group row" ng-repeat="field in cc.optionFields track by $index" >
+                                            <!-- options for fileinput-->
+                                            <div class="form-group row" ng-if="fieldValues.componentName == 'fileInput'">
+                                                <div class="col-md-5" style="margin-top: 7px;">
+                                                    <label>Encoding </label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <select style="margin-top: 0px;" class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.encodingOptions" >
+                                                        <option selected value=""> -- select option -- </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- end -->
+                                                <!-- options for radio,checkBox,sliderAnswer,starAnswer left side column-->
+                                            <div class="col-md-5" ng-if="fieldValues.componentName != 'dragDrop'">
+                                                <div ng-if="fieldValues.componentName == 'radio' || fieldValues.componentName == 'checkBox'">
+                                                    <select class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.radioCheckBoxOptions" ng-if="$index < 2" disabled>
+                                                        <option selected value=""> -- select option -- </option>
+                                                    </select>
+                                                    <select class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.radioCheckBoxOptions" ng-if="$index >= 2 && fieldValues.componentName == 'checkBox'">
+                                                        <option selected value=""> -- select option -- </option>
+                                                    </select>
+                                                    <select class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.radioOptions" ng-if="$index >= 2 && fieldValues.componentName == 'radio'">
+                                                        <option selected value=""> -- select option -- </option>
+                                                    </select>
+                                                </div>
+
+                                                <div ng-if="fieldValues.componentName == 'sliderAnswer'">
+                                                    <label ng-if="field.name === 'useScale'" style="margin-top: 7px;">Use Scale</label>
+                                                    <select class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.sliderAnswerOptions" ng-if="field.name != 'useScale'">
+                                                        <option selected value=""> -- select option -- </option>
+                                                    </select>
+                                                </div>
+
+                                                <div ng-if="fieldValues.componentName == 'starAnswer'" style="margin-top: 7px;">
+                                                    <label style="margin-top: 7px;">Max Star</label>
+                                                </div>
+
+                                            </div>
+                                            <!-- options for dragdrop left side column-->
+                                            <div class="col-md-5" ng-if="fieldValues.componentName == 'dragDrop'">
+                                                <label style="text-transform: capitalize;" ng-if="$index < 24">{{ field.name | splitCamelCase }}</label>
+                                                <select class="form-control" ng-model="field.name" ng-options="option.name as option.name for option in cc.dragDropOptions" ng-if="$index >= 24" >
+                                                    <option selected value=""> -- select option -- </option>
+                                                </select>
+                                            </div>
+                                            <!-- options for radio,checkBox,sliderAnswer,starAnswer right side column-->
+                                            <div class="col-md-5" ng-if="fieldValues.componentName != 'dragDrop'">
+                                                <div ng-if="fieldValues.componentName == 'starAnswer'">
+                                                    <input type="number" ng-model="field['value']" class="form-control" name='value' min="0" max="100">
+                                                </div>
+                                                <div ng-if="fieldValues.componentName == 'sliderAnswer'">
+                                                    <select class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.useScaleOptions" ng-if="field.name === 'useScale'" ng-change="cc.checkUseScale(field.value,true)">
+                                                        <option selected value=""> -- select option -- </option>
+                                                    </select>
+                                                    <select class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.questionFieldNames" ng-if="field.name != 'useScale'">
+                                                        <option selected value=""> -- select csv field -- </option>
+                                                    </select>
+                                                </div>
+                                                <select class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.questionFieldNames" ng-if="fieldValues.componentName != 'starAnswer' && fieldValues.componentName != 'sliderAnswer' && fieldValues.componentName != 'fileInput'">
+                                                    <option selected value=""> -- select csv field -- </option>
+                                                </select>
+                                            </div>
+                                            <!-- options for dragdrop right side column -->
+                                            <div class="col-md-5" ng-if="fieldValues.componentName == 'dragDrop'">
+                                                <div ng-if="$index < 24">
+                                                    <div ng-if="field.name == 'connectives' || field.name == 'sentence1' || field.name == 'sentence2' || field.name == 'context1' || field.name == 'context2'">
+                                                        <select class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.questionFieldNames" >
+                                                            <option selected value=""> -- select csv field -- </option>
+                                                        </select>
+                                                    </div>
+                                                    <div ng-if="field.name == 'randomizeConnectives' || field.name == 'htmlInput' || field.name == 'allowMultiple' || field.name == 'allowNoneOfThese' || field.name == 'allowNone'">
+                                                        <select class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.trueFalse" >
+                                                            <option selected value=""> -- select csv field -- </option>
+                                                        </select>
+                                                    </div>
+                                                    <div ng-if="field.name == 'noneStyle'">
+                                                        <select class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.noneStyleOptions" >
+                                                            <option selected value=""> -- select csv field -- </option>
+                                                        </select>
+                                                    </div>
+                                                    <div ng-if="field.name == 'displayStyle'">
+                                                        <select class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.displayStyle" >
+                                                            <option selected value=""> -- select csv field -- </option>
+                                                        </select>
+                                                    </div>
+                                                    <div ng-if="field.name == 'boxPosition'">
+                                                        <select class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.middleBottom" >
+                                                            <option selected value=""> -- select csv field -- </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div ng-if="field.name == 'splitter' || field.name == 'content' || field.name == 'boxTitle' || field.name == 'instructions1' || field.name == 'instructions2' || field.name == 'goBackText' || field.name == 'noneOfTheseText' || field.name == 'allowNoneText' || field.name == 'defaultConnective' || field.name == 'contentClass' || field.name == 'click'">
+                                                        <input type="text" ng-model="field['value']" class="form-control" name='value' placeholder="{{field.name|splitCamelCase}}">
+                                                    </div>
+                                                </div>
+                                                <div ng-if="$index >= 24">
+                                                    <select class="form-control" ng-model="field.value" ng-options="type.name as type.name for type in cc.questionFieldNames" >
+                                                        <option selected value=""> -- select csv field -- </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                                <!--  delete options button except drapdrop-->
+                                            <div class="col-md-1" ng-if="fieldValues.componentName != 'dragDrop'">
+                                                <div ng-if="fieldValues.componentName == 'radio' || fieldValues.componentName == 'checkBox'">
+                                                    <button ng-click="cc.removeOptionField(field)" style="margin-top: 0px;" class="btn btn-default" ng-if="$index >= 2">-</button>
+                                                </div>
+                                                <div ng-if="fieldValues.componentName != 'radio' && fieldValues.componentName != 'checkBox' && fieldValues.componentName != 'starAnswer' && fieldValues.componentName != 'fileInput' && field.name != 'useScale'">
+                                                    <button ng-click="cc.removeOptionField(field)" style="margin-top: 0px;" class="btn btn-default" >-</button>
+                                                </div>
+
+                                            </div>
+                                                <!--  delete options button for drapdrop-->
+                                            <div class="col-md-1" ng-if="fieldValues.componentName == 'dragDrop'">
+                                                <button ng-click="cc.removeOptionField(field)" style="margin-top: 0px;" class="btn btn-default"  ng-if="$index >= 24">-</button>
+                                            </div>
+                                        </div>
+                                            <!--  add new option button -->
+                                        <div class="pull-right"  ng-if="fieldValues.componentName != 'starAnswer' && fieldValues.componentName != 'sliderAnswer' && fieldValues.componentName != 'fileInput' ">
+                                            <button ng-click="cc.addOptionField()" class="btn btn-primary" type="button">Add Option</button>
+                                        </div>
+                                        <div class="pull-right" ng-if="cc.optionFields[0].value === 'custom'">
+                                            <button ng-click="cc.addOptionField()" class="btn btn-primary" type="button">Add Option</button>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+                                </div>
+                                <!--  end of edit modal option -->
+                                 <!--  start of edit modal conditions -->
+                                <div  ng-if="cc.conditionFields.length > 0">
+                                    <label>Add Conditions for this Component</label>
+
+                                    <div style="" class="panel-body">
+                                        <div class="form-group row"  ng-repeat="conditionFields in cc.conditionFields track by $index">
+                                                <!-- edit modal conditions label -->
+                                            <div class="col-md-5" style="margin-top: 7px;">
+                                                <label>{{conditionFields.name}}</label>
+                                            </div>
+                                                <!-- edit modal conditions values -->
+                                            <div class="col-md-5">
+                                                <div class="form-group" ng-if="conditionFields.name == 'minWordCount' || conditionFields.name == 'maxWordCount' || conditionFields.name == 'preventCharacters'">
+                                                    <input type="number" ng-model="conditionFields.value" class="form-control" ng-if="conditionFields.name == 'minWordCount'" step="1" oninput="validity.valid||(value='');" id ='minWordCount'  ng-keyup="cc.setMaxValue(conditionFields.value)" >
+                                                    <input type="number" ng-model="conditionFields.value" class="form-control" ng-if="conditionFields.name == 'maxWordCount'" step="1" oninput="validity.valid||(value='');" id = 'maxWordCount' ng-keyup="cc.checkMax()" >
+                                                    <input type="text" ng-model="conditionFields.value" class="form-control" ng-if="conditionFields.name == 'preventCharacters'">
+                                                </div>
+
+                                                <div class="" ng-if='conditionFields.name == "mandatory" || conditionFields.name == "allowMultipleSelection" || conditionFields.name == "randomize-connectives"'>
+                                                    <select style="margin-top: 0px;" class="form-control" ng-model="conditionFields.value" ng-options="type.name as type.name for type in cc.trueFalse" >
+                                                        <option selected value=""> -- select csv field -- </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  end of edit modal conditions -->
+                            </div>
+                                <!--  end of edit modal options and conditions -->
+                        </form>
+                        <div style="clear:both"></div>
+                    </div>
+                        <!-- edit modal footer button -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="cc.editAddedElement(fieldValues)">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="cc.modalClose()">Close</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!--  end of edit modal  -->
+
+        <!--  start of modal for slide name change -->
+        <div id="slideNameChangeModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="cc.modalClose()">&times;</button>
+                        <h4 class="modal-title">Change Slide Name</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <input type="text" ng-model="fieldValues.slideIndex" hidden>
+                            <div class="col-md-5">
+                                <label for="">Slide Name:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" ng-model="fieldValues.slideName" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                        <!--  modal footer for slide name change with Change and Close button-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="cc.changeSlideName(fieldValues)">Change</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="cc.modalClose()">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--  end of modal for slide name change -->
+    </div>
+}
