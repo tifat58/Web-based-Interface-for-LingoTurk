@@ -5,7 +5,7 @@ The lingoturk system was designed to develop crowdsourcing interviews but did no
 
 This repo contains only the code that we developed in the folder "LingoTurk Public" and does not contain the original files from the Lingoturk System. But in order to make our code functional, you can refer to the original Lingoturk System and add our files from the folder "LingoTurk Public". 
 
-You may need to install [Jsoup] https://jsoup.org/ and rebuild the project after adding files from this repo.
+You may need to install [Jsoup] https://jsoup.org/ by including it's corresponding .jar file in the lib folder and rebuilding the project after adding files from this repo.
 
 Requirements
 > Java Development Kit 8: [Download JDK] http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
