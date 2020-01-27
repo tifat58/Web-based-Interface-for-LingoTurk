@@ -63,17 +63,3 @@ Initial LingoTurk setup
 5. Change the LingoTurk password.
 6. Click Apply changes.
 
-Using LingoTurk
-1. Click Create experiment. You now have the option to either:
-	* Use one of the existing experiment types to instantiate an experiment: This will be described here: Instantiating an experiment
-	* Create a new experiment type: This case will be described here: Creating a new experiment type
-
-Using the instructions on these pages, you will be able to
-
-publish
-modify
-view
-or delete
-an instantiated experiment or to download results.
-
-
